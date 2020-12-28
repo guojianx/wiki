@@ -177,6 +177,8 @@ Error message and password prompt
 
 <li>$:/themes/tiddlywiki/vanilla</li>
 
+<li>Draft of 'New Tiddler'</li>
+
 </ul>
 </p>
 
@@ -10091,13 +10093,13 @@ Error message and password prompt
 <div created="20201228150122303" modified="20201228150223730" title="$:/state/tab-2065006209">
 <pre>$:/core/ui/ControlPanel/Saving/GitHub</pre>
 </div>
-<div created="20201228150013909" modified="20201228150013909" title="$:/state/tab/sidebar--595412856">
-<pre>$:/core/ui/SideBar/Tools</pre>
+<div created="20201228150013909" modified="20201228164239221" title="$:/state/tab/sidebar--595412856">
+<pre>$:/core/ui/SideBar/Open</pre>
 </div>
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20201228162705363" list="$:/ControlPanel GettingStarted" modified="20201228162705363" title="$:/StoryList">
+<div created="20201228162705363" list="[[Draft of 'New Tiddler']]" modified="20201228162705363" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -10208,6 +10210,26 @@ Error message and password prompt
         }
     }
 }</pre>
+</div>
+<div created="20201228165244505" draft.of="New Tiddler" draft.title="New Tiddler" modified="20201228165248409" tags="" title="Draft of 'New Tiddler'">
+<pre>This is a version of the TaskManagementExample enhanced with the ability to drag and drop the task list to re-order them.
+
+! Outstanding tasks
+
+//Drag the tasks to re-order them//
+
+&lt;&lt;list-tagged-draggable tag:&quot;task&quot; subFilter:&quot;!has[draft.of]!tag[done]&quot; itemTemplate:&quot;TaskManagementExampleDraggableTemplate&quot; emptyMessage:&quot;You don't have any active tasks&quot;&gt;&gt;
+
+! Completed tasks
+
+//(Listed in reverse order of completion)//
+
+&lt;$list filter=&quot;[!has[draft.of]tag[task]tag[done]sort[created]]&quot;&gt;
+&lt;div&gt;
+&lt;$checkbox tag=&quot;done&quot;&gt; ~~&lt;$link/&gt;~~&lt;/$checkbox&gt;
+&lt;/div&gt;
+&lt;/$list&gt;
+</pre>
 </div>
 
 
