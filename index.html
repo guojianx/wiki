@@ -159,6 +159,8 @@ Error message and password prompt
 
 <li>$:/SiteTitle</li>
 
+<li>$:/state/showeditpreview</li>
+
 <li>$:/state/sidebar</li>
 
 <li>$:/state/tab--2112689675</li>
@@ -179,6 +181,14 @@ Error message and password prompt
 
 <li>$:/themes/tiddlywiki/vanilla</li>
 
+<li>规划一下每日功课</li>
+
+<li>去一趟好孩子</li>
+
+<li>去一趟金象大药房</li>
+
+<li>我的职业规划</li>
+
 <li>done</li>
 
 <li>Learn Flask</li>
@@ -193,15 +203,9 @@ Error message and password prompt
 
 <li>TaskManagementExampleDraggableTemplate</li>
 
+<li>Tech Notes</li>
+
 <li>ToDo List</li>
-
-<li>去一趟好孩子</li>
-
-<li>去一趟金象大药房</li>
-
-<li>我的职业规划</li>
-
-<li>规划一下每日功课</li>
 
 </ul>
 </p>
@@ -10105,7 +10109,10 @@ Error message and password prompt
 <div created="20201228162625512" modified="20201228162634364" title="$:/SiteTitle">
 <pre>Notes</pre>
 </div>
-<div created="20201228150048917" modified="20201229104508145" title="$:/state/sidebar">
+<div created="20201230023808396" modified="20201230023816163" title="$:/state/showeditpreview">
+<pre>yes</pre>
+</div>
+<div created="20201228150048917" modified="20201230025142652" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20201228150044385" modified="20201228150046350" title="$:/state/tab--2112689675">
@@ -10117,16 +10124,16 @@ Error message and password prompt
 <div created="20201228150122303" modified="20201228195420655" title="$:/state/tab-2065006209">
 <pre>$:/core/ui/ControlPanel/Saving/GitHub</pre>
 </div>
-<div created="20201228150013909" modified="20201228195408271" title="$:/state/tab/sidebar--595412856">
+<div created="20201228150013909" modified="20201230023702324" title="$:/state/tab/sidebar--595412856">
 <pre>TableOfContents</pre>
 </div>
-<div created="20201228194622791" modified="20201228195409249" title="$:/state/toc/TableOfContents-ToDo List--118161433">
-<pre>open</pre>
+<div created="20201228194622791" modified="20201230023658443" title="$:/state/toc/TableOfContents-ToDo List--118161433">
+<pre>close</pre>
 </div>
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20201229131242124" list="我的职业规划 [[ToDo List]] 规划一下每日功课" modified="20201229134253192" title="$:/StoryList">
+<div created="20201230023646180" list="$:/ControlPanel TableOfContents [[Tech Notes]]" modified="20201230025302285" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -10238,6 +10245,22 @@ Error message and password prompt
     }
 }</pre>
 </div>
+<div created="20201229135936275" modified="20201229140236389" tags="[[ToDo List]] task" title="规划一下每日功课">
+<pre>1. 英语口语/写作
+2. 中文写作
+3. 计算机科学课程
+在这个wiki里实现一个功课的记录系统
+</pre>
+</div>
+<div created="20201229065858230" modified="20201229104517961" tags="[[ToDo List]] task done" title="去一趟好孩子">
+<pre>篮子、奶瓶消毒器</pre>
+</div>
+<div created="20201229070420302" modified="20201229084811552" tags="[[ToDo List]] task done" title="去一趟金象大药房">
+<pre>买伊可新维生素D和妈咪爱</pre>
+</div>
+<div created="20201229134302426" modified="20201229135921065" tags="树洞" title="我的职业规划">
+<pre>随机，小时侯的梦想是成为一名建筑师给自己建一栋梦想房子。学校计算机课成绩从高中开始一直到大学都是班里甚至是年级里最好的。</pre>
+</div>
 <div color="#2ef209" created="20201228194702570" modified="20201228194702570" title="done">
 <pre></pre>
 </div>
@@ -10264,6 +10287,43 @@ Error message and password prompt
 <div created="20201228192021343" modified="20201228192105868" tags="" title="TaskManagementExampleDraggableTemplate" type="text/vnd.tiddlywiki">
 <pre>&lt;$checkbox tag=&quot;done&quot;&gt; &lt;$link/&gt;&lt;/$checkbox&gt;</pre>
 </div>
+<div created="20201230023712429" modified="20201230025110382" tags="TableOfContents" title="Tech Notes">
+<pre>
+```
+# git branch -vv
+* alpha  af58179 Fixed the issue of ... accurately.
+  master af58179 [origin/master] Fixed the issue of ... accurately.
+
+# git branch -u origin/alpha
+Branch alpha set up to track remote branch alpha from origin.
+
+# git branch -vv
+* alpha  af58179 [origin/alpha: ahead 1, behind 9] Fixed the issue of ... accurately.
+  master af58179 [origin/master] Fixed the issue of ... accurately.
+
+# git reset HEAD~
+Unstaged changes after reset:
+M       Dec...rFile.cpp
+M       FFm...oder.cpp
+M       ...
+
+# rm -rf *
+# git checkout -f
+Your branch is behind 'origin/alpha' by 9 commits, and can be fast-forwarded.
+  (use &quot;git pull&quot; to update your local branch)
+# git pull
+Updating 061321b..42af93b
+Fast-forward
+ AMix.cpp                        |  170 +++-----
+ AMix.h                          |   12 +-
+ AspectRatio.cpp                 |   47 +-
+
+# git branch -vv
+* alpha  42af93b [origin/alpha] Fix the issue of ... different streams.
+  master af58179 [origin/master] Fixed the issue of ... accurately.
+```
+</pre>
+</div>
 <div color="#8075e4" created="20201228165244505" modified="20201228194749558" tags="TableOfContents" title="ToDo List">
 <pre>! Outstanding tasks
 
@@ -10280,22 +10340,6 @@ Error message and password prompt
 &lt;$checkbox tag=&quot;done&quot;&gt; ~~&lt;$link/&gt;~~&lt;/$checkbox&gt;
 &lt;/div&gt;
 &lt;/$list&gt;
-</pre>
-</div>
-<div created="20201229065858230" modified="20201229104517961" tags="[[ToDo List]] task done" title="去一趟好孩子">
-<pre>篮子、奶瓶消毒器</pre>
-</div>
-<div created="20201229070420302" modified="20201229084811552" tags="[[ToDo List]] task done" title="去一趟金象大药房">
-<pre>买伊可新维生素D和妈咪爱</pre>
-</div>
-<div created="20201229134302426" modified="20201229135921065" tags="树洞" title="我的职业规划">
-<pre>随机，小时侯的梦想是成为一名建筑师给自己建一栋梦想房子。学校计算机课成绩从高中开始一直到大学都是班里甚至是年级里最好的。</pre>
-</div>
-<div created="20201229135936275" modified="20201229140236389" tags="[[ToDo List]] task" title="规划一下每日功课">
-<pre>1. 英语口语/写作
-2. 中文写作
-3. 计算机科学课程
-在这个wiki里实现一个功课的记录系统
 </pre>
 </div>
 
