@@ -197,9 +197,13 @@ Error message and password prompt
 
 <li>done</li>
 
+<li>Job Tasks</li>
+
 <li>Learn Flask</li>
 
 <li>Make Flash Cards</li>
+
+<li>New Tiddler</li>
 
 <li>Put Tiddly Wiki onto Github</li>
 
@@ -10130,7 +10134,7 @@ Error message and password prompt
 <div created="20201228150122303" modified="20201228195420655" title="$:/state/tab-2065006209">
 <pre>$:/core/ui/ControlPanel/Saving/GitHub</pre>
 </div>
-<div created="20201228150013909" modified="20201230075238435" title="$:/state/tab/sidebar--595412856">
+<div created="20201228150013909" modified="20201231032500276" title="$:/state/tab/sidebar--595412856">
 <pre>TableOfContents</pre>
 </div>
 <div created="20201228194622791" modified="20201230023658443" title="$:/state/toc/TableOfContents-ToDo List--118161433">
@@ -10139,7 +10143,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20201231015455059" list="[[ToDo List]] 简单心里的52堂人格课" modified="20201231015726612" title="$:/StoryList">
+<div created="20201231032443684" list="TableOfContents [[ToDo List]] [[Job Tasks]] [[New Tiddler]]" modified="20201231032537019" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -10280,12 +10284,32 @@ Error message and password prompt
 <div color="#2ef209" created="20201228194702570" modified="20201228194702570" title="done">
 <pre></pre>
 </div>
+<div created="20201231032518598" modified="20201231032644477" tags="TableOfContents" title="Job Tasks">
+<pre>! Outstanding tasks
+
+//Drag the tasks to re-order them//
+
+&lt;&lt;list-tagged-draggable tag:&quot;jtask&quot; subFilter:&quot;!has[draft.of]!tag[jdone]&quot; itemTemplate:&quot;TaskManagementExampleDraggableTemplate&quot; emptyMessage:&quot;You don't have any active tasks&quot;&gt;&gt;
+
+! Completed tasks
+
+//(Listed in reverse order of completion)//
+
+&lt;$list filter=&quot;[!has[draft.of]tag[jtask]tag[jdone]sort[created]]&quot;&gt;
+&lt;div&gt;
+&lt;$checkbox tag=&quot;done&quot;&gt; ~~&lt;$link/&gt;~~&lt;/$checkbox&gt;
+&lt;/div&gt;
+&lt;/$list&gt;</pre>
+</div>
 <div created="20201228195007402" modified="20201228195232061" tags="task [[ToDo List]]" title="Learn Flask">
 <pre>Try to use Flask [[instead|https://palletsprojects.com/]] of [[django|https://www.djangoproject.com/]] </pre>
 </div>
 <div created="20201228193538488" modified="20201228194235489" tags="[[ToDo List]] task" title="Make Flash Cards">
 <pre>Make flash cards for English Learning and CS Learning by following [[jwasham/coding-interview-university|https://github.com/jwasham/coding-interview-university]]
 </pre>
+</div>
+<div created="20201231032700317" modified="20201231032714196" tags="[[Job Tasks]] jtask" title="New Tiddler">
+<pre></pre>
 </div>
 <div created="20201228165405699" modified="20201228195500535" tags="task done" title="Put Tiddly Wiki onto Github">
 <pre></pre>
