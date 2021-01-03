@@ -171,6 +171,8 @@ Error message and password prompt
 
 <li>$:/state/tab/sidebar--595412856</li>
 
+<li>$:/state/toc/TableOfContents-Job Tasks--118161433</li>
+
 <li>$:/state/toc/TableOfContents-ToDo List--118161433</li>
 
 <li>$:/status/RequireReloadDueToPluginChange</li>
@@ -180,6 +182,8 @@ Error message and password prompt
 <li>$:/themes/tiddlywiki/snowwhite</li>
 
 <li>$:/themes/tiddlywiki/vanilla</li>
+
+<li>常立志</li>
 
 <li>规划一下每日功课</li>
 
@@ -10119,11 +10123,11 @@ Error message and password prompt
 <div created="20201228162625512" modified="20201228162634364" title="$:/SiteTitle">
 <pre>Notes</pre>
 </div>
-<div created="20201230023808396" modified="20201230122108699" title="$:/state/showeditpreview">
-<pre>no</pre>
-</div>
-<div created="20201228150048917" modified="20201230122015193" title="$:/state/sidebar">
+<div created="20201230023808396" modified="20210103141559176" title="$:/state/showeditpreview">
 <pre>yes</pre>
+</div>
+<div created="20201228150048917" modified="20210103141553233" title="$:/state/sidebar">
+<pre>no</pre>
 </div>
 <div created="20201228150044385" modified="20201228150046350" title="$:/state/tab--2112689675">
 <pre>$:/core/ui/ControlPanel/Basics</pre>
@@ -10134,8 +10138,11 @@ Error message and password prompt
 <div created="20201228150122303" modified="20201228195420655" title="$:/state/tab-2065006209">
 <pre>$:/core/ui/ControlPanel/Saving/GitHub</pre>
 </div>
-<div created="20201228150013909" modified="20201231032500276" title="$:/state/tab/sidebar--595412856">
-<pre>TableOfContents</pre>
+<div created="20201228150013909" modified="20210103141505961" title="$:/state/tab/sidebar--595412856">
+<pre>$:/core/ui/SideBar/Tools</pre>
+</div>
+<div created="20210103140714766" modified="20210103140714766" title="$:/state/toc/TableOfContents-Job Tasks--118161433">
+<pre>open</pre>
 </div>
 <div created="20201228194622791" modified="20201230023658443" title="$:/state/toc/TableOfContents-ToDo List--118161433">
 <pre>close</pre>
@@ -10143,7 +10150,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20201231032443684" list="TableOfContents [[ToDo List]] [[Job Tasks]] [[Daobo stuck when it mixes single A-V]]" modified="20201231032815866" title="$:/StoryList">
+<div created="20210103140718297" list="$:/TagManager 树洞 常立志 [[Tech Notes]]" modified="20210103141515696" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -10254,6 +10261,19 @@ Error message and password prompt
         }
     }
 }</pre>
+</div>
+<div created="20210103141520498" modified="20210103142911069" tags="树洞" title="常立志">
+<pre>H265 - 目前有h265的需求，但NGINX-RTMP模块不支持h265码流；
+
+```
+要确认RTMP协议是否支持h265
+1. 支持
+   是否有必要修改Nginx-RTMP模块以便传输h265码流，确定其可行性（目前的浏览器、VLC和ffplay等播放器是否支持rtmp-h265）和工作量
+2. 不支持
+   调研WebRTC-h265方案：实现方法、工作量
+```
+
+</pre>
 </div>
 <div created="20201229135936275" modified="20201229140236389" tags="[[ToDo List]] task" title="规划一下每日功课">
 <pre>1. 英语口语/写作
