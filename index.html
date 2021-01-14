@@ -241,8 +241,6 @@ Error message and password prompt
 
 <li>create our own filter in ffmpeg</li>
 
-<li>Daobo stuck when it mixes single A-V</li>
-
 <li>done</li>
 
 <li>ffmpeg 的 banner 信息是什么</li>
@@ -10176,7 +10174,7 @@ Error message and password prompt
 <div created="20201230023808396" modified="20210104014155791" title="$:/state/showeditpreview">
 <pre>no</pre>
 </div>
-<div created="20201228150048917" modified="20210113071925294" title="$:/state/sidebar">
+<div created="20201228150048917" modified="20210114084148509" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20201228150044385" modified="20201228150046350" title="$:/state/tab--2112689675">
@@ -10188,8 +10186,8 @@ Error message and password prompt
 <div created="20201228150122303" modified="20201228195420655" title="$:/state/tab-2065006209">
 <pre>$:/core/ui/ControlPanel/Saving/GitHub</pre>
 </div>
-<div created="20201228150013909" modified="20210113113312262" title="$:/state/tab/sidebar--595412856">
-<pre>$:/core/ui/SideBar/Recent</pre>
+<div created="20201228150013909" modified="20210114084150141" title="$:/state/tab/sidebar--595412856">
+<pre>TableOfContents</pre>
 </div>
 <div created="20210103140714766" modified="20210103140714766" title="$:/state/toc/TableOfContents-Job Tasks--118161433">
 <pre>open</pre>
@@ -10203,7 +10201,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210114084042267" list="[[ToDo List]] [[create our own filter in ffmpeg]]" modified="20210114084042267" title="$:/StoryList">
+<div created="20210114084042267" list="[[Job Tasks]]" modified="20210114084157845" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -10511,210 +10509,6 @@ Mix a video stream and an audio stream, they are separate to each other
 <div created="20210114084045368" modified="20210114084106133" tags="[[ToDo List]] task" title="create our own filter in ffmpeg">
 <pre></pre>
 </div>
-<div created="20201231032700317" modified="20201231033104276" tags="[[Job Tasks]] jtask" title="Daobo stuck when it mixes single A-V">
-<pre>```
-(gdb) print streams[0]._M_impl._M_start
-$4 = (std::_Vector_base&lt;InternalStream*, std::allocator&lt;InternalStream*&gt; &gt;::pointer) 0x7f56e46a5960
-(gdb) print *streams[0]._M_impl._M_start
-$5 = (InternalStream *) 0x7f56e4538fc0
-(gdb) print *((InternalStream *) 0x7f56e4538fc0)
-$6 = {counterpart = 0x0, frameq = {queue = {{frame = 0x7f56e4539340, duration = 184558}, {frame = 0x7f56e469d9c0, duration = 40000}, {
-        frame = 0x7f56e469dc80, duration = 40000}, {frame = 0x7f56e469df00, duration = 40000}, {frame = 0x7f56e469e1c0, duration = 40000}, {
-        frame = 0x7f56e469e400, duration = 40000}, {frame = 0x7f56e469e6c0, duration = 40000}, {frame = 0x7f56e469e940, duration = 40000}, {
-        frame = 0x7f56e469ec00, duration = 40000}, {frame = 0x7f56e469ee40, duration = 40000}, {frame = 0x7f56e469f100, duration = 40000}, {
-        frame = 0x7f56e469f380, duration = 40000}, {frame = 0x7f56e469f640, duration = 20000}, {frame = 0x7f56e469f880, duration = 40000}, {
-        frame = 0x7f56e469fb40, duration = 40000}, {frame = 0x7f56e469fdc0, duration = 40000}, {frame = 0x7f56e46a0080, duration = 40000}, {
-        frame = 0x7f56e46a02c0, duration = 40000}, {frame = 0x7f56e46a0580, duration = 40000}, {frame = 0x7f56e46a0800, duration = 40000}, {
-        frame = 0x7f56e46a0ac0, duration = 40000}, {frame = 0x7f56e46a0d00, duration = 40000}, {frame = 0x7f56e46a0fc0, duration = 40000}, {
-        frame = 0x7f56e46a1240, duration = 40000}, {frame = 0x7f56e46a1500, duration = 40000}, {frame = 0x7f56e46a1740, duration = 40000}, {
-        frame = 0x7f56e46a1a00, duration = 40000}, {frame = 0x7f56e46a1c80, duration = 40000}, {frame = 0x7f56e46a1f40, duration = 40000}, {
-        frame = 0x7f56e46a2180, duration = 40000}, {frame = 0x7f56e46a2440, duration = 40000}, {frame = 0x7f56e46a26c0, duration = 40000}, {
-        frame = 0x7f56e46a2980, duration = 40000}, {frame = 0x7f56e46a2bc0, duration = 40000}, {frame = 0x7f56e46a2e80, duration = 40000}, {
-        frame = 0x7f56e46a3100, duration = 40000}, {frame = 0x7f56e46a33c0, duration = 40000}, {frame = 0x7f56e46a3600, duration = 40000}, {
-        frame = 0x7f56e46a38c0, duration = 40000}, {frame = 0x7f56e46a3b40, duration = 40000}, {frame = 0x7f56e46a3e00, duration = 40000}, {
-        frame = 0x7f56e46a4040, duration = 40000}, {frame = 0x7f56e46a4300, duration = 40000}, {frame = 0x7f56e46a4580, duration = 40000}, {
-        frame = 0x7f56e46a4840, duration = 40000}, {frame = 0x7f56e46a4a80, duration = 40000}, {frame = 0x7f56e46a4d40, duration = 40000}, {
-        frame = 0x7f56e46a4fc0, duration = 40000}, {frame = 0x7f56e46a5280, duration = 40000}, {frame = 0x7f56e4695b00, duration = 40000}},
-    rindex = 0, windex = 1, size = 1, max_size = 50, keep_last = 1, rindex_shown = 1, abort_request = 0, mutex = 0x7f56e4538810,
-    cond = 0x7f56e4538a60}, offset = -22858050, program_id = 3, read_done = false, last_pts = 1650984557}
-(gdb) print *streams[1]._M_impl._M_start
-$7 = (InternalStream *) 0x7f56e465a150
-(gdb) print *((InternalStream *) 0x7f56e465a150)
-$8 = {counterpart = 0x0, frameq = {queue = {{frame = 0x7f56e465a500, duration = 23220}, {frame = 0x7f56e465a780, duration = 23243}, {
-        frame = 0x7f56e465aa40, duration = 23197}, {frame = 0x7f56e465ac80, duration = 23220}, {frame = 0x7f56e465af40, duration = 23220}, {
-        frame = 0x7f56e465b1c0, duration = 23220}, {frame = 0x7f56e465b480, duration = 23220}, {frame = 0x7f56e465b6c0, duration = 23220}, {
-        frame = 0x7f56e465b980, duration = 23220}, {frame = 0x7f56e465bc00, duration = 23220}, {frame = 0x7f56e465bec0, duration = 23220}, {
-        frame = 0x7f56e4532c00, duration = 23220}, {frame = 0x7f56e4532e80, duration = 23220}, {frame = 0x7f56e4533140, duration = 23220}, {
-        frame = 0x7f56e4533380, duration = 23220}, {frame = 0x7f56e4533640, duration = 23220}, {frame = 0x7f56e45338c0, duration = 23219}, {
-        frame = 0x7f56e4533b80, duration = 23220}, {frame = 0x7f56e4533dc0, duration = 23220}, {frame = 0x7f56e4534080, duration = 23220}, {
-        frame = 0x7f56e4534300, duration = 23220}, {frame = 0x7f56e45345c0, duration = 23242}, {frame = 0x7f56e4534800, duration = 23220}, {
-        frame = 0x7f56e4534ac0, duration = 23197}, {frame = 0x7f56e4534d40, duration = 23220}, {frame = 0x7f56e4535000, duration = 23220}, {
-        frame = 0x7f56e4535240, duration = 23198}, {frame = 0x7f56e4535500, duration = 23220}, {frame = 0x7f56e4535780, duration = 23220}, {
-        frame = 0x7f56e4535a40, duration = 23219}, {frame = 0x7f56e4535c80, duration = 23220}, {frame = 0x7f56e4535f40, duration = 23220}, {
-        frame = 0x7f56e45361c0, duration = 23220}, {frame = 0x7f56e4536480, duration = 23243}, {frame = 0x7f56e45366c0, duration = 23220}, {
-        frame = 0x7f56e4536980, duration = 23220}, {frame = 0x7f56e4536c00, duration = 23243}, {frame = 0x7f56e4536ec0, duration = 23197}, {
-        frame = 0x7f56e4537100, duration = 23220}, {frame = 0x7f56e45373c0, duration = 23220}, {frame = 0x7f56e4537640, duration = 23220}, {
-        frame = 0x7f56e4537900, duration = 23220}, {frame = 0x7f56e4537b40, duration = 23220}, {frame = 0x7f56e4537e00, duration = 23220}, {
-        frame = 0x7f56e4538080, duration = 23219}, {frame = 0x7f56e4538340, duration = 23220}, {frame = 0x7f56e4538580, duration = 23220}, {
-        frame = 0x7f56e4538840, duration = 23220}, {frame = 0x7f56e4538ac0, duration = 23220}, {frame = 0x7f56e4538d80, duration = 23220}},
-    rindex = 13, windex = 17, size = 4, max_size = 50, keep_last = 1, rindex_shown = 1, abort_request = 0, mutex = 0x7f56e411e890,
-    cond = 0x7f56e4112620}, offset = 0, program_id = 4, read_done = false, last_pts = 227140681}
-(gdb) n
-468             if (!running)
-(gdb)
-475             for (i = 0; i &lt; streams[type].size(); i++) {
-(gdb)
-476                     st = streams[type][i];
-(gdb) where
-#0  StreamMix::GetFrame (this=this@entry=0x7f56e45266e0, type=type@entry=0, id=id@entry=0x0, out=0x7f56e005d3c0) at StreamMix.cpp:476
-#1  0x000000000045476d in StreamMix::BroadData (this=0x7f56e45266e0, p=..., pin=3) at StreamMix.cpp:405
-#2  0x000000000045485d in Pin::fillBuffer (this=&lt;optimized out&gt;, p=...) at MediaBase.h:57
-#3  0x0000000000410d9c in AspectRatio::pushVideo (this=0x7f56e4698be0, p=...) at AspectRatio.cpp:161
-#4  0x0000000000410eab in AspectRatio::fillBuffer (this=&lt;optimized out&gt;, p=...) at AspectRatio.cpp:21
-#5  0x0000000000414c3f in split::pushStream (this=0x7f56dc019770, p=..., in=&lt;optimized out&gt;, out_pre=&lt;optimized out&gt;, out_from=0x7f56dc021c40,
-    type=type@entry=VIDEO, push=true) at split.cpp:213
-#6  0x0000000000414d09 in split::fillBuffer (this=&lt;optimized out&gt;, p=...) at split.cpp:25
-#7  0x000000000040ca18 in pushStream (frame=0x7f56e00ecbc0, type=VIDEO, this=0x7f56dc15e060) at DecoderFile.cpp:298
-#8  DecoderFile::exec (this=0x7f56dc15e060) at DecoderFile.cpp:221
-#9  0x000000000040b14a in operator() (this=0x7f56e00008c8) at /usr/include/c++/4.8.2/functional:2471
-#10 operator() (this=0x7f56e00008c0) at /usr/include/c++/4.8.2/future:1216
-#11 std::_Function_handler&lt;std::unique_ptr&lt;std::__future_base::_Result_base, std::__future_base::_Result_base::_Deleter&gt; (), std::__future_base::_Task_setter&lt;std::unique_ptr&lt;std::__future_base::_Result&lt;int&gt;, std::__future_base::_Result_base::_Deleter&gt;, int&gt; &gt;::_M_invoke(std::_Any_data const&amp;) (__functor=...) at /usr/include/c++/4.8.2/functional:2057
-#12 0x000000000040b3ee in operator() (this=&lt;optimized out&gt;) at /usr/include/c++/4.8.2/functional:2471
-#13 std::__future_base::_State_base::_M_do_set(std::function&lt;std::unique_ptr&lt;std::__future_base::_Result_base, std::__future_base::_Result_base::_Deleter&gt; ()&gt;&amp;, bool&amp;) (this=0x7f56dc18b8c8, __f=..., __set=@0x7f56cc7dfc7f: false) at /usr/include/c++/4.8.2/future:471
-#14 0x00007f56f554c1cb in __pthread_once_slow () from /lib64/libpthread.so.0
-#15 0x000000000040c30a in __gthread_once (__func=&lt;optimized out&gt;, __once=0x7f56dc18b934)
-    at /usr/include/c++/4.8.2/x86_64-redhat-linux/bits/gthr-default.h:699
-#16 call_once&lt;void (std::__future_base::_State_base::*)(std::function&lt;std::unique_ptr&lt;std::__future_base::_Result_base, std::__future_base::_Result_base::_Deleter&gt;()&gt;&amp;, bool&amp;), std::__future_base::_State_base* const, std::reference_wrapper&lt;std::function&lt;std::unique_ptr&lt;std::__future_base::_Result_base, std::__future_base::_Result_base::_Deleter&gt;()&gt; &gt;, std::reference_wrapper&lt;bool&gt; &gt; (__f=&lt;optimized out&gt;, __once=...)
-    at /usr/include/c++/4.8.2/mutex:786
-#17 _M_set_result (__ignore_failure=false, __res=..., this=0x7f56dc18b8c8) at /usr/include/c++/4.8.2/future:358
-#18 std::__future_base::_Task_state&lt;DecoderFile::decoderStream()::__lambda4, std::allocator&lt;int&gt;, int()&gt;::_M_run(void) (this=0x7f56dc18b8c8)
----Type &lt;return&gt; to continue, or q &lt;return&gt; to quit---list
-    at /usr/include/c++/4.8.2/future:1286
-#19 0x000000000040bef7 in operator() (this=&lt;optimized out&gt;) at /usr/include/c++/4.8.2/future:1421
-#20 _M_invoke&lt;&gt; (this=&lt;optimized out&gt;) at /usr/include/c++/4.8.2/functional:1732
-#21 operator() (this=&lt;optimized out&gt;) at /usr/include/c++/4.8.2/functional:1720
-#22 std::thread::_Impl&lt;std::_Bind_simple&lt;std::packaged_task&lt;int ()&gt; ()&gt; &gt;::_M_run() (this=&lt;optimized out&gt;) at /usr/include/c++/4.8.2/thread:115
-#23 0x00007f56f26a0330 in ?? () from /lib64/libstdc++.so.6
-#24 0x00007f56f554de65 in start_thread () from /lib64/libpthread.so.0
-#25 0x00007f56f1e0388d in clone () from /lib64/libc.so.6
-(gdb) list
-471             f = NULL;
-472             st = NULL;
-473             frame_ts = AV_NOPTS_VALUE;
-474
-475             for (i = 0; i &lt; streams[type].size(); i++) {
-476                     st = streams[type][i];
-477                     if (st-&gt;read_done || frame_queue_nb_remaining(&amp;st-&gt;frameq) &lt;= 0)
-478                             continue;
-479
-480                     if (!(f = frame_queue_peek_readable(&amp;st-&gt;frameq))) {
-(gdb)
-481                             /* Response to Abort due to somewhere frame_queue_abort() be called.
-482                              * FIXME frame_queue_abort() shall be called in stopMix().  */
-483                             return -1;
-484                     }
-485                     else {
-486                             /* Have to make sure frame_queue_nb_remaining(&amp;st-&gt;frameq) &gt; 0 whenever go into frame_queue_next() */
-487                             frame_ts = (type == MEDIA_TYPE_VIDEO) ? f-&gt;frame-&gt;pts :
-488                                     av_rescale(f-&gt;frame-&gt;pts, AV_TIME_BASE, f-&gt;frame-&gt;sample_rate);
-489
-490                             socketlog(&quot;%s.%d  PEEK [%ld = %ld + %ld][%ld], dur = %ld, pts = %ld, sample_rate = %d,&quot;
-(gdb)
-491                                     &quot;remaining = %d\n&quot;,
-492                                     (type == MEDIA_TYPE_VIDEO) ? &quot;VIDEO&quot; : &quot;AUDIO&quot;, st-&gt;program_id,
-493                                     frame_ts + st-&gt;offset, frame_ts, st-&gt;offset, *ref_t, f-&gt;duration,
-494                                     f-&gt;frame-&gt;pts, f-&gt;frame-&gt;sample_rate, frame_queue_nb_remaining(&amp;st-&gt;frameq));
-495                             break;
-496                     }
-497             }
-498
-499             /* When f is NULL here, means that there's no data in all unread frameq */
-500             if (!f) {
-(gdb) n
-475             for (i = 0; i &lt; streams[type].size(); i++) {
-(gdb)
-476                     st = streams[type][i];
-(gdb)
-477                     if (st-&gt;read_done || frame_queue_nb_remaining(&amp;st-&gt;frameq) &lt;= 0)
-(gdb) print type
-$9 = 0
-(gdb) n
-475             for (i = 0; i &lt; streams[type].size(); i++) {
-(gdb)
-476                     st = streams[type][i];
-(gdb)
-475             for (i = 0; i &lt; streams[type].size(); i++) {
-(gdb)
-502                     for (st = NULL, i = 0; i &lt; streams[type].size(); i++) {
-(gdb)
-503                             if (streams[type][i]-&gt;read_done &amp;&amp; frame_queue_full(&amp;streams[type][i]-&gt;frameq))
-(gdb)
-476                     st = streams[type][i];
-(gdb)
-502                     for (st = NULL, i = 0; i &lt; streams[type].size(); i++) {
-(gdb)
-506                             if (!streams[type][i]-&gt;read_done)
-(gdb) list
-501                     bool there_is_full_frameq = 0;
-502                     for (st = NULL, i = 0; i &lt; streams[type].size(); i++) {
-503                             if (streams[type][i]-&gt;read_done &amp;&amp; frame_queue_full(&amp;streams[type][i]-&gt;frameq))
-504                                     there_is_full_frameq = 1;
-505
-506                             if (!streams[type][i]-&gt;read_done)
-507                                     st = streams[type][i];
-508                     }
-509
-510                     /* Have to insert frame for all unread frameq, so that the frames in the full frameq could be digested,
-(gdb)
-511                      * otherwise the full frameq will block decoding threads. */
-512                     if (there_is_full_frameq &amp;&amp; st) {
-513                             /*
-514                             DaoboLog(this, &quot;frameq[%s][%d] Insert due to full frameq existion\n&quot;,
-515                                             (type == MEDIA_TYPE_VIDEO) ? &quot;VIDEO&quot; : &quot;AUDIO&quot;, st-&gt;program_id);
-516                                             */
-517                             goto insert;
-518                     }
-519                     else {
-520                             cv_.wait_for(lock, chrono::microseconds(20000));
-(gdb) print streams[type^CQuitread_done
-(gdb) print ((InternalStream *) 0x7f56e465a150)-&gt;read_done
-$10 = false
-(gdb) print ((InternalStream *) 0x7f56e4538fc0)-&gt;read_done
-$11 = false
-(gdb) print ((InternalStream *) 0x7f56e4538fc0)-&gt;frameq
-$12 = {queue = {{frame = 0x7f56e4539340, duration = 184558}, {frame = 0x7f56e469d9c0, duration = 40000}, {frame = 0x7f56e469dc80,
-      duration = 40000}, {frame = 0x7f56e469df00, duration = 40000}, {frame = 0x7f56e469e1c0, duration = 40000}, {frame = 0x7f56e469e400,
-      duration = 40000}, {frame = 0x7f56e469e6c0, duration = 40000}, {frame = 0x7f56e469e940, duration = 40000}, {frame = 0x7f56e469ec00,
-      duration = 40000}, {frame = 0x7f56e469ee40, duration = 40000}, {frame = 0x7f56e469f100, duration = 40000}, {frame = 0x7f56e469f380,
-      duration = 40000}, {frame = 0x7f56e469f640, duration = 20000}, {frame = 0x7f56e469f880, duration = 40000}, {frame = 0x7f56e469fb40,
-      duration = 40000}, {frame = 0x7f56e469fdc0, duration = 40000}, {frame = 0x7f56e46a0080, duration = 40000}, {frame = 0x7f56e46a02c0,
-      duration = 40000}, {frame = 0x7f56e46a0580, duration = 40000}, {frame = 0x7f56e46a0800, duration = 40000}, {frame = 0x7f56e46a0ac0,
-      duration = 40000}, {frame = 0x7f56e46a0d00, duration = 40000}, {frame = 0x7f56e46a0fc0, duration = 40000}, {frame = 0x7f56e46a1240,
-      duration = 40000}, {frame = 0x7f56e46a1500, duration = 40000}, {frame = 0x7f56e46a1740, duration = 40000}, {frame = 0x7f56e46a1a00,
-      duration = 40000}, {frame = 0x7f56e46a1c80, duration = 40000}, {frame = 0x7f56e46a1f40, duration = 40000}, {frame = 0x7f56e46a2180,
-      duration = 40000}, {frame = 0x7f56e46a2440, duration = 40000}, {frame = 0x7f56e46a26c0, duration = 40000}, {frame = 0x7f56e46a2980,
-      duration = 40000}, {frame = 0x7f56e46a2bc0, duration = 40000}, {frame = 0x7f56e46a2e80, duration = 40000}, {frame = 0x7f56e46a3100,
-      duration = 40000}, {frame = 0x7f56e46a33c0, duration = 40000}, {frame = 0x7f56e46a3600, duration = 40000}, {frame = 0x7f56e46a38c0,
-      duration = 40000}, {frame = 0x7f56e46a3b40, duration = 40000}, {frame = 0x7f56e46a3e00, duration = 40000}, {frame = 0x7f56e46a4040,
-      duration = 40000}, {frame = 0x7f56e46a4300, duration = 40000}, {frame = 0x7f56e46a4580, duration = 40000}, {frame = 0x7f56e46a4840,
-      duration = 40000}, {frame = 0x7f56e46a4a80, duration = 40000}, {frame = 0x7f56e46a4d40, duration = 40000}, {frame = 0x7f56e46a4fc0,
-      duration = 40000}, {frame = 0x7f56e46a5280, duration = 40000}, {frame = 0x7f56e4695b00, duration = 40000}}, rindex = 0, windex = 1,
-  size = 1, max_size = 50, keep_last = 1, rindex_shown = 1, abort_request = 0, mutex = 0x7f56e4538810, cond = 0x7f56e4538a60}
-(gdb) print ((InternalStream *) 0x7f56e4538fc0)-&gt;frameq.size
-$13 = 1
-(gdb) print ((InternalStream *) 0x7f56e465a150)-&gt;frameq.size
-$14 = 4
-(gdb) print *streams[0]._M_impl._M_start
-$15 = (InternalStream *) 0x7f56e4538fc0
-(gdb)  q
-A debugging session is active.
-
-        Inferior 1 [process 12334] will be detached.
-
-Quit anyway? (y or n) y
-Detaching from program: /opt/bottom/daobo, process 12334
-```</pre>
-</div>
 <div color="#2ef209" created="20201228194702570" modified="20201228194702570" title="done">
 <pre></pre>
 </div>
@@ -10770,7 +10564,7 @@ append 方式的m3u8
 
 &lt;/div&gt;</pre>
 </div>
-<div created="20201228192109981" list="[[Put Tiddly Wiki onto Github]] 规划一下每日功课 称体重 新生儿出门如何装备 奶嘴、棉花、指甲钳 每天都听一听modle和module的发音 确认AWS释放了所有资源 记账做预算 简单心里的52堂人格课 去一趟好孩子 去一趟金象大药房 [[Make Flash Cards]] [[Learn Flask]] Sanbao程序重构 [[了解Nginx - rtmp-flv 模块的GOP缓存的作用]] 能直接合成音画同步的ts切片，用他们的命令合出来的视频为什么会音画不同步 了解flv.js和浏览器中的播放器 [[Algorithm of &quot;read input at native rate&quot; info flash cards]] [[Algorithm of A-V Sync into flash cards]] 中医哲学：要想小儿安，三分饥与寒 [[HLS m3u8 和 ts的域名不同]]" modified="20210113032747857" title="task">
+<div created="20201228192109981" list="[[Put Tiddly Wiki onto Github]] 规划一下每日功课 称体重 [[create our own filter in ffmpeg]] 新生儿出门如何装备 奶嘴、棉花、指甲钳 每天都听一听modle和module的发音 确认AWS释放了所有资源 记账做预算 简单心里的52堂人格课 去一趟好孩子 去一趟金象大药房 [[Make Flash Cards]] [[Learn Flask]] Sanbao程序重构 [[了解Nginx - rtmp-flv 模块的GOP缓存的作用]] 能直接合成音画同步的ts切片，用他们的命令合出来的视频为什么会音画不同步 了解flv.js和浏览器中的播放器 [[Algorithm of &quot;read input at native rate&quot; info flash cards]] [[Algorithm of A-V Sync into flash cards]] 中医哲学：要想小儿安，三分饥与寒 [[HLS m3u8 和 ts的域名不同]] 北京自来水是否可以冲奶" modified="20210114084112921" title="task">
 <pre></pre>
 </div>
 <div created="20201228192021343" modified="20201228192105868" tags="" title="TaskManagementExampleDraggableTemplate" type="text/vnd.tiddlywiki">
