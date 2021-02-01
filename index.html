@@ -10237,7 +10237,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210201014624276" list="[[Tech Notes]] WebRTC" modified="20210201022636596" title="$:/StoryList">
+<div created="20210201014624276" list="[[HLS m3u8 和 ts的域名不同]] [[Tech Notes]] WebRTC" modified="20210201022732339" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -10706,8 +10706,10 @@ https://trac.ffmpeg.org/wiki/FilteringGuide</pre>
 <div created="20210112032150688" modified="20210112032227061" tags="[[ToDo List]]" title="ffmpeg 的 banner 信息是什么">
 <pre></pre>
 </div>
-<div created="20210104111939245" modified="20210113022104949" tags="[[ToDo List]] task [[Tech Notes]] done" title="HLS m3u8 和 ts的域名不同">
+<div created="20210104111939245" modified="20210201023047868" tags="[[ToDo List]] task [[Tech Notes]] done" title="HLS m3u8 和 ts的域名不同">
 <pre>M3u8文件里没给出ts的域名，ffplay是从哪得到不同于m3u8的域名的？
+
+Nginx 返回302，依HTTP协议，ffmpeg 的http模块重定向实现的，HLS模块对http的重定向无感知，还是持有重定向前的地址，导致每次在请求ts切片时都要重定向。
 
 302重定向到了别的域名，但第一次索要ts切片的时候使用的还是m3u8的域名地址
 
