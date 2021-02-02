@@ -213,6 +213,8 @@ Error message and password prompt
 
 <li>Algorithm of A-V Sync into flash cards</li>
 
+<li>checking for int-overflow</li>
+
 <li>create our own filter in ffmpeg</li>
 
 <li>done</li>
@@ -10218,7 +10220,7 @@ Error message and password prompt
 <div created="20201228150122303" modified="20201228195420655" title="$:/state/tab-2065006209">
 <pre>$:/core/ui/ControlPanel/Saving/GitHub</pre>
 </div>
-<div created="20201228150013909" modified="20210202015307142" title="$:/state/tab/sidebar--595412856">
+<div created="20201228150013909" modified="20210202073118771" title="$:/state/tab/sidebar--595412856">
 <pre>TableOfContents</pre>
 </div>
 <div created="20210103140714766" modified="20210103140714766" title="$:/state/toc/TableOfContents-Job Tasks--118161433">
@@ -10239,7 +10241,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210202015308824" list="[[ToDo List]] [[English Daily Tech Reading]] GettingStarted" modified="20210202015308824" title="$:/StoryList">
+<div created="20210202073121995" list="[[ToDo List]] [[checking for int-overflow]]" modified="20210202073121995" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -10538,6 +10540,26 @@ Disentangling principles from expediency is tricky. Like almost everything else 
 # VIdeo clock as master
 # System clock as master
 # Reading input at native frame rate</pre>
+</div>
+<div created="20210202073126557" modified="20210202073152290" tags="[[ToDo List]]" title="checking for int-overflow">
+<pre>/**
+ * Multiply two `size_t` values checking for overflow.
+ *
+ * @param[in]  a,b Operands of multiplication
+ * @param[out] r   Pointer to the result of the operation
+ * @return 0 on success, AVERROR(EINVAL) on overflow
+ */
+static inline int av_size_mult(size_t a, size_t b, size_t *r)
+{
+    size_t t = a * b;
+    /* Hack inspired from glibc: don't try the division if nelem and elsize
+     * are both less than sqrt(SIZE_MAX). */
+    if ((a | b) &gt;= ((size_t)1 &lt;&lt; (sizeof(size_t) * 4)) &amp;&amp; a &amp;&amp; t / a != b)
+        return AVERROR(EINVAL);
+    *r = t;
+    return 0;
+}
+</pre>
 </div>
 <div created="20210114084045368" modified="20210121021116683" tags="[[ToDo List]] task done" title="create our own filter in ffmpeg">
 <pre>https://wiki.multimedia.cx/index.php/FFmpeg_filter_HOWTO
