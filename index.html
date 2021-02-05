@@ -10249,7 +10249,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210205025512464" list="WebRTC GettingStarted" modified="20210205025514516" title="$:/StoryList">
+<div created="20210205055112809" list="WebRTC" modified="20210205055112809" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11221,10 +11221,18 @@ cmake -DCMAKE_INSTALL_PREFIX=/path/to/install  /path/to/src
 &lt;/$list&gt;
 </pre>
 </div>
-<div created="20210201022655974" modified="20210205022954776" tags="[[Tech Notes]]" title="WebRTC">
+<div created="20210201022655974" modified="20210205055248104" tags="[[Tech Notes]]" title="WebRTC">
 <pre># [[WebRTC|https://webrtc.org/getting-started/peer-connections]]
 # [[janus|https://janus.conf.meetecho.com/]]
-# [[mediesoup|https://mediasoup.org/]]</pre>
+# [[mediesoup|https://mediasoup.org/]]
+#* Create TLS .pem certification files
+
+```
+1. openssl req -newkey rsa:2048 -new -nodes -keyout key.pem -out csr.pem
+2. openssl x509 -req -days 365 -in csr.pem -signkey key.pem -out server.crt
+3. mv server.crt fullchain.pem
+   mv key.pem privkey.pem
+```</pre>
 </div>
 <div created="20210114084354095" modified="20210114084444229" tags="文化" title="中医口诀">
 <pre># 要想小儿安，三分饥与寒</pre>
