@@ -241,6 +241,8 @@ Error message and password prompt
 
 <li>RTMP</li>
 
+<li>RTP</li>
+
 <li>Sanbao程序重构</li>
 
 <li>TableOfContents</li>
@@ -10249,7 +10251,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210205055112809" list="WebRTC" modified="20210205055112809" title="$:/StoryList">
+<div created="20210207074039667" list="WebRTC RTP" modified="20210207074039667" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11106,6 +11108,29 @@ AVFormatContext&lt;ic&gt; ---&gt; HTTPContext.location在重定向后就变了</
 </div>
 <div created="20210205020718220" modified="20210205020730035" tags="[[Tech Notes]]" title="RTMP">
 <pre></pre>
+</div>
+<div created="20210207074056710" modified="20210207074333320" tags="WebRTC" title="RTP">
+<pre>https://www.kurento.org/blog/rtp-i-intro-rtp-and-sdp
+https://www.kurento.org/blog/rtp-ii-streaming-ffmpeg
+
+cat video.sdp
+
+```
+v=0
+o=- 0 0 IN IP4 127.0.0.1
+s=No Name
+c=IN IP4 127.0.0.1
+t=0 0
+a=tool:libavformat 58.45.100
+m=video 5004 RTP/AVP 96
+b=AS:833
+a=rtpmap:96 H264/90000
+a=fmtp:96 packetization-mode=1; sprop-parameter-sets=Z2QAKKzIcBQBbsBagQEAoAAAAwAgAFfkAeMGM8A=,aOm4ssiw; profile-level-id=640028
+```
+
+ffmpeg -re -stream_loop -1 -i ./in.mp4 -c:v copy -an -f rtp -sdp_file ./video.sdp rtp://127.0.0.1:5004
+
+ffplay -protocol_whitelist file,rtp,udp -i video.sdp</pre>
 </div>
 <div created="20210107100007494" modified="20210107100328296" tags="[[ToDo List]] task" title="Sanbao程序重构">
 <pre>已经存下了Sanbao的原始数据，存于vmdisk/SanbaoRawData.tar.bz2
