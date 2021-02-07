@@ -11109,7 +11109,7 @@ AVFormatContext&lt;ic&gt; ---&gt; HTTPContext.location在重定向后就变了</
 <div created="20210205020718220" modified="20210205020730035" tags="[[Tech Notes]]" title="RTMP">
 <pre></pre>
 </div>
-<div created="20210207074056710" modified="20210207074333320" tags="WebRTC" title="RTP">
+<div created="20210207074056710" modified="20210207074455292" tags="WebRTC" title="RTP">
 <pre>https://www.kurento.org/blog/rtp-i-intro-rtp-and-sdp
 https://www.kurento.org/blog/rtp-ii-streaming-ffmpeg
 
@@ -11128,9 +11128,10 @@ a=rtpmap:96 H264/90000
 a=fmtp:96 packetization-mode=1; sprop-parameter-sets=Z2QAKKzIcBQBbsBagQEAoAAAAwAgAFfkAeMGM8A=,aOm4ssiw; profile-level-id=640028
 ```
 
-ffmpeg -re -stream_loop -1 -i ./in.mp4 -c:v copy -an -f rtp -sdp_file ./video.sdp rtp://127.0.0.1:5004
+`ffmpeg -re -stream_loop -1 -i ./in.mp4 -c:v copy -an -f rtp -sdp_file ./video.sdp rtp://127.0.0.1:5004`
 
-ffplay -protocol_whitelist file,rtp,udp -i video.sdp</pre>
+`ffplay -protocol_whitelist file,rtp,udp -i video.sdp`
+</pre>
 </div>
 <div created="20210107100007494" modified="20210107100328296" tags="[[ToDo List]] task" title="Sanbao程序重构">
 <pre>已经存下了Sanbao的原始数据，存于vmdisk/SanbaoRawData.tar.bz2
