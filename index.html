@@ -10593,8 +10593,8 @@ But then, what is the worst possible case? Surely we can always make the program
 #* I don’t consider that I’m to blame. 我不认为我应该被责备。
 #* I consider him irresponsible. 我觉得他不负责任</pre>
 </div>
-<div created="20210205010608220" modified="20210211135653241" tags="英语学习 Journal" title="5th February 2021">
-<pre>Formal notes on the input size124^^123^^
+<div created="20210205010608220" modified="20210211135844135" tags="英语学习 Journal" title="5th February 2021">
+<pre>Formal notes on the input size
 
 What exactly is this “input size” we started to talk about? In the formal definitions this is the size of the input written in some fixed finite alphabet (with at least 2 “letters”). For our needs, we may consider this alphabet to be the numbers 0…255. Then the “input size” turns out to be exactly the size of the input file in bytes.
 
@@ -10622,13 +10622,13 @@ the second and third step are executed exactly N(N – 1)/2 times
 
 the fourth step is executed at most N(N – 1)/2 times
 
-Clearly, if the elements in A are in descending order at the beginning, the fourth step will always be executed. Thus in this case the algorithm makes 3N(N – 1)/2 + N = 1.5N2 – 0.5N steps. Therefore our algorithm has f (N) = 1.5N2 – 0.5N.
+Clearly, if the elements in A are in descending order at the beginning, the fourth step will always be executed. Thus in this case the algorithm makes 3N(N – 1)/2 + N = 1.5N^^2^^ – 0.5N steps. Therefore our algorithm has f (N) = 1.5N^^2^^ – 0.5N.
 
-As you can see, determining the exact function f for more complicated programs is painful. Moreover, it isn’t even necessary. In our case, clearly the -0.5N term can be neglected. It will usually be much smaller than the 1.5N2 term and it won’t affect the runtime significantly. The result “f (N) is roughly equal to 1.5N2” gives us all the information we need. As we will show now, if we want	to compare this algorithm with some other algorithm solving the	same problem, even the constant 1.5 is not that important.
+As you can see, determining the exact function f for more complicated programs is painful. Moreover, it isn’t even necessary. In our case, clearly the -0.5N term can be neglected. It will usually be much smaller than the 1.5N^^2^^ term and it won’t affect the runtime significantly. The result “f (N) is roughly equal to 1.5N^^2^^” gives us all the information we need. As we will show now, if we want	to compare this algorithm with some other algorithm solving the	same problem, even the constant 1.5 is not that important.
 
-Consider two algorithms, one with the runtime N2, the other with the runtime 0.001N3. One can easily see that for N greater than 1 000 the first algorithm is faster – and soon this difference becomes apparent. While the first algorithm is able to solve inputs with N = 20 000 in a matter of seconds, the second one will already need several minutes on current machines.
+Consider two algorithms, one with the runtime N^^2^^, the other with the runtime 0.001N^^3^^. One can easily see that for N greater than 1 000 the first algorithm is faster – and soon this difference becomes apparent. While the first algorithm is able to solve inputs with N = 20 000 in a matter of seconds, the second one will already need several minutes on current machines.
 
-Clearly this will occur always when one of the runtime functions grows asymptotically faster than the other (i.e. when N grows beyond all bounds the limit of their quotient is zero or infinity). Regardless of the constant factors, an algorithm with runtime proportional to N2 will always be better than an algorithm with runtime proportional to N3 on almost all inputs. And this observation is exactly what we base our formal definition on.
+Clearly this will occur always when one of the runtime functions grows asymptotically faster than the other (i.e. when N grows beyond all bounds the limit of their quotient is zero or infinity). Regardless of the constant factors, an algorithm with runtime proportional to N^^2^^ will always be better than an algorithm with runtime proportional to N^^3^^ on almost all inputs. And this observation is exactly what we base our formal definition on.
 
 # Proportional - 成比例的
 # logarithmic - 对数的
