@@ -207,6 +207,8 @@ Error message and password prompt
 
 <li>03rd February 2021</li>
 
+<li>05th February 2021</li>
+
 <li>11th January 2021</li>
 
 <li>12th February 2021</li>
@@ -230,8 +232,6 @@ Error message and password prompt
 <li>24th January 2021</li>
 
 <li>27th January 2021</li>
-
-<li>5th February 2021</li>
 
 <li>Algorithm of &quot;read frame at native rate&quot; info flash cards</li>
 
@@ -10296,7 +10296,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210217112132440" list="2021-2-16 英语学习 [[January 2021]] [[12th February 2021]] [[01st February 2021]] [[03rd February 2021]] [[5th February 2021]] [[February 2021]] Journal" modified="20210217114621483" title="$:/StoryList">
+<div created="20210217112132440" list="2021-2-16 英语学习 [[January 2021]] [[12th February 2021]] [[01st February 2021]] [[03rd February 2021]] [[05th February 2021]] [[February 2021]] Journal" modified="20210217114621483" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -10488,6 +10488,53 @@ But then, what is the worst possible case? Surely we can always make the program
 #* he considered the women round the table with wariness. 他小心翼翼打量桌子周围的女士们
 #* I don’t consider that I’m to blame. 我不认为我应该被责备。
 #* I consider him irresponsible. 我觉得他不负责任</pre>
+</div>
+<div created="20210205010608220" modified="20210217115119173" tags="英语学习 Journal [[February 2021]]" title="05th February 2021">
+<pre>Formal notes on the input size
+
+What exactly is this “input size” we started to talk about? In the formal definitions this is the size of the input written in some fixed finite alphabet (with at least 2 “letters”). For our needs, we may consider this alphabet to be the numbers 0…255. Then the “input size” turns out to be exactly the size of the input file in bytes.
+
+Usually a part of the input is a number (or several numbers) such that the size of the input is proportional to the number.
+
+E.g. in Example 2 we are given an int N and an array containing N ints. The size of the input file will be roughly 5N (depending on the OS and architecture, but always linear in N).
+
+In such cases, we may choose that this number will represent the size of the input. Thus when talking about problems on arrays/strings, the input size is the length of the array/string, when talking about graph problems, the input size depends both on the number of vertices (N) and the number of edges (M), etc.
+
+We will adopt this approach and use N as the input size in the following parts of the article.
+
+There is one tricky special case you sometimes need to be aware of. To write a (possibly large) number we need only logarithmic space. (E.g. to write 123456, we need only roughly log10(123456) digits.) This is why the naive primality test does not run in polynomial time – its runtime is polynomial in the size of the number, but not in its number of digits! If you didn’t understand the part about polynomial time, don’t worry, we’ll get there later.
+
+How to measure efficiency?
+
+We already mentioned that given an input we are able to count the number of steps an algorithm makes simply by simulating it. Suppose we do this for all inputs of size at most N and find the worst of these inputs (i.e. the one that causes the algorithm to do the most steps). Let f (N) be this number of steps. We will call this function the time complexity, or shortly the runtime of our algorithm.
+
+In other words, if we have any input of size N, solving it will require at most f (N) steps.
+
+Let’s return to the algorithm from Example 2. What is the worst case of size N? In other words, what array with N elements will cause the algorithm to make the most steps? If we take a look at the algorithm, we can easily see that:
+
+the first step is executed exactly N times
+
+the second and third step are executed exactly N(N – 1)/2 times
+
+the fourth step is executed at most N(N – 1)/2 times
+
+Clearly, if the elements in A are in descending order at the beginning, the fourth step will always be executed. Thus in this case the algorithm makes 3N(N – 1)/2 + N = 1.5N^^2^^ – 0.5N steps. Therefore our algorithm has f (N) = 1.5N^^2^^ – 0.5N.
+
+As you can see, determining the exact function f for more complicated programs is painful. Moreover, it isn’t even necessary. In our case, clearly the -0.5N term can be neglected. It will usually be much smaller than the 1.5N^^2^^ term and it won’t affect the runtime significantly. The result “f (N) is roughly equal to 1.5N^^2^^” gives us all the information we need. As we will show now, if we want	to compare this algorithm with some other algorithm solving the	same problem, even the constant 1.5 is not that important.
+
+Consider two algorithms, one with the runtime N^^2^^, the other with the runtime 0.001N^^3^^. One can easily see that for N greater than 1 000 the first algorithm is faster – and soon this difference becomes apparent. While the first algorithm is able to solve inputs with N = 20 000 in a matter of seconds, the second one will already need several minutes on current machines.
+
+Clearly this will occur always when one of the runtime functions grows asymptotically faster than the other (i.e. when N grows beyond all bounds the limit of their quotient is zero or infinity). Regardless of the constant factors, an algorithm with runtime proportional to N^^2^^ will always be better than an algorithm with runtime proportional to N^^3^^ on almost all inputs. And this observation is exactly what we base our formal definition on.
+
+# Proportional - 成比例的
+# logarithmic - 对数的
+# digit - 0到9的任意数字
+# Naive - 幼稚、没经验、缺乏判断力的
+# primarily - 原始的、素数
+# polynomial - 多项式的
+# descend - 下降
+# neglect - 忽视
+# asymptotically - 逐渐地</pre>
 </div>
 <div created="20210110221624935" modified="20210217113120531" tags="英语学习 Journal [[January 2021]]" title="11th January 2021">
 <pre>THE MEGAPHONE has been taken away. On January 8th Twitter, a social network, announced that it was “permanently suspending” President Donald Trump's account. Viewed in isolation, the two tweets that led to the ban were, by Mr Trump’s standards, fairly innocuous. But Twitter said it had taken its decision in the wake of the riot at America's Congress on January 6th, in which five people died as legislators' offices were ransacked by a crowd of Mr Trump's supporters after Mr Trump had encouraged them to march on the Capitol. The social network said that continuing to give Mr Trump access risked allowing him to incite further violence.
@@ -10708,53 +10755,6 @@ Disentangling principles from expediency is tricky. Like almost everything else 
 # censor - 审查
 # conservative - 保守党人
 # proliferate - 激增</pre>
-</div>
-<div created="20210205010608220" modified="20210217114628888" tags="英语学习 Journal [[February 2021]]" title="5th February 2021">
-<pre>Formal notes on the input size
-
-What exactly is this “input size” we started to talk about? In the formal definitions this is the size of the input written in some fixed finite alphabet (with at least 2 “letters”). For our needs, we may consider this alphabet to be the numbers 0…255. Then the “input size” turns out to be exactly the size of the input file in bytes.
-
-Usually a part of the input is a number (or several numbers) such that the size of the input is proportional to the number.
-
-E.g. in Example 2 we are given an int N and an array containing N ints. The size of the input file will be roughly 5N (depending on the OS and architecture, but always linear in N).
-
-In such cases, we may choose that this number will represent the size of the input. Thus when talking about problems on arrays/strings, the input size is the length of the array/string, when talking about graph problems, the input size depends both on the number of vertices (N) and the number of edges (M), etc.
-
-We will adopt this approach and use N as the input size in the following parts of the article.
-
-There is one tricky special case you sometimes need to be aware of. To write a (possibly large) number we need only logarithmic space. (E.g. to write 123456, we need only roughly log10(123456) digits.) This is why the naive primality test does not run in polynomial time – its runtime is polynomial in the size of the number, but not in its number of digits! If you didn’t understand the part about polynomial time, don’t worry, we’ll get there later.
-
-How to measure efficiency?
-
-We already mentioned that given an input we are able to count the number of steps an algorithm makes simply by simulating it. Suppose we do this for all inputs of size at most N and find the worst of these inputs (i.e. the one that causes the algorithm to do the most steps). Let f (N) be this number of steps. We will call this function the time complexity, or shortly the runtime of our algorithm.
-
-In other words, if we have any input of size N, solving it will require at most f (N) steps.
-
-Let’s return to the algorithm from Example 2. What is the worst case of size N? In other words, what array with N elements will cause the algorithm to make the most steps? If we take a look at the algorithm, we can easily see that:
-
-the first step is executed exactly N times
-
-the second and third step are executed exactly N(N – 1)/2 times
-
-the fourth step is executed at most N(N – 1)/2 times
-
-Clearly, if the elements in A are in descending order at the beginning, the fourth step will always be executed. Thus in this case the algorithm makes 3N(N – 1)/2 + N = 1.5N^^2^^ – 0.5N steps. Therefore our algorithm has f (N) = 1.5N^^2^^ – 0.5N.
-
-As you can see, determining the exact function f for more complicated programs is painful. Moreover, it isn’t even necessary. In our case, clearly the -0.5N term can be neglected. It will usually be much smaller than the 1.5N^^2^^ term and it won’t affect the runtime significantly. The result “f (N) is roughly equal to 1.5N^^2^^” gives us all the information we need. As we will show now, if we want	to compare this algorithm with some other algorithm solving the	same problem, even the constant 1.5 is not that important.
-
-Consider two algorithms, one with the runtime N^^2^^, the other with the runtime 0.001N^^3^^. One can easily see that for N greater than 1 000 the first algorithm is faster – and soon this difference becomes apparent. While the first algorithm is able to solve inputs with N = 20 000 in a matter of seconds, the second one will already need several minutes on current machines.
-
-Clearly this will occur always when one of the runtime functions grows asymptotically faster than the other (i.e. when N grows beyond all bounds the limit of their quotient is zero or infinity). Regardless of the constant factors, an algorithm with runtime proportional to N^^2^^ will always be better than an algorithm with runtime proportional to N^^3^^ on almost all inputs. And this observation is exactly what we base our formal definition on.
-
-# Proportional - 成比例的
-# logarithmic - 对数的
-# digit - 0到9的任意数字
-# Naive - 幼稚、没经验、缺乏判断力的
-# primarily - 原始的、素数
-# polynomial - 多项式的
-# descend - 下降
-# neglect - 忽视
-# asymptotically - 逐渐地</pre>
 </div>
 <div created="20210111062657014" modified="20210129092447801" tags="[[ToDo List]] task" title="Algorithm of &quot;read frame at native rate&quot; info flash cards">
 <pre></pre>
