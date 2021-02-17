@@ -205,6 +205,8 @@ Error message and password prompt
 
 <li>01st February 2021</li>
 
+<li>03rd February 2021</li>
+
 <li>11th January 2021</li>
 
 <li>12th February 2021</li>
@@ -228,8 +230,6 @@ Error message and password prompt
 <li>24th January 2021</li>
 
 <li>27th January 2021</li>
-
-<li>3rd February 2021</li>
 
 <li>5th February 2021</li>
 
@@ -10296,7 +10296,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210217112132440" list="2021-2-16 英语学习 [[January 2021]] [[12th February 2021]] [[01st February 2021]] [[3rd February 2021]] [[5th February 2021]] [[February 2021]] Journal" modified="20210217114621483" title="$:/StoryList">
+<div created="20210217112132440" list="2021-2-16 英语学习 [[January 2021]] [[12th February 2021]] [[01st February 2021]] [[03rd February 2021]] [[5th February 2021]] [[February 2021]] Journal" modified="20210217114621483" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -10442,6 +10442,52 @@ It turns out that this is almost always the case – given two algorithms, eithe
 #* things will remain substantially the same over the next ten years. - 未来10年情况将基本不变
 # it turns out that ... - 其结果是...
 # general idea - 大意</pre>
+</div>
+<div created="20210202175517701" modified="20210217115005143" tags="英语学习 Journal [[February 2021]]" title="03rd February 2021">
+<pre>A neat trick
+
+If you thing about Example 1 for a while, it shouldn’t be too difficult to see that there is an algorithm with runtimes similar to those in Table 2:
+
+|!# of records|!10|!20|!50|!100|!1000|!5000|
+|algorithm 3|0.00s|0.01s|0.05s|0.11s|0.78s|14.22s|
+
+
+Table 2. Runtimes of a new fictional algorithm.
+
+The idea behind this algorithm: Check the number of records. If it is small enough, run algorithm 1, otherwise run algorithm 2.
+
+Similar ideas are often used in praxis. As an example consider most of the sort() functions provided by various libraries. Often this function is an implementation of QuickSort with various improvements, such as:
+
+* if the number of elements is too small, run InsertSort instead (as InsertSort is faster for small inputs)
+
+* if the pivot choices lead to poor results, fall back to MergeSort
+
+‘’What is efficiency?’’
+
+Example 2. Suppose you have a concrete implementation of some algorithm. (The example code presented below is actually an implementation of MinSort – a slow but simple sorting algorithm.)
+
+```
+for (int i=0; i&lt;N; i++)
+    for (int j=i+1; j&lt;N; j++) 
+         if (A[i] &gt; A[j])
+             swap( A[i], A[j] );
+```
+
+If we are given an input to this algorithm (in our case, the array A and its size N), we can exactly compute the number of steps our algorithm does on this input. We could even count the processor instructions if we wanted to. However, there are too many possible inputs for this approach to be practical.
+
+And we still need to answer one important question: What is it exactly we are interested in? Most usually it is the behavior of our program in the worst possible case – we need to look at the input data and to determine an upper bound on how long will it take if we run the program.
+
+But then, what is the worst possible case? Surely we can always make the program run longer simply by giving it a larger input. Some of the more important questions are: What is the worst input with 700 elements? How fast does the maximum runtime grow when we increase the input size?
+
+# neat - 简洁的
+# trick - 花招、方法
+# consider
+#* each application is considered on its merits. 每种用法的优点都被考虑到
+#* it is my considered opinion that we should await for further developments. 经过考虑，我们应该等待事态进一步的发展
+#* he has considered giving up his job. 
+#* he considered the women round the table with wariness. 他小心翼翼打量桌子周围的女士们
+#* I don’t consider that I’m to blame. 我不认为我应该被责备。
+#* I consider him irresponsible. 我觉得他不负责任</pre>
 </div>
 <div created="20210110221624935" modified="20210217113120531" tags="英语学习 Journal [[January 2021]]" title="11th January 2021">
 <pre>THE MEGAPHONE has been taken away. On January 8th Twitter, a social network, announced that it was “permanently suspending” President Donald Trump's account. Viewed in isolation, the two tweets that led to the ban were, by Mr Trump’s standards, fairly innocuous. But Twitter said it had taken its decision in the wake of the riot at America's Congress on January 6th, in which five people died as legislators' offices were ransacked by a crowd of Mr Trump's supporters after Mr Trump had encouraged them to march on the Capitol. The social network said that continuing to give Mr Trump access risked allowing him to incite further violence.
@@ -10662,52 +10708,6 @@ Disentangling principles from expediency is tricky. Like almost everything else 
 # censor - 审查
 # conservative - 保守党人
 # proliferate - 激增</pre>
-</div>
-<div created="20210202175517701" modified="20210217114616550" tags="英语学习 Journal [[February 2021]]" title="3rd February 2021">
-<pre>A neat trick
-
-If you thing about Example 1 for a while, it shouldn’t be too difficult to see that there is an algorithm with runtimes similar to those in Table 2:
-
-|!# of records|!10|!20|!50|!100|!1000|!5000|
-|algorithm 3|0.00s|0.01s|0.05s|0.11s|0.78s|14.22s|
-
-
-Table 2. Runtimes of a new fictional algorithm.
-
-The idea behind this algorithm: Check the number of records. If it is small enough, run algorithm 1, otherwise run algorithm 2.
-
-Similar ideas are often used in praxis. As an example consider most of the sort() functions provided by various libraries. Often this function is an implementation of QuickSort with various improvements, such as:
-
-* if the number of elements is too small, run InsertSort instead (as InsertSort is faster for small inputs)
-
-* if the pivot choices lead to poor results, fall back to MergeSort
-
-‘’What is efficiency?’’
-
-Example 2. Suppose you have a concrete implementation of some algorithm. (The example code presented below is actually an implementation of MinSort – a slow but simple sorting algorithm.)
-
-```
-for (int i=0; i&lt;N; i++)
-    for (int j=i+1; j&lt;N; j++) 
-         if (A[i] &gt; A[j])
-             swap( A[i], A[j] );
-```
-
-If we are given an input to this algorithm (in our case, the array A and its size N), we can exactly compute the number of steps our algorithm does on this input. We could even count the processor instructions if we wanted to. However, there are too many possible inputs for this approach to be practical.
-
-And we still need to answer one important question: What is it exactly we are interested in? Most usually it is the behavior of our program in the worst possible case – we need to look at the input data and to determine an upper bound on how long will it take if we run the program.
-
-But then, what is the worst possible case? Surely we can always make the program run longer simply by giving it a larger input. Some of the more important questions are: What is the worst input with 700 elements? How fast does the maximum runtime grow when we increase the input size?
-
-# neat - 简洁的
-# trick - 花招、方法
-# consider
-#* each application is considered on its merits. 每种用法的优点都被考虑到
-#* it is my considered opinion that we should await for further developments. 经过考虑，我们应该等待事态进一步的发展
-#* he has considered giving up his job. 
-#* he considered the women round the table with wariness. 他小心翼翼打量桌子周围的女士们
-#* I don’t consider that I’m to blame. 我不认为我应该被责备。
-#* I consider him irresponsible. 我觉得他不负责任</pre>
 </div>
 <div created="20210205010608220" modified="20210217114628888" tags="英语学习 Journal [[February 2021]]" title="5th February 2021">
 <pre>Formal notes on the input size
