@@ -233,6 +233,8 @@ Error message and password prompt
 
 <li>20th February 2021</li>
 
+<li>22nd February 2021</li>
+
 <li>22nd January 2021</li>
 
 <li>24th January 2021</li>
@@ -10255,7 +10257,7 @@ Error message and password prompt
 <div created="20201230023808396" modified="20210104014155791" title="$:/state/showeditpreview">
 <pre>no</pre>
 </div>
-<div created="20201228150048917" modified="20210220002234109" title="$:/state/sidebar">
+<div created="20201228150048917" modified="20210222004929221" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20201228150044385" modified="20201228150046350" title="$:/state/tab--2112689675">
@@ -10306,7 +10308,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210221002352123" list="英语学习 [[19th February 2021]] [[ToDo List]] 完成昨天和今天的英语" modified="20210221004446547" title="$:/StoryList">
+<div created="20210222004341630" list="[[20th February 2021]] 英语学习 [[22nd February 2021]] [[01st February 2021]] [[12th February 2021]] [[16th February 2021]] [[18th February 2021]]" modified="20210222004417969" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -10817,6 +10819,33 @@ In a topcoder contest, an algorithm doing 1 000 000 000 multiplications runs bar
 # Occurrence - 发生、存在
 # barely - 仅仅、几乎不
 #* barely in time - 几乎不能按时完成</pre>
+</div>
+<div created="20210222004614004" modified="20210222004932945" tags="英语学习 Journal [[February 2021]]" title="22nd February 2021">
+<pre>A note on algorithm analysis
+
+Usually if we present an algorithm, the best way to present its time complexity is to give a . However, it is common practice to only give an O-bound	- the other bound is usually trivial, O is much easier to type and better known.	Still, don’t forget that O represents only an upper bound. Usually we try to find	an O-bound that’s as good as possible.
+
+Example 3. Given is a sorted	array A. Determine whether it contains two elements with the difference D. Consider the following code solving this problem:
+
+
+```
+int j=0;
+for (int i=0; i&lt;N; i++) {
+    while ( (j&lt;N-1) &amp;&amp; (A[i]-A[j] &gt; D) )
+        j++;
+    if (A[i]-A[j] == D) return 1;
+}
+```
+
+It is easy to give an O(N^^2^^) bound for the time complexity of this algorithm – the	inner while-cycle is called N times, each time we increase j at most N times.	But a more careful analysis shows that in fact we can give an O(N) bound on the	time complexity of this algorithm – it is sufficient to realize that during the whole execution of the algorithm the command “j++;” is executed no more than N times.
+
+If we said “this algorithm is O(N^^2^^)”, we would have been right.	But by saying “this algorithm is O(N)” we give more information	about the algorithm.
+
+Conclusion
+
+We have shown how to write bounds on the time complexity of algorithms.	We have also demonstrated why this way of characterizing algorithms is natural	and (usually more-or-less) sufficient.
+
+The next logical step is to show how to estimate the time complexity of a given algorithm. As we have already seen in Example 3, sometimes this can be messy.	It gets really messy when recursion is involved.	We will address these issues in the second part of this article.</pre>
 </div>
 <div created="20210122122535967" modified="20210217113300065" tags="英语学习 Journal [[January 2021]]" title="22nd January 2021">
 <pre>Reaction has been split. Mr Trump’s opponents, as well as many academics who study online media, welcomed the decision; some called it overdue. After his personal account was banned, Mr Trump used the official account of the American presidency to accuse Twitter of attempting to silence him, and of giving a platform to some of the “most vicious people in the world”. (Twitter later deleted those tweets, though it did not ban the account). Some prominent politicians from the Republican party, which Mr Trump leads, condemned the decision. “Speech should be free whether you agree or not,” said Ben Carson, the Secretary of Housing and Urban Development. “We aren’t in China.” Even Alexei Navalny, a Russian opposition leader, weighed in (on Twitter) to oppose the ban, saying it set a precedent that “will be exploited by the enemies of freedom of speech around the world”.
