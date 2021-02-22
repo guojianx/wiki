@@ -10315,7 +10315,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210222020052281" list="[[Tech Notes]] [[ToDo List]] [[了解Nginx - rtmp-flv 模块的GOP缓存的作用]] Future LeetCode-1663" modified="20210222020818825" title="$:/StoryList">
+<div created="20210222073517463" list="LeetCode-1663" modified="20210222073519849" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11398,8 +11398,12 @@ AVFormatContext&lt;ic&gt; ---&gt; HTTPContext.location在重定向后就变了</
 <div created="20201228195007402" modified="20210219182539314" tags="task [[ToDo List]] done" title="Learn Flask">
 <pre>Try to use Flask [[instead|https://palletsprojects.com/]] of [[django|https://www.djangoproject.com/]] </pre>
 </div>
-<div created="20210220005554784" modified="20210222020348097" tags="[[ToDo List]] task" title="LeetCode-1663">
-<pre></pre>
+<div created="20210220005554784" modified="20210222074545749" tags="[[ToDo List]] task" title="LeetCode-1663">
+<pre>malloc 在电脑里可以运行，但在LeetCode上返回栈溢出，后来改用全局固定长度的数组就解决了该问题。
+
+在LeetCode 社区里，其他人说的原因可能是LeetCode 检查到可能会出现访问越界，所以提前抛出了错误。
+
+我觉得应该是执行过程中LeetCode 的内部代码操作malloc出来的内存时越界了。或者是malloc出来的内存未初始化，还保留有内存审查程序留下的标记，在程序访问到有被标记的内存时返回错误。可以通过memset 初始化该段内存来验证我的猜想，初始化后可正常运行则说明猜想正确，否则也不能证明猜想错误。</pre>
 </div>
 <div created="20201228193538488" modified="20201228194235489" tags="[[ToDo List]] task" title="Make Flash Cards">
 <pre>Make flash cards for English Learning and CS Learning by following [[jwasham/coding-interview-university|https://github.com/jwasham/coding-interview-university]]
