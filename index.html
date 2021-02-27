@@ -243,6 +243,8 @@ Error message and password prompt
 
 <li>25th February 2021</li>
 
+<li>27th February 2021</li>
+
 <li>27th January 2021</li>
 
 <li>Algorithm of &quot;read frame at native rate&quot; info flash cards</li>
@@ -10279,8 +10281,8 @@ Error message and password prompt
 <div created="20201228150122303" modified="20201228195420655" title="$:/state/tab-2065006209">
 <pre>$:/core/ui/ControlPanel/Saving/GitHub</pre>
 </div>
-<div created="20201228150013909" modified="20210225151344273" title="$:/state/tab/sidebar--595412856">
-<pre>TableOfContents</pre>
+<div created="20201228150013909" modified="20210227021233234" title="$:/state/tab/sidebar--595412856">
+<pre>$:/core/ui/SideBar/Recent</pre>
 </div>
 <div created="20210217112900892" modified="20210217112903138" title="$:/state/tag-manager/Journal">
 <pre>closed</pre>
@@ -10321,7 +10323,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210226234821021" list="[[ToDo List]] 当下的事" modified="20210226234919208" title="$:/StoryList">
+<div created="20210227021235500" list="[[25th February 2021]] 英语学习 [[27th February 2021]]" modified="20210227021359368" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -10899,6 +10901,36 @@ The next logical step is to show how to estimate the time complexity of a given 
 In 1853 vaccination was made compulsory for all infants in England and Wales with parents who failed to comply liable to a fine or imprisonment. Opposition to this infringement on personal liberty promptly grew, even more so after the law was strengthened in the 1870s. 
 
 Victorian anti-vaxxers spread misinformation eerily similar to today’s. In 1878 the National Anti-Compulsory Vaccination Reporter told its readers that vaccination could cause diseases including diphtheria, abscesses, bronchitis and convulsions. “On the whole”, it wrote, “it is a greater evil to humanity than smallpox itself!” In echoes of today’s concerns about Big Pharma, the Reporter speculated that compulsory vaccination was a plot by the medical establishment and averred that faithful obedience to the “sacred laws of health” would provide superior protection. It is hard to put a sliver of organic carrot between this sanctimony and the notion that nasty viral pathogens can be warded off by raising children “naturally” and using alternative medicines.</pre>
+</div>
+<div created="20210227021404074" modified="20210227022109632" tags="英语学习 Journal [[February 2021]]" title="27th February 2021">
+<pre>In this part of the article we will focus on estimating the time complexity for recursive programs. In essence, this will lead to finding the order of growth for solutions of recurrence equations. Don’t worry if you don’t understand what exactly is a recurrence solution, we will explain it in the right place at the right time. But first we will consider a simpler case – programs without recursion.
+
+''Nested loops''
+
+First of all let’s consider simple programs that contain no function calls. The rule of thumb to find an upper bound on the time complexity of such a program is:
+
+* estimate the maximum number of times each loop can be executed,
+
+* add these bounds for cycles following each other.
+
+* multiply these bounds for nested cycles/parts of code,
+
+Example 1. Estimating the time complexity of a random piece of code.
+
+
+```
+int result=0;                           //  1
+for (int i=0; i&lt;N; i++)                 //  2
+    for (int j=i; j&lt;N; j++) {             //  3
+        for (int k=0; k&lt;M; k++) {           //  4
+            int x=0;                          //  5
+            while (x&lt;N) { result++; x+=3; }   //  6
+        }                                   //  7
+    for (int k=0; k&lt;2*M; k++)           //  8
+        if (k%7 == 4) result++;           //  9
+    }             
+```
+</pre>
 </div>
 <div created="20210127051355845" modified="20210217113324384" tags="英语学习 Journal [[January 2021]]" title="27th January 2021">
 <pre>Nor was it just social-media companies cracking down. Apple and Google act as gatekeepers to virtually every smartphone on the planet. In the wake of the riots both have banned Parler, a Twitter alternative popular with American right-wingers, from their app stores. Both firms said that some of the rioters had used the app to plan. Amazon quickly followed suit, kicking Parler off its web-hosting service, effectively removing it from the internet and causing an exodus of users to Telegram, a messaging service. Whether Parler's disappearance is permanent will depend on its ability to find a new host willing to stomach its reputation. 
