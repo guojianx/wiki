@@ -10641,7 +10641,7 @@ One early flashpoint could be India, where Facebook is embroiled in the struggle
 # Satanic - 撒旦
 # paedophiles - 恋童癖者 </pre>
 </div>
-<div created="20210313015818663" modified="20210315034350254" tags="英语学习 Journal [[March 2021]]" title="13th March 2021">
+<div created="20210313015818663" modified="20210315034636422" tags="英语学习 Journal [[March 2021]]" title="13th March 2021">
 <pre>[[topcoder setction-2|https://www.topcoder.com/community/data-science/data-science-tutorials/computational-complexity-section-2/]]
 
 From now on we will assume that the reader is able to estimate the time complexity of simple parts of code using the method demonstrated above. We will now consider programs using recursion (i.e. a function occasionally calling itself with different parameters) and try to analyze the impact of these recursive calls on their time complexity.
@@ -10654,7 +10654,34 @@ This approach is not absolutely universal, there may be problems where it is imp
 
 As a side note, it is always possible to generate all strings of zeroes and ones, check each of them (i.e. check whether it corresponds to a valid solution) and keep the best found so far. If we can find an upper bound on the size of the best solution, this approach is finite. However, this approach is everything but fast. Don’t use it if there is any other way.
 
-Example 2. A trivial algorithm to generate all permutations of numbers 0 to N – 1.</pre>
+''Example 2.'' A trivial algorithm to generate all permutations of numbers 0 to N – 1.
+```
+vector permutation(N);
+vector used(N,0);
+
+void try(int which, int what) {
+    // try taking the number “what” as the “which”-th element
+    permutation[which] = what;
+    used[what] = 1; 
+
+    if (which == N-1)
+        outputPermutation();
+    else
+        // try all possibilities for the next element
+        for (int next=0; next&lt;N; next++)
+            if (!used[next])
+            try(which+1, next); 
+
+    used[what] = 0;
+} 
+
+int main()
+{
+    // try all possibilities for the first element
+    for (int first=0; first&lt;N; first++)
+        try(0,first);
+}
+```</pre>
 </div>
 <div created="20210113181919733" modified="20210302005038031" tags="英语学习 Journal [[January 2021]]" title="14th January 2021">
 <pre>Such installations are changing the world. Other photon-driven technologies, those concerned with the gathering and transmission of information, have already done so.
