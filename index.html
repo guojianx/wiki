@@ -10891,8 +10891,44 @@ Hesitancy is promoted and spread by a hard core of proselytising “anti-vaxxer�
 # liberated - 无拘束的
 # capacitor - 电容器</pre>
 </div>
-<div created="20210319031703755" modified="20210319031805123" tags="[[March 2021]] Journal" title="19th March 2021">
-<pre>[[Data Models by MongoDB|https://docs.mongodb.com/manual/core/data-model-operations/]]</pre>
+<div created="20210319031703755" modified="20210319032428316" tags="[[March 2021]] Journal" title="19th March 2021">
+<pre>[[Data Models by MongoDB|https://docs.mongodb.com/manual/core/data-model-operations/]]
+
+Modeling application data for MongoDB should consider various operational factors that impact the performance of MongoDB. For instance, different data models can allow for more efficent queries, increase the throughput of insert and update operations, or distribute activity to a sharded cluster more effectively.
+
+When developing a data model, analyze all of your application’s read and write operations in conjunction with the following considerations.
+
+! Large Number of Collections
+
+In certain situations, you might choose to store related information in several collections rather than in a single collection.
+
+Consider a sample collection logs that stores log documents for various environment and applications. The logs collection contains documents of the following form:
+
+
+```
+{ log: &quot;dev&quot;, ts: ..., info: ... }
+{ log: &quot;debug&quot;, ts: ..., info: ...}
+```
+
+If the total number of documents is low, you may group documents into collection by type. For logs, consider maintaining distinct log collections, such as logs_dev and logs_debug. The logs_dev collection would contain only the documents related to the dev environment.
+
+Generally, having a large number of collections has no significant performance penalty and results in very good performance. Distinct collections are very important for high-throughput batch processing.
+
+When using models that have a large number of collections, consider the following behaviors:
+
+* Each collection has a certain minimum overhead of a few kilobytes.
+* Each index, including the index on _id, requires at least 8 kB of data space.
+* For each database, a single namespace file (i.e. &lt;database&gt;.ns) stores all meta-data for that database, and each index and collection has its own entry in the namespace file. MongoDB places limits on the size of namespace files.
+
+! Collection Contains Large Number of Small Documents
+
+You should consider embedding for performance reasons if you have a collection with a large number of small documents. If you can group these small documents by some logical relationship and you frequently retrieve the documents by this grouping, you might consider “rolling-up” the small documents into larger documents that contain an array of embedded documents.
+
+“Rolling up” these small documents into logical groupings means that queries to retrieve a group of documents involve sequential reads and fewer random disk accesses. Additionally, “rolling up” documents and moving common fields to the larger document benefit the index on these fields. There would be fewer copies of the common fields and there would be fewer associated key entries in the corresponding index. See Indexes for more information on indexes.
+
+However, if you often only need to retrieve a subset of the documents within the group, then “rolling-up” the documents may not provide better performance. Furthermore, if small, separate documents represent the natural model for the data, you should maintain that model.
+
+Additionally, if your application only uses recently inserted documents, consider [[Capped Collections|https://docs.mongodb.com/manual/core/capped-collections/]]. Capped collections provide first-in-first-out (FIFO) management of inserted documents and efficiently support operations that insert and read documents based on insertion order.</pre>
 </div>
 <div created="20210220001801950" modified="20210221004348624" tags="英语学习 Journal [[February 2021]]" title="20th February 2021">
 <pre>When speaking about the time/memory complexity of an algorithm, instead of using the formal [img[http://community.topcoder.com/i/education/complexity4.png]](f (n))-notation we may simply state the class of functions f belongs to. E.g. if f (N) = [img[http://community.topcoder.com/i/education/complexity4.png]](N), we call the algorithm linear. More examples:
