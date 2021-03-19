@@ -10278,11 +10278,11 @@ Error message and password prompt
 <div created="20210215002612032" modified="20210215002613840" title="$:/state/image-picker/system-871291922">
 <pre>hide</pre>
 </div>
-<div created="20201230023808396" modified="20210104014155791" title="$:/state/showeditpreview">
-<pre>no</pre>
-</div>
-<div created="20201228150048917" modified="20210226235835019" title="$:/state/sidebar">
+<div created="20201230023808396" modified="20210319032449674" title="$:/state/showeditpreview">
 <pre>yes</pre>
+</div>
+<div created="20201228150048917" modified="20210319032519307" title="$:/state/sidebar">
+<pre>no</pre>
 </div>
 <div created="20201228150044385" modified="20201228150046350" title="$:/state/tab--2112689675">
 <pre>$:/core/ui/ControlPanel/Basics</pre>
@@ -10891,7 +10891,7 @@ Hesitancy is promoted and spread by a hard core of proselytising “anti-vaxxer�
 # liberated - 无拘束的
 # capacitor - 电容器</pre>
 </div>
-<div created="20210319031703755" modified="20210319032428316" tags="[[March 2021]] Journal" title="19th March 2021">
+<div created="20210319031703755" modified="20210319032643667" tags="[[March 2021]] Journal" title="19th March 2021">
 <pre>[[Data Models by MongoDB|https://docs.mongodb.com/manual/core/data-model-operations/]]
 
 Modeling application data for MongoDB should consider various operational factors that impact the performance of MongoDB. For instance, different data models can allow for more efficent queries, increase the throughput of insert and update operations, or distribute activity to a sharded cluster more effectively.
@@ -10918,9 +10918,10 @@ When using models that have a large number of collections, consider the followin
 
 * Each collection has a certain minimum overhead of a few kilobytes.
 * Each index, including the index on _id, requires at least 8 kB of data space.
-* For each database, a single namespace file (i.e. &lt;database&gt;.ns) stores all meta-data for that database, and each index and collection has its own entry in the namespace file. MongoDB places limits on the size of namespace files.
+* For each database, a single namespace file (i.e. \&lt;database\&gt;.ns) stores all meta-data for that database, and each index and collection has its own entry in the namespace file. MongoDB places limits on the size of namespace files.
 
-! Collection Contains Large Number of Small Documents
+
+!Collection Contains Large Number of Small Documents
 
 You should consider embedding for performance reasons if you have a collection with a large number of small documents. If you can group these small documents by some logical relationship and you frequently retrieve the documents by this grouping, you might consider “rolling-up” the small documents into larger documents that contain an array of embedded documents.
 
