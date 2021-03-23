@@ -11821,7 +11821,7 @@ find . -name '*.c' -printf &quot;%CD\t%s\t%f\n&quot;
 cmake -DCMAKE_INSTALL_PREFIX=/path/to/install  /path/to/src
 ```</pre>
 </div>
-<div created="20210323073312653" modified="20210323074854130" tags="[[ToDo List]]" title="TechRead - computational complexity">
+<div created="20210323073312653" modified="20210323075647654" tags="[[ToDo List]]" title="TechRead - computational complexity">
 <pre>[[Topcoder|https://www.topcoder.com/thrive/articles/Computational%20Complexity%20part%20two]]
 
 In this part of the article we will focus on estimating the time complexity for recursive programs. In essence, this will lead to finding the order of growth for solutions of recurrence equations. Don’t worry if you don’t understand what exactly is a recurrence solution, we will explain it in the right place at the right time. But first we will consider a simpler case – programs without recursion.
@@ -11951,6 +11951,36 @@ A reader skilled in math is encouraged to prove that if p is a polynomial (with 
 The observations we made allow us to rewrite our example equation in a more simple way:
 
 (1)[img[https://images.ctfassets.net/b5f1djy59z3a/1PYsoE2tQMq6IIAIokIwyk/f12615b10713f1a5bb3f2c5e3228fe8c/Computational_Complexity_3.png]]
+
+Note that this is not an equation in the classical sense. As in the examples in the first part of this article, the equals sign now reads “is asymptotically equal to”. Usually there are lots of different functions that satisfy such an equation. But usually all of them will have the same order of growth – and this is exactly what we want to determine. Or, more generally, we want to find the smallest upper bound on the growth of ''all possible'' functions that satisfy the given equation.
+
+In the last sections of this article we will discuss various methods of solving these “equations”. But before we can do that, we need to know a bit more about logarithms.
+
+Notes on logarithms
+
+By now, you may have already asked one of the following questions: If the author writes that some complexity is e.g. O(N log N), what is the base of the logarithm? In some cases, wouldn’t O(N log,,2,,N) be a better bound?
+
+The answer: The base of the logarithm does not matter, all logarithmic functions (with base &gt; 1) are asymptotically equal. This is due to the well-known equation:
+
+(2)[img[https://images.ctfassets.net/b5f1djy59z3a/4MgqQ4AXx6wEUE6Iy6QE2i/f23cf25e2c3da6b8ad786f00feedcf7d/Computational_Complexity_4.png]]
+
+Note that given two bases a, b, the number 1/log,,b,,a is just a constant, and thus the function log,,a,,N is just a constant multiple of log,,b,,N.
+
+To obtain more clean and readable expressions, we always use the notation log N inside big-Oh expressions, even if logarithms with a different base were used in the computation of the bound.
+
+By the way, sadly the meaning of log N differs from country to country. To avoid ambiguity where it may occur: I use log N to denote the decadic (i.e. base-10) logarithm, ln N for the natural (i.e. base-e) logarithm, lg N for the binary logarithm and logbN for the general case.
+
+Now we will show some useful tricks involving logarithms, we will need them later. Suppose a, b are given constants such that a, b &gt; 1.
+
+From (2) we get:
+
+[img[https://images.ctfassets.net/b5f1djy59z3a/2JQOSNo87Y6O4IYE4m6iUk/bae14f9aba4c8ae910ef544c0e04d482/Computational_Complexity_5.png]]
+
+Using this knowledge, we can simplify the term 
+
+[img[https://images.ctfassets.net/piwi0eufbb2g/64l938UvNmbNHGd0zrr1gY/84fc017979b0aeaec5d4b2d334d19958/new47.png]]
+
+(3)[img[https://images.ctfassets.net/piwi0eufbb2g/2GTJRokW8hwUUuNsVpIP0w/eeef30852f48b2905333f84a3b353085/new48.png]]
 
 
 </pre>
