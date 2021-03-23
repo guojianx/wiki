@@ -309,6 +309,8 @@ Error message and password prompt
 
 <li>Tech Notes</li>
 
+<li>TechRead - computational complexity</li>
+
 <li>ToDo List</li>
 
 <li>WebRTC</li>
@@ -10287,8 +10289,8 @@ Error message and password prompt
 <div created="20201230023808396" modified="20210319032857114" title="$:/state/showeditpreview">
 <pre>no</pre>
 </div>
-<div created="20201228150048917" modified="20210322213500452" title="$:/state/sidebar">
-<pre>yes</pre>
+<div created="20201228150048917" modified="20210323073829077" title="$:/state/sidebar">
+<pre>no</pre>
 </div>
 <div created="20201228150044385" modified="20201228150046350" title="$:/state/tab--2112689675">
 <pre>$:/core/ui/ControlPanel/Basics</pre>
@@ -10299,8 +10301,8 @@ Error message and password prompt
 <div created="20201228150122303" modified="20201228195420655" title="$:/state/tab-2065006209">
 <pre>$:/core/ui/ControlPanel/Saving/GitHub</pre>
 </div>
-<div created="20201228150013909" modified="20210322212302695" title="$:/state/tab/sidebar--595412856">
-<pre>$:/core/ui/SideBar/Recent</pre>
+<div created="20201228150013909" modified="20210323073259876" title="$:/state/tab/sidebar--595412856">
+<pre>TableOfContents</pre>
 </div>
 <div created="20210217112900892" modified="20210217112903138" title="$:/state/tag-manager/Journal">
 <pre>closed</pre>
@@ -10344,7 +10346,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210322212238709" list="[[17th March 2021]] 英语学习 [[23rd March 2021]] [[27th February 2021]] [[25th February 2021]] [[22nd February 2021]] [[19th February 2021]] [[18th February 2021]] [[ToDo List]]" modified="20210322214006641" title="$:/StoryList">
+<div created="20210323073301934" list="[[ToDo List]] [[TechRead - computational complexity]]" modified="20210323073301934" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11818,6 +11820,115 @@ find . -name '*.c' -printf &quot;%CD\t%s\t%f\n&quot;
 ```
 cmake -DCMAKE_INSTALL_PREFIX=/path/to/install  /path/to/src
 ```</pre>
+</div>
+<div created="20210323073312653" modified="20210323074123970" tags="[[ToDo List]]" title="TechRead - computational complexity">
+<pre>[[Topcoder|https://www.topcoder.com/thrive/articles/Computational%20Complexity%20part%20two]]
+
+In this part of the article we will focus on estimating the time complexity for recursive programs. In essence, this will lead to finding the order of growth for solutions of recurrence equations. Don’t worry if you don’t understand what exactly is a recurrence solution, we will explain it in the right place at the right time. But first we will consider a simpler case – programs without recursion.
+
+Nested loops
+
+First of all let’s consider simple programs that contain no function calls. The rule of thumb to find an upper bound on the time complexity of such a program is:
+
+* estimate the maximum number of times each loop can be executed,
+* add these bounds for cycles following each other.
+* multiply these bounds for nested cycles/parts of code,
+
+''Example 1''. Estimating the time complexity of a random piece of code.
+
+
+```
+int result = 0; //  1
+for (int i = 0; i &lt; N; i++) //  2
+  for (int j = i; j &lt; N; j++) { //  3
+    for (int k = 0; k &lt; M; k++) { //  4
+      int x = 0; //  5
+      while (x &lt; N) {
+        result++;
+        x += 3;
+      } //  6
+    } //  7
+    for (int k = 0; k &lt; 2 * M; k++) //  8
+      if (k % 7 == 4) result++; //  9
+  } // 10
+```
+
+The time complexity of the while-cycle in line 6 is clearly O(N) – it is executed no more than N/3 + 1 times.
+
+Now consider the for-cycle in lines 4-7. The variable k is clearly incremented O(M) times. Each time the whole while-cycle in line 6 is executed. Thus the total time complexity of the lines 4-7 can be bounded by O(MN).
+
+The time complexity of the for-cycle in lines 8-9 is O(M). Thus the execution time of lines 4-9 is O(MN + M) = O(MN).
+
+This inner part is executed O(N^^2^^) times – once for each possible combination of i and j. (Note that there are only N(N + 1)/2 possible values for [i, j]. Still, O(N^^2^^) is a correct upper bound.)
+
+From the facts above follows that the total time complexity of the algorithm in Example 1 is O(N^^2^^.MN) = O(MN^^3^^).
+
+From now on we will assume that the reader is able to estimate the time complexity of simple parts of code using the method demonstrated above. We will now consider programs using recursion (i.e. a function occasionally calling itself with different parameters) and try to analyze the impact of these recursive calls on their time complexity.
+
+Using recursion to generate combinatorial objects
+
+One common use of recursion is to implement a backtracking algorithm to generate all possible solutions of a problem. The general idea is to generate the solution incrementally and to step back and try another way once all solutions for the current branch have been exhausted.
+
+This approach is not absolutely universal, there may be problems where it is impossible to generate the solution incrementally. However, very often the set of all possible solutions of a problem corresponds to the set of all combinatorial objects of some kind. Most often it is the set of all permutations (of a given size), but other objects (combinations, partitions, etc.) can be seen from time to time.
+
+As a side note, it is always possible to generate all strings of zeroes and ones, check each of them (i.e. check whether it corresponds to a valid solution) and keep the best found so far. If we can find an upper bound on the size of the best solution, this approach is finite. However, this approach is everything but fast. Don’t use it if there is ''any'' other way.
+
+''Example 2.'' A trivial algorithm to generate all permutations of numbers 0 to N – 1.
+
+```
+vector permutation(N);
+vector used(N, 0);
+
+void
+try (int which, int what) {
+  // try taking the number “what” as the “which”-th element
+  permutation[which] = what;
+  used[what] = 1;
+
+  if (which == N - 1)
+    outputPermutation();
+  else
+    // try all possibilities for the next element
+    for (int next = 0; next &lt; N; next++)
+      if (!used[next])
+        try (which + 1, next);
+
+  used[what] = 0;
+}
+
+int main() {
+  // try all possibilities for the first element
+  for (int first = 0; first &lt; N; first++)
+    try (0, first);
+}
+```
+
+In this case a trivial ''lower'' bound on the time complexity is the number of possible solutions. Backtracking algorithms are usually used to solve hard problems – i.e. such that we don’t know whether a significantly more efficient solution exists. Usually the solution space is quite large and uniform and the algorithm can be implemented so that its time complexity is close to the theoretical lower bound. To get an upper bound it should be enough to check how much additional (i.e. unnecessary) work the algorithm does.
+
+The number of possible solutions, and thus the time complexity of such algorithms, is usually exponential – or worse.
+
+Divide&amp;conquer using recursion
+
+From the previous example we could get the feeling that recursion is evil and leads to horribly slow programs. The contrary is true. Recursion can be a very powerful tool in the design of effective algorithms. The usual way to create an effective recursive algorithm is to apply the divide &amp; conquer paradigm – try to split the problem into several parts, solve each part separately and in the end combine the results to obtain the result for the original problem. Needless to say, the “solve each part separately” is usually implemented using recursion – and thus applying the same method again and again, until the problem is sufficiently small to be solved by brute force.
+
+''Example 3''. The sorting algorithm MergeSort described in pseudocode.
+
+```
+MergeSort(sequence S) {
+  if (size of S &lt;= 1) return S;
+  split S into S_1 and S_2 of roughly the same size;
+  MergeSort(S_1);
+  MergeSort(S_2);
+  combine sorted S_1 and sorted S_2 to obtain sorted S;
+  return sorted S;
+}
+```
+
+Clearly O(N) time is enough to split a sequence with N elements into two parts (Depending on the implementation this may be even possible in constant time.) Combining the shorter sorted sequences can be done in (N): Start with an empty S. At each moment the smallest element not yet in S is either at the beginning of S1 or at the beginning of S2. Move this element to the end of S and continue.
+
+Thus the total time to MergeSort a sequence with N elements is (N) plus the time needed to make the two recursive calls.
+
+Let f (N) be the time complexity of MergeSort as defined in the previous part of our article. The discussion above leads us to the following equation:</pre>
 </div>
 <div color="#8075e4" created="20201228165244505" modified="20201228194749558" tags="TableOfContents" title="ToDo List">
 <pre>! Outstanding tasks
