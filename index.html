@@ -10286,11 +10286,11 @@ Error message and password prompt
 <div created="20210215002612032" modified="20210215002613840" title="$:/state/image-picker/system-871291922">
 <pre>hide</pre>
 </div>
-<div created="20201230023808396" modified="20210319032857114" title="$:/state/showeditpreview">
+<div created="20201230023808396" modified="20210323074852625" title="$:/state/showeditpreview">
 <pre>no</pre>
 </div>
-<div created="20201228150048917" modified="20210323074203601" title="$:/state/sidebar">
-<pre>yes</pre>
+<div created="20201228150048917" modified="20210323074739690" title="$:/state/sidebar">
+<pre>no</pre>
 </div>
 <div created="20201228150044385" modified="20201228150046350" title="$:/state/tab--2112689675">
 <pre>$:/core/ui/ControlPanel/Basics</pre>
@@ -11821,7 +11821,7 @@ find . -name '*.c' -printf &quot;%CD\t%s\t%f\n&quot;
 cmake -DCMAKE_INSTALL_PREFIX=/path/to/install  /path/to/src
 ```</pre>
 </div>
-<div created="20210323073312653" modified="20210323074429039" tags="[[ToDo List]]" title="TechRead - computational complexity">
+<div created="20210323073312653" modified="20210323074854130" tags="[[ToDo List]]" title="TechRead - computational complexity">
 <pre>[[Topcoder|https://www.topcoder.com/thrive/articles/Computational%20Complexity%20part%20two]]
 
 In this part of the article we will focus on estimating the time complexity for recursive programs. In essence, this will lead to finding the order of growth for solutions of recurrence equations. Don’t worry if you don’t understand what exactly is a recurrence solution, we will explain it in the right place at the right time. But first we will consider a simpler case – programs without recursion.
@@ -11931,6 +11931,27 @@ Thus the total time to MergeSort a sequence with N elements is [img[http://commu
 Let f (N) be the time complexity of MergeSort as defined in the previous part of our article. The discussion above leads us to the following equation:
 
 [img[https://images.ctfassets.net/b5f1djy59z3a/wIFnLTP3tQAICqeQk4a04/5990cf2cef5f288cef54994219575d62/Computational_Complexity_2.png]]
+
+where p is a linear function representing the amount of work spent on splitting the sequence and merging the results.
+
+Basically, this is just a recurrence equation. If you don’t know this term, please don’t be afraid. The word “recurrence” stems from the latin phrase for “to run back”. Thus the name just says that the next values of f are defined using the previous (i.e. smaller) values of f.
+
+Well, to be really formal, for the equation to be complete we should specify some initial values – in this case, f (1). This (and knowing the implementation-specific function p) would enable us to compute the exact values of f.
+
+But as you hopefully understand by now, this is not necessarily our goal. While it is theoretically possible to compute a closed-form formula for f (N), this formula would most probably be really ugly… and we don’t really need it. We only want to find a [img[http://community.topcoder.com/i/education/complexity4.png]]-bound (and sometimes only an O-bound) on the growth of f. Luckily, this can often be done quite easily, if you know some tricks of the trade.
+
+As a consequence, we won’t be interested in the exact form of p, all we need to know is that p(N) = [img[http://community.topcoder.com/i/education/complexity4.png]](N). Also, we don’t need to specify the initial values for the equation. We simply assume that all problem instances with small N can be solved in constant time.
+
+The rationale behind the last simplification: While changing the initial values does change the solution to the recurrence equation, it usually doesn’t change its asymptotic order of growth. (If your intuition fails you here, try playing with the equation above. For example fix p and try to compute f (8), f (16) and f (32) for different values of f (1).)
+
+If this would be a formal textbook, at this point we would probably have to develop some theory that would allow us to deal with the floor and ceiling functions in our equations. Instead we will simply neglect them from now on. (E.g. we can assume that each division will be integer division, rounded down.)
+
+A reader skilled in math is encouraged to prove that if p is a polynomial (with non-negative values on N) and q(n) = p(n + 1) then q(n) = [img[http://community.topcoder.com/i/education/complexity4.png]](p(n)). Using this observation we may formally prove that (assuming the f we seek is polynomially-bounded) the right side of each such equation remains asymptotically the same if we replace each ceiling function by a floor function.
+
+The observations we made allow us to rewrite our example equation in a more simple way:
+
+(1)[img[https://images.ctfassets.net/b5f1djy59z3a/1PYsoE2tQMq6IIAIokIwyk/f12615b10713f1a5bb3f2c5e3228fe8c/Computational_Complexity_3.png]]
+
 
 </pre>
 </div>
