@@ -10289,8 +10289,8 @@ Error message and password prompt
 <div created="20201230023808396" modified="20210319032857114" title="$:/state/showeditpreview">
 <pre>no</pre>
 </div>
-<div created="20201228150048917" modified="20210323073829077" title="$:/state/sidebar">
-<pre>no</pre>
+<div created="20201228150048917" modified="20210323074203601" title="$:/state/sidebar">
+<pre>yes</pre>
 </div>
 <div created="20201228150044385" modified="20201228150046350" title="$:/state/tab--2112689675">
 <pre>$:/core/ui/ControlPanel/Basics</pre>
@@ -10301,8 +10301,8 @@ Error message and password prompt
 <div created="20201228150122303" modified="20201228195420655" title="$:/state/tab-2065006209">
 <pre>$:/core/ui/ControlPanel/Saving/GitHub</pre>
 </div>
-<div created="20201228150013909" modified="20210323073259876" title="$:/state/tab/sidebar--595412856">
-<pre>TableOfContents</pre>
+<div created="20201228150013909" modified="20210323074206164" title="$:/state/tab/sidebar--595412856">
+<pre>$:/core/ui/SideBar/Recent</pre>
 </div>
 <div created="20210217112900892" modified="20210217112903138" title="$:/state/tag-manager/Journal">
 <pre>closed</pre>
@@ -10346,7 +10346,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210323073301934" list="[[ToDo List]] [[TechRead - computational complexity]]" modified="20210323073301934" title="$:/StoryList">
+<div created="20210323073301934" list="[[TechRead - computational complexity]]" modified="20210323074207667" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11821,7 +11821,7 @@ find . -name '*.c' -printf &quot;%CD\t%s\t%f\n&quot;
 cmake -DCMAKE_INSTALL_PREFIX=/path/to/install  /path/to/src
 ```</pre>
 </div>
-<div created="20210323073312653" modified="20210323074123970" tags="[[ToDo List]]" title="TechRead - computational complexity">
+<div created="20210323073312653" modified="20210323074429039" tags="[[ToDo List]]" title="TechRead - computational complexity">
 <pre>[[Topcoder|https://www.topcoder.com/thrive/articles/Computational%20Complexity%20part%20two]]
 
 In this part of the article we will focus on estimating the time complexity for recursive programs. In essence, this will lead to finding the order of growth for solutions of recurrence equations. Don’t worry if you don’t understand what exactly is a recurrence solution, we will explain it in the right place at the right time. But first we will consider a simpler case – programs without recursion.
@@ -11924,11 +11924,15 @@ MergeSort(sequence S) {
 }
 ```
 
-Clearly O(N) time is enough to split a sequence with N elements into two parts (Depending on the implementation this may be even possible in constant time.) Combining the shorter sorted sequences can be done in (N): Start with an empty S. At each moment the smallest element not yet in S is either at the beginning of S1 or at the beginning of S2. Move this element to the end of S and continue.
+Clearly O(N) time is enough to split a sequence with N elements into two parts (Depending on the implementation this may be even possible in constant time.) Combining the shorter sorted sequences can be done in [img[http://community.topcoder.com/i/education/complexity4.png]](N): Start with an empty S. At each moment the smallest element not yet in S is either at the beginning of S,,1,, or at the beginning of S,,2,,. Move this element to the end of S and continue.
 
-Thus the total time to MergeSort a sequence with N elements is (N) plus the time needed to make the two recursive calls.
+Thus the total time to MergeSort a sequence with N elements is [img[http://community.topcoder.com/i/education/complexity4.png]](N) plus the time needed to make the two recursive calls.
 
-Let f (N) be the time complexity of MergeSort as defined in the previous part of our article. The discussion above leads us to the following equation:</pre>
+Let f (N) be the time complexity of MergeSort as defined in the previous part of our article. The discussion above leads us to the following equation:
+
+[img[https://images.ctfassets.net/b5f1djy59z3a/wIFnLTP3tQAICqeQk4a04/5990cf2cef5f288cef54994219575d62/Computational_Complexity_2.png]]
+
+</pre>
 </div>
 <div color="#8075e4" created="20201228165244505" modified="20201228194749558" tags="TableOfContents" title="ToDo List">
 <pre>! Outstanding tasks
