@@ -337,8 +337,6 @@ Error message and password prompt
 
 <li>done</li>
 
-<li>Draft of '26th March 2021'</li>
-
 <li>English Daily Tech Reading</li>
 
 <li>EnglishRead - Steve Jobs famous speech at Stanford</li>
@@ -10352,7 +10350,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210326035552145" list="[[19th March 2021]] [[Draft of '26th March 2021']] [[ToDo List]]" modified="20210326035953436" title="$:/StoryList">
+<div created="20210326035552145" list="[[19th March 2021]] [[26th March 2021]] [[ToDo List]]" modified="20210326035953436" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11129,7 +11127,7 @@ Victorian anti-vaxxers spread misinformation eerily similar to today’s. In 187
 # ward off - 避开
 </pre>
 </div>
-<div created="20210326035959159" modified="20210326040010308" tags="[[March 2021]] Journal 英语学习" title="26th March 2021">
+<div created="20210326035959159" modified="20210326061926428" tags="[[March 2021]] Journal 英语学习" title="26th March 2021">
 <pre>Well, to be really formal, for the equation to be complete we should specify some initial values – in this case, f (1). This (and knowing the implementation-specific function p) would enable us to compute the exact values of f.
 
 But as you hopefully understand by now, this is not necessarily our goal. While it is theoretically possible to compute a closed-form formula for f (N), this formula would most probably be really ugly… and we don’t really need it. We only want to find a [img[http://community.topcoder.com/i/education/complexity4.png]]-bound (and sometimes only an O-bound) on the growth of f. Luckily, this can often be done quite easily, if you know some tricks of the trade.
@@ -11148,7 +11146,11 @@ The observations we made allow us to rewrite our example equation in a more simp
 
 Note that this is not an equation in the classical sense. As in the examples in the first part of this article, the equals sign now reads “is asymptotically equal to”. Usually there are lots of different functions that satisfy such an equation. But usually all of them will have the same order of growth – and this is exactly what we want to determine. Or, more generally, we want to find the smallest upper bound on the growth of ''all possible'' functions that satisfy the given equation.
 
-In the last sections of this article we will discuss various methods of solving these “equations”. But before we can do that, we need to know a bit more about logarithms.</pre>
+In the last sections of this article we will discuss various methods of solving these “equations”. But before we can do that, we need to know a bit more about logarithms.
+
+
+# closed-form formula - 闭型函数、封闭函数、解析函数、封闭公式
+</pre>
 </div>
 <div created="20210227021404074" modified="20210302052549451" tags="英语学习 Journal [[February 2021]]" title="27th February 2021">
 <pre>In this part of the article we will focus on estimating the time complexity for recursive programs. In essence, this will lead to finding the order of growth for solutions of recurrence equations. Don’t worry if you don’t understand what exactly is a recurrence solution, we will explain it in the right place at the right time. But first we will consider a simpler case – programs without recursion.
@@ -11501,30 +11503,6 @@ https://trac.ffmpeg.org/wiki/FilteringGuide</pre>
 </div>
 <div color="#2ef209" created="20201228194702570" modified="20201228194702570" title="done">
 <pre></pre>
-</div>
-<div created="20210326035959159" draft.of="26th March 2021" draft.title="26th March 2021" modified="20210326040625764" tags="[[March 2021]] Journal 英语学习" title="Draft of '26th March 2021'">
-<pre>Well, to be really formal, for the equation to be complete we should specify some initial values – in this case, f (1). This (and knowing the implementation-specific function p) would enable us to compute the exact values of f.
-
-But as you hopefully understand by now, this is not necessarily our goal. While it is theoretically possible to compute a closed-form formula for f (N), this formula would most probably be really ugly… and we don’t really need it. We only want to find a [img[http://community.topcoder.com/i/education/complexity4.png]]-bound (and sometimes only an O-bound) on the growth of f. Luckily, this can often be done quite easily, if you know some tricks of the trade.
-
-As a consequence, we won’t be interested in the exact form of p, all we need to know is that p(N) = [img[http://community.topcoder.com/i/education/complexity4.png]](N). Also, we don’t need to specify the initial values for the equation. We simply assume that all problem instances with small N can be solved in constant time.
-
-The rationale behind the last simplification: While changing the initial values does change the solution to the recurrence equation, it usually doesn’t change its asymptotic order of growth. (If your intuition fails you here, try playing with the equation above. For example fix p and try to compute f (8), f (16) and f (32) for different values of f (1).)
-
-If this would be a formal textbook, at this point we would probably have to develop some theory that would allow us to deal with the floor and ceiling functions in our equations. Instead we will simply neglect them from now on. (E.g. we can assume that each division will be integer division, rounded down.)
-
-A reader skilled in math is encouraged to prove that if p is a polynomial (with non-negative values on N) and q(n) = p(n + 1) then q(n) = [img[http://community.topcoder.com/i/education/complexity4.png]](p(n)). Using this observation we may formally prove that (assuming the f we seek is polynomially-bounded) the right side of each such equation remains asymptotically the same if we replace each ceiling function by a floor function.
-
-The observations we made allow us to rewrite our example equation in a more simple way:
-
-(1)[img[https://images.ctfassets.net/b5f1djy59z3a/1PYsoE2tQMq6IIAIokIwyk/f12615b10713f1a5bb3f2c5e3228fe8c/Computational_Complexity_3.png]]
-
-Note that this is not an equation in the classical sense. As in the examples in the first part of this article, the equals sign now reads “is asymptotically equal to”. Usually there are lots of different functions that satisfy such an equation. But usually all of them will have the same order of growth – and this is exactly what we want to determine. Or, more generally, we want to find the smallest upper bound on the growth of ''all possible'' functions that satisfy the given equation.
-
-In the last sections of this article we will discuss various methods of solving these “equations”. But before we can do that, we need to know a bit more about logarithms.
-
-
-</pre>
 </div>
 <div created="20210202015321529" modified="20210219182714442" tags="[[ToDo List]] task" title="English Daily Tech Reading">
 <pre>```
