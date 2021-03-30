@@ -10296,11 +10296,11 @@ Error message and password prompt
 <div created="20210215002612032" modified="20210215002613840" title="$:/state/image-picker/system-871291922">
 <pre>hide</pre>
 </div>
-<div created="20201230023808396" modified="20210323074852625" title="$:/state/showeditpreview">
-<pre>no</pre>
-</div>
-<div created="20201228150048917" modified="20210323080607454" title="$:/state/sidebar">
+<div created="20201230023808396" modified="20210330024211346" title="$:/state/showeditpreview">
 <pre>yes</pre>
+</div>
+<div created="20201228150048917" modified="20210330024203981" title="$:/state/sidebar">
+<pre>no</pre>
 </div>
 <div created="20201228150044385" modified="20201228150046350" title="$:/state/tab--2112689675">
 <pre>$:/core/ui/ControlPanel/Basics</pre>
@@ -10311,8 +10311,8 @@ Error message and password prompt
 <div created="20201228150122303" modified="20201228195420655" title="$:/state/tab-2065006209">
 <pre>$:/core/ui/ControlPanel/Saving/GitHub</pre>
 </div>
-<div created="20201228150013909" modified="20210330022423431" title="$:/state/tab/sidebar--595412856">
-<pre>$:/core/ui/SideBar/Recent</pre>
+<div created="20201228150013909" modified="20210330023918322" title="$:/state/tab/sidebar--595412856">
+<pre>TableOfContents</pre>
 </div>
 <div created="20210217112900892" modified="20210217112903138" title="$:/state/tag-manager/Journal">
 <pre>closed</pre>
@@ -10356,7 +10356,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210330013857837" list="[[26th March 2021]] task" modified="20210330022429605" title="$:/StoryList">
+<div created="20210330013857837" list="[[ToDo List]] [[TechRead - computational complexity]] [[26th March 2021]] task" modified="20210330023943827" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11873,7 +11873,7 @@ find . -name '*.c' -printf &quot;%CD\t%s\t%f\n&quot;
 cmake -DCMAKE_INSTALL_PREFIX=/path/to/install  /path/to/src
 ```</pre>
 </div>
-<div created="20210323073312653" modified="20210323080617336" tags="[[ToDo List]] task" title="TechRead - computational complexity">
+<div created="20210323073312653" modified="20210330024453055" tags="[[ToDo List]] task" title="TechRead - computational complexity">
 <pre>[[Topcoder|https://www.topcoder.com/thrive/articles/Computational%20Complexity%20part%20two]]
 
 In this part of the article we will focus on estimating the time complexity for recursive programs. In essence, this will lead to finding the order of growth for solutions of recurrence equations. Don’t worry if you don’t understand what exactly is a recurrence solution, we will explain it in the right place at the right time. But first we will consider a simpler case – programs without recursion.
@@ -12034,8 +12034,27 @@ Using this knowledge, we can simplify the term
 
 (3)[img[https://images.ctfassets.net/piwi0eufbb2g/2GTJRokW8hwUUuNsVpIP0w/eeef30852f48b2905333f84a3b353085/new48.png]]
 
+The substitution method
 
-</pre>
+This method can be summarized in one sentence: Guess an asymptotic upper bound on f and (try to) prove it by induction.
+
+As an example, we will prove that if f satisfies the equation (1) then f (N) = O(N log N).
+
+From (1) we know that:
+
+[img[https://images.ctfassets.net/piwi0eufbb2g/64F3kJwlYijHjxwZtMGLlO/0d2085183ebbd4b94a35294c5843142b/new52.png]]
+
+for some c. Now we will prove that if we take a large enough (but constant) d then for almost all N we have f (N) &lt;= dN lg N. We will start by proving the induction step.
+
+Assume that f (N/2) &lt;= d (N/2)lg(N/2). Then
+
+[img[https://images.ctfassets.net/piwi0eufbb2g/5UH5U0XZkXHghwJT7ZIuqI/b77447ab9d64755777bbe264a5e1ee0e/new57.png]]
+
+In other words, the induction step will hold as long as d &gt; c. We are always able to choose such d.
+
+We are only left with proving the inequality for some initial value N. This gets quite ugly when done formally. The general idea is that if the d we found so far is not large enough, we can always increase it to cover the initial cases.
+
+Note that for our example equation we won’t be able to prove it for N = 1, because lg 1 = 0. However, by taking f (N) &lt;= dN lg N, where d is some fixed constant. Conclusion: from (1) it follows that f (N) = O(N lg N).</pre>
 </div>
 <div created="20210202015321529" modified="20210330014034089" tags="[[ToDo List]] task" title="TechRead - ffmpeg headers">
 <pre>```
