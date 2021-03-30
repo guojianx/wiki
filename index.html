@@ -259,6 +259,8 @@ Error message and password prompt
 
 <li>27th January 2021</li>
 
+<li>30th March 2021</li>
+
 <li>北京自来水是否可以冲奶</li>
 
 <li>编制快编马赛克和导播的测试用例</li>
@@ -10296,8 +10298,8 @@ Error message and password prompt
 <div created="20210215002612032" modified="20210215002613840" title="$:/state/image-picker/system-871291922">
 <pre>hide</pre>
 </div>
-<div created="20201230023808396" modified="20210330024211346" title="$:/state/showeditpreview">
-<pre>yes</pre>
+<div created="20201230023808396" modified="20210330024517578" title="$:/state/showeditpreview">
+<pre>no</pre>
 </div>
 <div created="20201228150048917" modified="20210330024203981" title="$:/state/sidebar">
 <pre>no</pre>
@@ -10356,7 +10358,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210330013857837" list="[[ToDo List]] [[TechRead - computational complexity]] [[26th March 2021]] task" modified="20210330023943827" title="$:/StoryList">
+<div created="20210330013857837" list="[[ToDo List]] [[TechRead - computational complexity]] [[26th March 2021]] [[March 2021]] [[30th March 2021]] 英语学习 task" modified="20210330024609182" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11227,6 +11229,55 @@ Disentangling principles from expediency is tricky. Like almost everything else 
 # censor - 审查
 # conservative - 保守党人
 # proliferate - 激增</pre>
+</div>
+<div created="20210330024613380" modified="20210330024625319" tags="[[March 2021]] Journal 英语学习" title="30th March 2021">
+<pre>Notes on logarithms
+
+By now, you may have already asked one of the following questions: If the author writes that some complexity is e.g. O(N log N), what is the base of the logarithm? In some cases, wouldn’t O(N log,,2,,N) be a better bound?
+
+The answer: The base of the logarithm does not matter, all logarithmic functions (with base &gt; 1) are asymptotically equal. This is due to the well-known equation:
+
+(2)[img[https://images.ctfassets.net/b5f1djy59z3a/4MgqQ4AXx6wEUE6Iy6QE2i/f23cf25e2c3da6b8ad786f00feedcf7d/Computational_Complexity_4.png]]
+
+Note that given two bases a, b, the number 1/log,,b,,a is just a constant, and thus the function log,,a,,N is just a constant multiple of log,,b,,N.
+
+To obtain more clean and readable expressions, we always use the notation log N inside big-Oh expressions, even if logarithms with a different base were used in the computation of the bound.
+
+By the way, sadly the meaning of log N differs from country to country. To avoid ambiguity where it may occur: I use log N to denote the decadic (i.e. base-10) logarithm, ln N for the natural (i.e. base-e) logarithm, lg N for the binary logarithm and logbN for the general case.
+
+Now we will show some useful tricks involving logarithms, we will need them later. Suppose a, b are given constants such that a, b &gt; 1.
+
+From (2) we get:
+
+[img[https://images.ctfassets.net/b5f1djy59z3a/2JQOSNo87Y6O4IYE4m6iUk/bae14f9aba4c8ae910ef544c0e04d482/Computational_Complexity_5.png]]
+
+Using this knowledge, we can simplify the term 
+
+[img[https://images.ctfassets.net/piwi0eufbb2g/64l938UvNmbNHGd0zrr1gY/84fc017979b0aeaec5d4b2d334d19958/new47.png]]
+
+(3)[img[https://images.ctfassets.net/piwi0eufbb2g/2GTJRokW8hwUUuNsVpIP0w/eeef30852f48b2905333f84a3b353085/new48.png]]
+
+The substitution method
+
+This method can be summarized in one sentence: Guess an asymptotic upper bound on f and (try to) prove it by induction.
+
+As an example, we will prove that if f satisfies the equation (1) then f (N) = O(N log N).
+
+From (1) we know that:
+
+[img[https://images.ctfassets.net/piwi0eufbb2g/64F3kJwlYijHjxwZtMGLlO/0d2085183ebbd4b94a35294c5843142b/new52.png]]
+
+for some c. Now we will prove that if we take a large enough (but constant) d then for almost all N we have f (N) &lt;= dN lg N. We will start by proving the induction step.
+
+Assume that f (N/2) &lt;= d (N/2)lg(N/2). Then
+
+[img[https://images.ctfassets.net/piwi0eufbb2g/5UH5U0XZkXHghwJT7ZIuqI/b77447ab9d64755777bbe264a5e1ee0e/new57.png]]
+
+In other words, the induction step will hold as long as d &gt; c. We are always able to choose such d.
+
+We are only left with proving the inequality for some initial value N. This gets quite ugly when done formally. The general idea is that if the d we found so far is not large enough, we can always increase it to cover the initial cases.
+
+Note that for our example equation we won’t be able to prove it for N = 1, because lg 1 = 0. However, by taking f (N) &lt;= dN lg N, where d is some fixed constant. Conclusion: from (1) it follows that f (N) = O(N lg N).</pre>
 </div>
 <div created="20210113072853970" modified="20210219182419146" tags="[[ToDo List]] task done" title="北京自来水是否可以冲奶">
 <pre>黄帝内经 - 异法方宜论 : 
