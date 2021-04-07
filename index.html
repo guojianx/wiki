@@ -11810,8 +11810,10 @@ Thank you all very much.
 <div created="20210222020638834" modified="20210222020726771" tags="[[ToDo List]]" title="Future">
 <pre></pre>
 </div>
-<div created="20210407034708038" modified="20210407034732509" tags="[[Tech Notes]]" title="H264 coding">
-<pre>(gdb) where
+<div created="20210407034708038" modified="20210407034742651" tags="[[Tech Notes]]" title="H264 coding">
+<pre>
+```
+(gdb) where
 #0  ff_h264_flush_change (h=h@entry=0x7fffd0011d00)
     at src/libavcodec/h264dec.c:440
 #1  0x00005555556755c7 in h264_decode_init (avctx=0x7fffd0002a40)
@@ -11822,6 +11824,8 @@ Thank you all very much.
 #3  0x0000555555a096a9 in avformat_find_stream_info (ic=0x7fffd0000bc0, 
     options=0x7fffd0004340) at src/libavformat/utils.c:3722
 #4  0x00005555556db95e in read_thread (arg=0x7fffde2fe040)
+```
+
 
 
 </pre>
