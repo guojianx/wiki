@@ -11810,7 +11810,7 @@ Thank you all very much.
 <div created="20210222020638834" modified="20210222020726771" tags="[[ToDo List]]" title="Future">
 <pre></pre>
 </div>
-<div created="20210407034708038" modified="20210407034742651" tags="[[Tech Notes]]" title="H264 coding">
+<div created="20210407034708038" modified="20210407034849163" tags="[[Tech Notes]]" title="H264 coding">
 <pre>
 ```
 (gdb) where
@@ -11826,6 +11826,31 @@ Thank you all very much.
 #4  0x00005555556db95e in read_thread (arg=0x7fffde2fe040)
 ```
 
+
+```
+#0  ff_h264_queue_decode_slice (h=h@entry=0x7fffd0011d00, 
+    nal=nal@entry=0x7fffd00e9d40) at src/libavcodec/h264_slice.c:2091
+#1  0x0000555555b5f69a in decode_nal_units (buf_size=807, 
+    buf=0x7fffd00a4240 &quot;&quot;, h=0x7fffd0011d00) at src/libavcodec/h264dec.c:622
+#2  h264_decode_frame (avctx=0x7fffd0002a40, data=0x7fffd00058c0, 
+    got_frame=0x7fffde2fc840, avpkt=&lt;optimized out&gt;)
+    at src/libavcodec/h264dec.c:992
+#3  0x0000555555a9f9e0 in decode_simple_internal (frame=0x7fffd00058c0, 
+    avctx=0x7fffd0002a40) at src/libavcodec/decode.c:342
+#4  decode_simple_receive_frame (frame=&lt;optimized out&gt;, avctx=&lt;optimized out&gt;)
+    at src/libavcodec/decode.c:538
+#5  decode_receive_frame_internal (avctx=avctx@entry=0x7fffd0002a40, 
+    frame=0x7fffd00058c0) at src/libavcodec/decode.c:556
+#6  0x0000555555aa06b0 in avcodec_send_packet (
+    avctx=avctx@entry=0x7fffd0002a40, avpkt=avpkt@entry=0x7fffde2fc910)
+    at src/libavcodec/decode.c:614
+#7  0x00005555559feab3 in try_decode_frame (s=s@entry=0x7fffd0000bc0, 
+    st=st@entry=0x7fffd0001fc0, avpkt=avpkt@entry=0x7fffd002d9c0, 
+    options=&lt;optimized out&gt;) at src/libavformat/utils.c:3111
+#8  0x0000555555a09a3d in avformat_find_stream_info (ic=0x7fffd0000bc0, 
+    options=0x7fffd0004340) at src/libavformat/utils.c:3954
+
+```
 
 
 </pre>
