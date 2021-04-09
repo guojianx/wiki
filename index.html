@@ -263,6 +263,8 @@ Error message and password prompt
 
 <li>30th March 2021</li>
 
+<li>9th April 2021</li>
+
 <li>北京自来水是否可以冲奶</li>
 
 <li>编制快编马赛克和导播的测试用例</li>
@@ -10314,11 +10316,11 @@ Error message and password prompt
 <div created="20210215002612032" modified="20210215002613840" title="$:/state/image-picker/system-871291922">
 <pre>hide</pre>
 </div>
-<div created="20201230023808396" modified="20210330024517578" title="$:/state/showeditpreview">
-<pre>no</pre>
-</div>
-<div created="20201228150048917" modified="20210408053308799" title="$:/state/sidebar">
+<div created="20201230023808396" modified="20210409025946860" title="$:/state/showeditpreview">
 <pre>yes</pre>
+</div>
+<div created="20201228150048917" modified="20210409025948499" title="$:/state/sidebar">
+<pre>no</pre>
 </div>
 <div created="20201228150044385" modified="20201228150046350" title="$:/state/tab--2112689675">
 <pre>$:/core/ui/ControlPanel/Basics</pre>
@@ -10329,8 +10331,8 @@ Error message and password prompt
 <div created="20201228150122303" modified="20201228195420655" title="$:/state/tab-2065006209">
 <pre>$:/core/ui/ControlPanel/Saving/GitHub</pre>
 </div>
-<div created="20201228150013909" modified="20210408053311128" title="$:/state/tab/sidebar--595412856">
-<pre>TableOfContents</pre>
+<div created="20201228150013909" modified="20210409025851971" title="$:/state/tab/sidebar--595412856">
+<pre>$:/core/ui/SideBar/Recent</pre>
 </div>
 <div created="20210217112900892" modified="20210217112903138" title="$:/state/tag-manager/Journal">
 <pre>closed</pre>
@@ -10374,7 +10376,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210408091323751" list="[[Tech Notes]] [[H264 coding]]" modified="20210408091744138" title="$:/StoryList">
+<div created="20210409025057605" list="[[2nd April 2021]] 英语学习 [[9th April 2021]] [[Tech Notes]]" modified="20210409025856995" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11335,6 +11337,59 @@ Note that for our example equation we won’t be able to prove it for N = 1, bec
 # decadic - 十进制的
 # substitution - 替换
 # induction - 归纳</pre>
+</div>
+<div created="20210409025901069" modified="20210409031210651" tags="英语学习 Journal April" title="9th April 2021">
+<pre>''Example 6. ''Let’s try to apply our new “recursion tree” method to solve the following recurrence equation:
+
+[img[https://images.ctfassets.net/piwi0eufbb2g/ogXKwD5HVzKuddBLbSXBo/8fb141a9199787a0d2697dab5ff95fc6/new72.png]]
+
+The recursion tree will look as follows:
+
+[img[https://images.ctfassets.net/piwi0eufbb2g/3VSFRdCsKVE7i4o9nQu2es/82fd95adec8a5b0c4246eae5cc07eb29/tree5.png]]
+
+Let’s try computing the total work for each of the first few levels. Our results:
+
+
+|LEVEL|1|2|3|…|
+|work|cN^^3^^|[img[https://images.ctfassets.net/piwi0eufbb2g/5SEkV4yJ3iaFb6r14yaFaR/2e6260b520c7b8eaa122444a08f89458/img16.png]] cN^^3^^|[img[https://images.ctfassets.net/piwi0eufbb2g/DXuNYbKPMbilIdFTcBwGy/a20e3ae785add765324a40219ec21e0a/img17.png]] cN^^3^^|…|
+
+Clearly as we go deeper in the tree, the total amount of work on the current level decreases. The question is, how fast does it decrease? As we move one level lower, there will be three times that many subproblems. However, their size gets divided by 2, and thus the time to process each of them decreases to one eighth of the original time. Thus the amount of work is decreased by the factor 3/8.
+
+Thus the total amount of work in our tree is [img[http://images.ctfassets.net/piwi0eufbb2g/SM9V0Z14CXpOrBMRd5084/7947f888cde28f1bdc873af13513fc52/complexity3.png]](N3) (summing the infinite sequence gives us an upper bound). But already the first element of our progression is [img[http://images.ctfassets.net/piwi0eufbb2g/6Z5qzbtqiR7YD5Q8YEAC3U/c61f8064de574235e0c2dc43a3afea98/complexity4.png]](N3). It follows that the total amount of work in our tree is [img[http://images.ctfassets.net/piwi0eufbb2g/6Z5qzbtqiR7YD5Q8YEAC3U/c61f8064de574235e0c2dc43a3afea98/complexity4.png]](N3) and we are done.
+
+The important generalization of this example: If the amounts of work at subsequent levels of the recursion tree form a ''decreasing geometric progression'', the total amount of work is asymptotically the same as the amount of work done in the root node.
+
+From this result we can deduce an interesting fact about the (hypothetical) algorithm behind this recurrence equation: The recursive calls didn’t take much time in this case, the most time consuming part was preparing the recursive calls and/or processing the results. (I.e. this is the part that should be improved if we need a faster algorithm.)
+
+''Example 7.'' Now let’s try to apply our new “recursion tree” method to solve the following recurrence equation:
+
+[img[https://images.ctfassets.net/piwi0eufbb2g/5Wyw3RJnFzgqlA1hK4sUzc/2198e3c1fae6addeb2d98acfb81ff3ef/new80.png]]
+
+The recursion tree will look as follows:
+
+[img[https://images.ctfassets.net/piwi0eufbb2g/7MI5X0xGKmQU6RR8oeYVQH/3732983f075cf331bbfb7a82d7adc98d/tree4.png]]
+
+Again, let’s try computing the total work for each of the first few levels. We get:
+
+
+|LEVEL|1|2|3|…|
+|work|cN^^3^^|[img[https://images.ctfassets.net/piwi0eufbb2g/5CgK58HEHtfnfntlZYPcEc/98c4c0da9d0db3a545b389c4722a446c/img21.png]]cN^^3^^|[img[https://images.ctfassets.net/piwi0eufbb2g/7Gg1ALwlj3TsB3QpIHl0Wz/2512294d503f347bd15d6441c3004835/img22.png]]cN^^3^^|…|
+
+This time we have the opposite situation: As we go deeper in the tree, the total amount of work on the current level increases. As we move one level lower, there will be five times that many subproblems, each of them one third of the previous size, the processing time is linear in problem size. Thus the amount of work increased by the factor 5/3.
+
+Again, we want to compute the total amount of work. This time it won’t be that easy, because the most work is done on the lowest level of the tree. We need to know its depth.
+
+The lowest level corresponds to problems of size 1. The size of a problem on level k is N/3^^k^^. Solving the equation 1 = N/3^^k^^ we get k = log,,3,,N. Note that this time we explicitly state the base of the logarithm, as this time it will be important.
+
+Our recursion tree has log,,3,,N levels. Each of the levels has five times more vertices than the previous one, thus the last level has [img[https://images.ctfassets.net/piwi0eufbb2g/1SmukeDxdG1GuSarDmDkkl/10685198c4e0867b475b048d8fd00f70/new89.png]] levels. The total work done on this level is then [img[https://images.ctfassets.net/piwi0eufbb2g/1FRsvs2MIA65AdRcG5ydDy/9bc604ebdc3fa85864d4ea5172d079f4/new90.png]]
+
+Note that using the trick (3) we may rewrite this as [img[https://images.ctfassets.net/piwi0eufbb2g/t6ZL1kGPMuG1y0xkuKzMK/5c054ba80b76172fc8f026c7b78f8619/new91.png]]
+
+Now we want to sum the work done on all levels of the tree. Again, this is a geometric progression. But instead of explicitly computing the sum, we now ''reverse ''it. Now we have a ''decreasing ''geometric progression…and we are already in the same situation as in the previous example. Using the same reasoning we can show that the sum is asymptotically equal to the largest element.
+
+It follows that the total amount of work in our tree is [img[https://images.ctfassets.net/piwi0eufbb2g/2L64R8CZ5vytan2FAbZi5o/0ed5a6a567481f00051246d880a4f470/new92.png]] and we are done.
+
+Note that the base-3 logarithm ends in the exponent, that’s why the base is important. If the base was different, also the result would be asymptotically different.</pre>
 </div>
 <div created="20210113072853970" modified="20210219182419146" tags="[[ToDo List]] task done" title="北京自来水是否可以冲奶">
 <pre>黄帝内经 - 异法方宜论 : 
