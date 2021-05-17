@@ -10864,7 +10864,7 @@ From the previous example we could get the feeling that recursion is evil and le
 # Evans was trying to ''obtain'' a false passport - 伊娃那时正试图获取假护照
 # brute - 残忍的、野蛮的  (brute force - 蛮力)</pre>
 </div>
-<div created="20210517091032193" modified="20210517092430785" tags="英语学习 Journal May" title="17th May 2021">
+<div created="20210517091032193" modified="20210517093254353" tags="英语学习 Journal May" title="17th May 2021">
 <pre>Stream extrapolation mode
 
 Describe how the frames of a stream are ''extrapolated'' before the first one and after EOF to keep sync with ''possibly'' longer other streams.
@@ -10872,6 +10872,22 @@ Describe how the frames of a stream are ''extrapolated'' before the first one an
 Synchronization level: frames on input at the highest sync level will generate output frame events.
 
 For example, if input #0 and #1 have sync level 2 and input #2 has sync level 1, then a frame on either input #0 or #1 will generate a frame event, but not a frame on input #2 until both inputs #0 and #1 have reached EOF.
+
+Flag ''indicating'' that a frame event is ready.
+
+Flag ''indicating that output has reached EOF.
+
+Initialize a frame sync structure.
+
+The entire structure is expected to be already set to 0 or preinited.
+
+Configure a frame sync structure.
+
+Must be set after all options are set but before all use.
+
+@param get -- if not zero, the calling code needs to get ownership of the returned frame; the current frame will either be duplicated or removed from the frame sync structure.
+
+
 
 * Extrapolated - 推测 
 * Possibly
