@@ -10355,8 +10355,8 @@ Error message and password prompt
 <div created="20201230023808396" modified="20210531060623371" title="$:/state/showeditpreview">
 <pre>no</pre>
 </div>
-<div created="20201228150048917" modified="20210531080202507" title="$:/state/sidebar">
-<pre>no</pre>
+<div created="20201228150048917" modified="20210622021319580" title="$:/state/sidebar">
+<pre>yes</pre>
 </div>
 <div created="20201228150044385" modified="20201228150046350" title="$:/state/tab--2112689675">
 <pre>$:/core/ui/ControlPanel/Basics</pre>
@@ -10367,8 +10367,8 @@ Error message and password prompt
 <div created="20201228150122303" modified="20201228195420655" title="$:/state/tab-2065006209">
 <pre>$:/core/ui/ControlPanel/Saving/GitHub</pre>
 </div>
-<div created="20201228150013909" modified="20210531030019703" title="$:/state/tab/sidebar--595412856">
-<pre>$:/core/ui/SideBar/Recent</pre>
+<div created="20201228150013909" modified="20210622021322268" title="$:/state/tab/sidebar--595412856">
+<pre>TableOfContents</pre>
 </div>
 <div created="20210217112900892" modified="20210217112903138" title="$:/state/tag-manager/Journal">
 <pre>closed</pre>
@@ -10418,7 +10418,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210531080201194" list="[[31st May 2021]]" modified="20210531080201194" title="$:/StoryList">
+<div created="20210622021328908" list="[[C++ knowledge]] [[Tech Notes]]" modified="20210622021335372" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11801,10 +11801,10 @@ measure in bytes</pre>
 询问0-1点优惠的事
 </pre>
 </div>
-<div created="20210416030556394" modified="20210416031624759" tags="[[Tech Notes]]" title="C++ knowledge">
+<div created="20210416030556394" modified="20210622021714133" tags="[[Tech Notes]]" title="C++ knowledge">
 <pre># 多重继承
-#* 子类构造函数被调用，父类默认构造函数自动被掉用
-#* 在子类构造时调用带参数的父类构造函数
+#* 派生类构造函数被调用，基类默认构造函数自动被掉用
+#* 在派生类构造时调用带参数的基类构造函数
 
 ```
 class derive : public base
@@ -11829,10 +11829,40 @@ class derive : public MiddleA, public MiddleB
     { ... }
 }
 
-不用虚拟继承derive将包含两个base的副本
+如果不用虚拟继承，derive将包含两个base的副本
 不指定base(args)，则自动调用base的默认构造函数
 ```
-</pre>
+
+```
+实例内的线程还未终止时，调用实例析构函数就会出现如下异常。
+
+Destructing Encoder: ./abc.mp4
+terminate called without an active exception
+
+Program received signal SIGABRT, Aborted.
+[Switching to Thread 0x7ffff40e0700 (LWP 31012)]
+0x00007ffff602b3d7 in raise () from /lib64/libc.so.6
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-323.el7_9.x86_64 keyutils-libs-1.5.8-3.el7.x86_64 krb5-libs-1.15.1-50.el7.x86_64 libcom_err-1.42.9-19.el7.x86_64 libgcc-4.8.5-44.el7.x86_64 libselinux-2.5-15.el7.x86_64 libstdc++-4.8.5-44.el7.x86_64 libubsan1-9.3.1-2.el7.x86_64 openssl-libs-1.0.2k-21.el7_9.x86_64 pcre-8.32-17.el7.x86_64 zlib-1.2.7-19.el7_9.x86_64
+(gdb)   where
+#0  0x00007ffff602b3d7 in raise () from /lib64/libc.so.6
+#1  0x00007ffff602cac8 in abort () from /lib64/libc.so.6
+#2  0x00007ffff72a3a95 in __gnu_cxx::__verbose_terminate_handler() () from /lib64/libstdc++.so.6
+#3  0x00007ffff72a1a06 in ?? () from /lib64/libstdc++.so.6
+#4  0x00007ffff72a1a33 in std::terminate() () from /lib64/libstdc++.so.6
+#5  0x00000000004ab269 in std::thread::~thread (this=0x7fffec0400e0, __in_chrg=&lt;optimized out&gt;)
+    at /opt/rh/devtoolset-9/root/usr/include/c++/9/thread:139
+#6  0x00000000004c7979 in std::_Destroy&lt;std::thread&gt; (__pointer=0x7fffec0400e0)
+    at /opt/rh/devtoolset-9/root/usr/include/c++/9/bits/stl_construct.h:98
+#7  0x00000000004c72d6 in std::_Destroy_aux&lt;false&gt;::__destroy&lt;std::thread*&gt; (__first=0x7fffec0400e0, __last=0x7fffec0400f0)
+    at /opt/rh/devtoolset-9/root/usr/include/c++/9/bits/stl_construct.h:108
+#8  0x00000000004c6ca8 in std::_Destroy&lt;std::thread*&gt; (__first=0x7fffec0400e0, __last=0x7fffec0400f0)
+    at /opt/rh/devtoolset-9/root/usr/include/c++/9/bits/stl_construct.h:137
+#9  0x00000000004c660f in std::_Destroy&lt;std::thread*, std::thread&gt; (__first=0x7fffec0400e0, __last=0x7fffec0400f0)
+    at /opt/rh/devtoolset-9/root/usr/include/c++/9/bits/stl_construct.h:206
+#10 0x00000000004c5c3f in std::vector&lt;std::thread, std::allocator&lt;std::thread&gt; &gt;::~vector (this=0x7fffec11dc30,
+    __in_chrg=&lt;optimized out&gt;) at /opt/rh/devtoolset-9/root/usr/include/c++/9/bits/stl_vector.h:677
+#11 0x00000000004c2eb0 in Encoder::~Encoder (this=0x7fffec11db40, __in_chrg=&lt;optimized out&gt;)
+```</pre>
 </div>
 <div created="20210413011910435" modified="20210414022528611" tags="[[ToDo List]] task done" title="C++17 class thread constructor, how to pass parameters to it? Why cannot pass a class member as its parameter?">
 <pre></pre>
