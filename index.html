@@ -11905,12 +11905,16 @@ https://trac.ffmpeg.org/wiki/FilteringGuide</pre>
 <div color="#2ef209" created="20201228194702570" modified="20201228194702570" title="done">
 <pre></pre>
 </div>
-<div created="20210719063936869" modified="20210719084654822" tags="[[Sisyphus's Rock]]" title="English">
+<div created="20210719063936869" modified="20210719085650461" tags="[[Sisyphus's Rock]]" title="English">
 <pre>''NAL (Network Abstraction Layer) units:''
 
 A sequence of NAL units can be decoded into video frames. NAL units have no boundary markers, and rely on some unspecified format to provide framing.
 
 ''monotonic'' -- 单调 [数学术语]
+
+''monochrome'' -- 单色
+
+&quot;mono&quot; -- 单声道
 
 https://wiki.videolan.org/YUV/
 
@@ -11922,7 +11926,23 @@ YUV can also be referred as YCbCr (Component blue and Component red).
 
 ''planar ['pleɪnə(r)]''
 
-''CSP -- Color Spcace Profiles''</pre>
+''CSP -- Color Spcace Profiles''
+
+```
+I400     /* monochrome 4:0:0 */
+I420     /* yuv 4:2:0 planar */
+YV12    /* yvu 4:2:0 planer */
+NV12   /* yuv 4:2:0 with one y plane and one packed u+v */
+NV21   /* yuv 4:2:0 with one y plane and one packed v+u */
+I422     /* yuv 4:2:2 planar */
+YV16    /* yvu 4:2:2 planar */
+NV16   /* yuv 4:2:2 with one y plane and one packed u+v */
+YUYV   /* yuyv 4:2:2 packed */
+UYVY   /* uyvy 4:2:2 packed */
+I444     /* yuv 4:4:4 planar */
+YV24    /* yvu 4:4:4 planar */
+
+```</pre>
 </div>
 <div created="20210326102838923" modified="20210326102902033" tags="[[ToDo List]] task" title="EnglishRead - 丘吉尔的演讲">
 <pre></pre>
