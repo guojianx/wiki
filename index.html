@@ -10356,8 +10356,8 @@ Error message and password prompt
 <div created="20210215002612032" modified="20210215002613840" title="$:/state/image-picker/system-871291922">
 <pre>hide</pre>
 </div>
-<div created="20201230023808396" modified="20210720051844989" title="$:/state/showeditpreview">
-<pre>yes</pre>
+<div created="20201230023808396" modified="20210720051900940" title="$:/state/showeditpreview">
+<pre>no</pre>
 </div>
 <div created="20201228150048917" modified="20210628063735061" title="$:/state/sidebar">
 <pre>yes</pre>
@@ -12030,7 +12030,7 @@ the point is what experience of working in large scale teams, how I worked in In
 <div created="20210205020718220" modified="20210205020730035" tags="[[Tech Notes]]" title="RTMP">
 <pre></pre>
 </div>
-<div created="20210207074056710" modified="20210720051851933" tags="WebRTC" title="RTP">
+<div created="20210207074056710" modified="20210720051926261" tags="WebRTC" title="RTP">
 <pre>https://www.kurento.org/blog/rtp-i-intro-rtp-and-sdp
 https://www.kurento.org/blog/rtp-ii-streaming-ffmpeg
 
@@ -12051,6 +12051,8 @@ a=fmtp:96 packetization-mode=1; sprop-parameter-sets=Z2QAKKzIcBQBbsBagQEAoAAAAwA
 ''Generate SDP file:''
 
 `ffmpeg -re -stream_loop -1 -i ./in.mp4 -c:v copy -an -f rtp -sdp_file ./video.sdp rtp://127.0.0.1:5004`
+
+''Play the rtp stream''
 
 `ffplay -protocol_whitelist file,rtp,udp -i video.sdp`
 </pre>
