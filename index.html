@@ -10359,7 +10359,7 @@ Error message and password prompt
 <div created="20201230023808396" modified="20210720051900940" title="$:/state/showeditpreview">
 <pre>no</pre>
 </div>
-<div created="20201228150048917" modified="20210628063735061" title="$:/state/sidebar">
+<div created="20201228150048917" modified="20210720052344459" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20201228150044385" modified="20201228150046350" title="$:/state/tab--2112689675">
@@ -10422,7 +10422,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210720051727083" list="RTP WebRTC" modified="20210720051738987" title="$:/StoryList">
+<div created="20210720051727083" list="WebRTC" modified="20210720052348773" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -12862,7 +12862,7 @@ typedef struct AVFrame {
 <div created="20210401004312763" modified="20210406013157676" tags="[[ToDo List]] task done" title="Turn the laptop into windows os">
 <pre></pre>
 </div>
-<div created="20210201022655974" modified="20210720052307173" tags="[[Tech Notes]]" title="WebRTC">
+<div created="20210201022655974" modified="20210720052436264" tags="[[Tech Notes]]" title="WebRTC">
 <pre>`chrome://webrtc-internals`
 
 # [[WebRTC|https://webrtc.org/getting-started/peer-connections]]
@@ -12875,6 +12875,14 @@ typedef struct AVFrame {
 #* Create TLS .pem certification files
 
 ```
+1. openssl req -newkey rsa:2048 -new -nodes -keyout key.pem -out csr.pem
+2. openssl x509 -req -days 365 -in csr.pem -signkey key.pem -out server.crt
+3. mv server.crt fullchain.pem
+   mv key.pem privkey.pem
+```
+
+```
+[profile-level-id]
             Table 5.  Combinations of profile_idc and profile-iop
             representing the same sub-profile corresponding to the full
             set of coding tools supported by one profile.  In the
@@ -12904,13 +12912,6 @@ typedef struct AVFrame {
               H42I        7A                 00010000
               H44I        F4                 00010000
               C44I        2C                 00010000
-```
-
-```
-1. openssl req -newkey rsa:2048 -new -nodes -keyout key.pem -out csr.pem
-2. openssl x509 -req -days 365 -in csr.pem -signkey key.pem -out server.crt
-3. mv server.crt fullchain.pem
-   mv key.pem privkey.pem
 ```</pre>
 </div>
 <div created="20210510034420652" modified="20210526071230246" tags="[[Sisyphus's Rock]]" title="X-Journal">
