@@ -12862,7 +12862,7 @@ typedef struct AVFrame {
 <div created="20210401004312763" modified="20210406013157676" tags="[[ToDo List]] task done" title="Turn the laptop into windows os">
 <pre></pre>
 </div>
-<div created="20210201022655974" modified="20210408053415847" tags="[[Tech Notes]]" title="WebRTC">
+<div created="20210201022655974" modified="20210720052307173" tags="[[Tech Notes]]" title="WebRTC">
 <pre>`chrome://webrtc-internals`
 
 # [[WebRTC|https://webrtc.org/getting-started/peer-connections]]
@@ -12873,6 +12873,38 @@ typedef struct AVFrame {
 # [[janus|https://janus.conf.meetecho.com/]]
 # [[mediesoup|https://mediasoup.org/]]
 #* Create TLS .pem certification files
+
+```
+            Table 5.  Combinations of profile_idc and profile-iop
+            representing the same sub-profile corresponding to the full
+            set of coding tools supported by one profile.  In the
+            following, x may be either 0 or 1, while the profile names
+            are indicated as follows.  CB: Constrained Baseline profile,
+            B: Baseline profile, M: Main profile, E: Extended profile,
+            H: High profile, H10: High 10 profile, H42: High 4:2:2
+            profile, H44: High 4:4:4 Predictive profile, H10I: High 10
+            Intra profile, H42I: High 4:2:2 Intra profile, H44I: High
+            4:4:4 Intra profile, and C44I: CAVLC 4:4:4 Intra profile.
+
+              Profile     profile_idc        profile-iop
+                          (hexadecimal)      (binary)
+
+              CB          42 (B)             x1xx0000
+                 same as: 4D (M)             1xxx0000
+                 same as: 58 (E)             11xx0000
+              B           42 (B)             x0xx0000
+                 same as: 58 (E)             10xx0000
+              M           4D (M)             0x0x0000
+              E           58                 00xx0000
+              H           64                 00000000
+              H10         6E                 00000000
+              H42         7A                 00000000
+              H44         F4                 00000000
+              H10I        6E                 00010000
+              H42I        7A                 00010000
+              H44I        F4                 00010000
+              C44I        2C                 00010000
+```
 
 ```
 1. openssl req -newkey rsa:2048 -new -nodes -keyout key.pem -out csr.pem
