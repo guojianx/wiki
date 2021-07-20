@@ -313,8 +313,6 @@ Error message and password prompt
 
 <li>Future</li>
 
-<li>H264 coding</li>
-
 <li>HLS</li>
 
 <li>HLS m3u8 和 ts的域名不同</li>
@@ -380,6 +378,8 @@ Error message and password prompt
 <li>WebRTC</li>
 
 <li>X-Journal</li>
+
+<li>x264</li>
 
 <li>中医口诀</li>
 
@@ -10422,7 +10422,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210720051727083" list="WebRTC" modified="20210720083159792" title="$:/StoryList">
+<div created="20210720051727083" list="x264" modified="20210720094616759" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11861,57 +11861,6 @@ Thank you all very much.
 <div created="20210222020638834" modified="20210222020726771" tags="[[ToDo List]]" title="Future">
 <pre></pre>
 </div>
-<div created="20210407034708038" modified="20210408091418187" tags="[[Tech Notes]]" title="H264 coding">
-<pre>https://hezhaojiang.github.io/
-
-ffmpeg.x264 -preset slow 对应的是什么profile 和 level??
-
-视频相关的博客
-
-```
-(gdb) where
-#0  ff_h264_flush_change (h=h@entry=0x7fffd0011d00)
-    at src/libavcodec/h264dec.c:440
-#1  0x00005555556755c7 in h264_decode_init (avctx=0x7fffd0002a40)
-    at src/libavcodec/h264dec.c:409
-#2  0x0000555555e0397f in avcodec_open2 (avctx=avctx@entry=0x7fffd0002a40, 
-    codec=codec@entry=0x555556936520 &lt;ff_h264_decoder&gt;, 
-    options=options@entry=0x7fffd0004340) at src/libavcodec/utils.c:927
-#3  0x0000555555a096a9 in avformat_find_stream_info (ic=0x7fffd0000bc0, 
-    options=0x7fffd0004340) at src/libavformat/utils.c:3722
-#4  0x00005555556db95e in read_thread (arg=0x7fffde2fe040)
-```
-
-avformat_find_stream_info()
-
-```
-#0  ff_h264_queue_decode_slice (h=h@entry=0x7fffd0011d00, 
-    nal=nal@entry=0x7fffd00e9d40) at src/libavcodec/h264_slice.c:2091
-#1  0x0000555555b5f69a in decode_nal_units (buf_size=807, 
-    buf=0x7fffd00a4240 &quot;&quot;, h=0x7fffd0011d00) at src/libavcodec/h264dec.c:622
-#2  h264_decode_frame (avctx=0x7fffd0002a40, data=0x7fffd00058c0, 
-    got_frame=0x7fffde2fc840, avpkt=&lt;optimized out&gt;)
-    at src/libavcodec/h264dec.c:992
-#3  0x0000555555a9f9e0 in decode_simple_internal (frame=0x7fffd00058c0, 
-    avctx=0x7fffd0002a40) at src/libavcodec/decode.c:342
-#4  decode_simple_receive_frame (frame=&lt;optimized out&gt;, avctx=&lt;optimized out&gt;)
-    at src/libavcodec/decode.c:538
-#5  decode_receive_frame_internal (avctx=avctx@entry=0x7fffd0002a40, 
-    frame=0x7fffd00058c0) at src/libavcodec/decode.c:556
-#6  0x0000555555aa06b0 in avcodec_send_packet (
-    avctx=avctx@entry=0x7fffd0002a40, avpkt=avpkt@entry=0x7fffde2fc910)
-    at src/libavcodec/decode.c:614
-#7  0x00005555559feab3 in try_decode_frame (s=s@entry=0x7fffd0000bc0, 
-    st=st@entry=0x7fffd0001fc0, avpkt=avpkt@entry=0x7fffd002d9c0, 
-    options=&lt;optimized out&gt;) at src/libavformat/utils.c:3111
-#8  0x0000555555a09a3d in avformat_find_stream_info (ic=0x7fffd0000bc0, 
-    options=0x7fffd0004340) at src/libavformat/utils.c:3954
-
-```
-
-
-</pre>
-</div>
 <div created="20210205020739333" modified="20210205020745145" tags="[[Tech Notes]]" title="HLS">
 <pre></pre>
 </div>
@@ -12917,6 +12866,57 @@ typedef struct AVFrame {
 </div>
 <div created="20210510034420652" modified="20210526071230246" tags="[[Sisyphus's Rock]]" title="X-Journal">
 <pre>朱研澔 - 家具设计师，在pinterest上看见一件他设计的碗柜，碗和碟子都平放在格子上，可以倒吊几个高脚杯，台面上放咖啡机，实用，有淳朴的生活气。
+</pre>
+</div>
+<div created="20210407034708038" modified="20210720094633104" tags="[[Tech Notes]]" title="x264">
+<pre>https://hezhaojiang.github.io/
+
+ffmpeg.x264 -preset slow 对应的是什么profile 和 level??
+
+视频相关的博客
+
+```
+(gdb) where
+#0  ff_h264_flush_change (h=h@entry=0x7fffd0011d00)
+    at src/libavcodec/h264dec.c:440
+#1  0x00005555556755c7 in h264_decode_init (avctx=0x7fffd0002a40)
+    at src/libavcodec/h264dec.c:409
+#2  0x0000555555e0397f in avcodec_open2 (avctx=avctx@entry=0x7fffd0002a40, 
+    codec=codec@entry=0x555556936520 &lt;ff_h264_decoder&gt;, 
+    options=options@entry=0x7fffd0004340) at src/libavcodec/utils.c:927
+#3  0x0000555555a096a9 in avformat_find_stream_info (ic=0x7fffd0000bc0, 
+    options=0x7fffd0004340) at src/libavformat/utils.c:3722
+#4  0x00005555556db95e in read_thread (arg=0x7fffde2fe040)
+```
+
+avformat_find_stream_info()
+
+```
+#0  ff_h264_queue_decode_slice (h=h@entry=0x7fffd0011d00, 
+    nal=nal@entry=0x7fffd00e9d40) at src/libavcodec/h264_slice.c:2091
+#1  0x0000555555b5f69a in decode_nal_units (buf_size=807, 
+    buf=0x7fffd00a4240 &quot;&quot;, h=0x7fffd0011d00) at src/libavcodec/h264dec.c:622
+#2  h264_decode_frame (avctx=0x7fffd0002a40, data=0x7fffd00058c0, 
+    got_frame=0x7fffde2fc840, avpkt=&lt;optimized out&gt;)
+    at src/libavcodec/h264dec.c:992
+#3  0x0000555555a9f9e0 in decode_simple_internal (frame=0x7fffd00058c0, 
+    avctx=0x7fffd0002a40) at src/libavcodec/decode.c:342
+#4  decode_simple_receive_frame (frame=&lt;optimized out&gt;, avctx=&lt;optimized out&gt;)
+    at src/libavcodec/decode.c:538
+#5  decode_receive_frame_internal (avctx=avctx@entry=0x7fffd0002a40, 
+    frame=0x7fffd00058c0) at src/libavcodec/decode.c:556
+#6  0x0000555555aa06b0 in avcodec_send_packet (
+    avctx=avctx@entry=0x7fffd0002a40, avpkt=avpkt@entry=0x7fffde2fc910)
+    at src/libavcodec/decode.c:614
+#7  0x00005555559feab3 in try_decode_frame (s=s@entry=0x7fffd0000bc0, 
+    st=st@entry=0x7fffd0001fc0, avpkt=avpkt@entry=0x7fffd002d9c0, 
+    options=&lt;optimized out&gt;) at src/libavformat/utils.c:3111
+#8  0x0000555555a09a3d in avformat_find_stream_info (ic=0x7fffd0000bc0, 
+    options=0x7fffd0004340) at src/libavformat/utils.c:3954
+
+```
+
+
 </pre>
 </div>
 <div created="20210114084354095" modified="20210114084444229" tags="文化" title="中医口诀">
