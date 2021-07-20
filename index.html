@@ -10422,7 +10422,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210720051727083" list="WebRTC" modified="20210720052348773" title="$:/StoryList">
+<div created="20210720051727083" list="[[C++ knowledge]] WebRTC" modified="20210720083159792" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11548,7 +11548,7 @@ Note that the base-3 logarithm ends in the exponent, that’s why the base is im
 询问0-1点优惠的事
 </pre>
 </div>
-<div created="20210416030556394" modified="20210622021714133" tags="[[Tech Notes]]" title="C++ knowledge">
+<div created="20210416030556394" modified="20210720083418917" tags="[[Tech Notes]]" title="C++ knowledge">
 <pre># 多重继承
 #* 派生类构造函数被调用，基类默认构造函数自动被掉用
 #* 在派生类构造时调用带参数的基类构造函数
@@ -11582,6 +11582,7 @@ class derive : public MiddleA, public MiddleB
 
 ```
 实例内的线程还未终止时，调用实例析构函数就会出现如下异常。
+When the thread is still running, calling the destructor will cause the following abort.
 
 Destructing Encoder: ./abc.mp4
 terminate called without an active exception
