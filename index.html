@@ -11304,10 +11304,19 @@ Victorian anti-vaxxers spread misinformation eerily similar to today’s. In 187
 # ward off - 避开
 </pre>
 </div>
-<div created="20210726062107009" modified="20210726063235943" tags="[[Sisyphus's Rock]] Journal" title="26th July 2021">
+<div created="20210726062107009" modified="20210726063433974" tags="[[Sisyphus's Rock]] Journal" title="26th July 2021">
 <pre>! ''L-Value vs R-Value and move semantics vs copy semantics.''
 
-the copy flavors of constructor and assignment take a const L-Value reference parameter, the move flavors of these functions use non-const R-Value reference parameteths.</pre>
+the copy flavors of constructor and assignment take a const L-Value reference parameter, the move flavors of these functions use non-const R-Value reference parameteths.
+
+```
+class A {
+    A(const A&amp; a);   const L-Value
+    A(A&amp;&amp; a);        non-const R-Value
+};
+```
+
+</pre>
 </div>
 <div created="20210326035959159" modified="20210330023324671" tags="[[March 2021]] Journal 英语学习" title="26th March 2021">
 <pre>Well, to be really formal, for the equation to be complete we should specify some initial values – in this case, f (1). This (and knowing the implementation-specific function p) would enable us to compute the exact values of f.
