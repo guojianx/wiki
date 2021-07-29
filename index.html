@@ -11440,7 +11440,7 @@ for (auto &amp;[key, val] : listA) {
 
 </pre>
 </div>
-<div created="20210729031434558" modified="20210729032947453" tags="[[Sisyphus's Rock]] Journal" title="29th July 2021">
+<div created="20210729031434558" modified="20210729033004660" tags="[[Sisyphus's Rock]] Journal" title="29th July 2021">
 <pre>! ''override'' specifier
 
 标记的函数要不是从父类继承的就编译错误。
@@ -11480,7 +11480,7 @@ class C : public B {
 class A final
 { ... };
 
-class B : public A                                // class A is final, compile error.
+class B : public A      // class A is final, compile error.
 { ... };
 
 ```
