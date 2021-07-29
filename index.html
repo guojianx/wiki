@@ -11417,7 +11417,7 @@ Disentangling principles from expediency is tricky. Like almost everything else 
 # conservative - 保守党人
 # proliferate - 激增</pre>
 </div>
-<div created="20210729030827382" modified="20210729031313517" tags="[[Sisyphus's Rock]] Journal" title="28th July 2021 - hash &amp; unordered_map">
+<div created="20210729030827382" modified="20210729031355292" tags="[[Sisyphus's Rock]] Journal" title="28th July 2021 - hash &amp; unordered_map">
 <pre>```
 class A { ... };
 
@@ -11428,6 +11428,11 @@ unordered_map&lt;size_t, shared_ptr&lt;A&gt;&gt; listA;
 
 hashValue = ptrHash(ptr.get());
 listA[hashValue] = ptr;
+
+for (auto &amp;[key, val] : listA) {
+    ...
+}
+
 ```
 
 
