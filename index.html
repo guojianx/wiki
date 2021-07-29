@@ -10437,7 +10437,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210729031430989" list="[[Sisyphus's Rock]] [[29th July 2021]] GettingStarted" modified="20210729031430989" title="$:/StoryList">
+<div created="20210729031430989" list="[[Sisyphus's Rock]] [[29th July 2021]]" modified="20210729031430989" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11440,8 +11440,8 @@ for (auto &amp;[key, val] : listA) {
 
 </pre>
 </div>
-<div created="20210729031434558" modified="20210729032016180" tags="[[Sisyphus's Rock]] Journal" title="29th July 2021">
-<pre>! ''override specifier''
+<div created="20210729031434558" modified="20210729032947453" tags="[[Sisyphus's Rock]] Journal" title="29th July 2021">
+<pre>! ''override'' specifier
 
 标记的函数要不是从父类继承的就编译错误。
 
@@ -11454,9 +11454,38 @@ class B : public A
 {
     virtual int dothings(int a) const override    // A::dothing() is not const，compile error.
     { ... }
-}
+};
 
 ```
+
+! ''final'' specifier
+
+标记的类或函数不允许继承和重载。
+
+```
+class A {
+   virtual int dothings(int a) {... }
+};
+
+class B : public A {
+   virtual int dothings(int a) override final
+   { ... }
+};
+
+class C : public B {
+   virtual int dothings(int a) overrride // B::dothings() is final, compile error.
+   { ... }
+}
+
+class A final
+{ ... };
+
+class B : public A                                // class A is final, compile error.
+{ ... };
+
+```
+
+
 </pre>
 </div>
 <div created="20210402151935509" modified="20210408004934418" tags="英语学习 Journal April" title="2nd April 2021">
