@@ -285,6 +285,8 @@ Error message and password prompt
 
 <li>2nd April 2021</li>
 
+<li>30th July 2021</li>
+
 <li>30th March 2021</li>
 
 <li>31st May 2021</li>
@@ -10437,7 +10439,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210729031430989" list="[[Sisyphus's Rock]] [[29th July 2021]]" modified="20210729031430989" title="$:/StoryList">
+<div created="20210730012213297" list="[[Sisyphus's Rock]] [[30th July 2021]]" modified="20210730072325354" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11522,6 +11524,12 @@ Combining both observations we get the final result: The total amount of work do
 A side note. If the reader doesn’t trust the simplifications we made when using this method, he is invited to treat this method as a “way of making a good guess” and then to prove the result using the substitution method. However, with a little effort the application of this method could also be upgraded to a full formal proof.
 
 # arbitrary - 任意的</pre>
+</div>
+<div created="20210730072330611" modified="20210730072345106" tags="[[Sisyphus's Rock]] Journal" title="30th July 2021">
+<pre>```
+ffmpeg -i ../bbb_h264_480p_30fps_aac.mp4 -i ../sample.mp4 -filter_complex &quot;nullsrc=s=1270x720[bg];[0:v]null,[bg]overlay=0:0[mid1];[1:v]scale=100:100,[mid1]overlay=100:100[mid2];[mid2]drawtext=box=1:boxborderw=13:boxcolor=#ffffff@0.0:x='if(gte(t,0),if(eq(ld(0),0),st(0,t),NAN));if(gte(t,0), (main_w-mod((t-ld(0))*88.00,main_w+2425.00)), NAN)':y=55.00:fontcolor=#ffffff@1.0:fontsize=48:text='xxxxxxxxxxxxxxxxxxxx'[mid3];[0:a][1:a]amix[aout]&quot; -map &quot;[mid3]&quot; -map &quot;[aout]&quot; -c:v libx264 -c:a aac  abc.mp4
+```
+</pre>
 </div>
 <div created="20210330024613380" modified="20210402005902160" tags="[[March 2021]] Journal 英语学习" title="30th March 2021">
 <pre>Notes on logarithms
