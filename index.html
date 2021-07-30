@@ -11525,7 +11525,7 @@ A side note. If the reader doesn’t trust the simplifications we made when usin
 
 # arbitrary - 任意的</pre>
 </div>
-<div created="20210730072330611" modified="20210730100142690" tags="[[Sisyphus's Rock]] Journal" title="30th July 2021">
+<div created="20210730072330611" modified="20210730102328850" tags="[[Sisyphus's Rock]] Journal" title="30th July 2021">
 <pre>! ''Element Management in PVW base on the below command.''
 
 ```
@@ -11540,21 +11540,32 @@ x264_plane_copy_deinterleave_c(pixel *dsta, int i_dsta, pixel *dstb, int i_dstb,
 CSP -- Colorspace Profile (NV12, I420, YUVU, ...), two types: planar | packed
 
 ```
+
+struct x264_t {
+    x264_mc_functions_t mc;
+}
+
 struct x264_picture_t {
     x264_image_t  img;
 };
 
 struct x264_image_t {
-    uint8_t *plane[4];
+    uint8_t *plane[4];  
+    // YUVU : [0] YU YV YU YV ...
 };
 
 struct x264_frame_t {
-    pixel *plane[3];          // pixel AKA uint8_t
+    pixel *plane[3];          // pixel AKA uint8_t   [0] Y , [1] UV
+    // plane[1]
+   
 };
 
 x264_encoder_encode(x264_t *h, ... , x264_picture_t pic_in, x264_picture_t pic_out)
     x264_frame_t *fenc = ... &quot;get a frame buffer from somewhere&quot;;
     x264_frame_copy_picture(h, fenc, pic_in); 
+        h-&gt;mc.plane_copy_deinterleave_yuvu( ... ); // this function AKA x264_plane_copy_deinterleave_c( ... );
+        
+        
 
 ```
 
