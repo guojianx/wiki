@@ -10893,7 +10893,7 @@ Note that even the exact runtime function f doesn’t give an exact answer to th
 #* the recipe specify the size of eggs to be used. - 菜谱明确规定了所用鸡蛋的大小。
 </pre>
 </div>
-<div created="20210816040545956" modified="20210816085913293" tags="[[Sisyphus's Rock]] Journal" title="16th August 2021">
+<div created="20210816040545956" modified="20210816090037485" tags="[[Sisyphus's Rock]] Journal" title="16th August 2021">
 <pre>https://www.valgrind.org/docs/manual/manual-core-adv.html
 
 ! &lt;a name=&quot;manual-core-adv.gdbserver-simple&quot;&gt;&lt;/a&gt;3.2.1. Quick Start: debugging in 3 steps
@@ -10938,6 +10938,8 @@ find_package(Threads REQUIRED)
 target_link_libraries(test PRIVATE Engine ... Threads::Threads)
 ```
 
+
+
 &lt;pre&gt;
 /**
  * Clip a signed integer value into the 0-255 range.
@@ -10949,7 +10951,9 @@ static av_always_inline av_const uint8_t av_clip_uint8_c(int a)
     if (a&amp;amp;(~0xFF)) return (~a)&amp;gt;&amp;gt;31;
     else           return a;
 }
-&lt;/pre&gt;</pre>
+&lt;/pre&gt;
+
+左移操作取决于符号位，符号位是0则左移补0，符号位是1左移则补1.</pre>
 </div>
 <div created="20210215172044496" modified="20210217144118232" tags="英语学习 Journal [[February 2021]]" title="16th February 2021">
 <pre>[[''Vaccine Hesitancy'']]
