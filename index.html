@@ -10386,7 +10386,7 @@ Error message and password prompt
 <div created="20201230023808396" modified="20210816040549530" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20201228150048917" modified="20210816040925378" title="$:/state/sidebar">
+<div created="20201228150048917" modified="20210816043133769" title="$:/state/sidebar">
 <pre>no</pre>
 </div>
 <div created="20201228150044385" modified="20201228150046350" title="$:/state/tab--2112689675">
@@ -10449,7 +10449,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210816040542906" list="[[Sisyphus's Rock]] [[16th August 2021]]" modified="20210816040542906" title="$:/StoryList">
+<div created="20210816043128786" list="[[16th August 2021]]" modified="20210816043128786" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -10893,7 +10893,7 @@ Note that even the exact runtime function f doesn’t give an exact answer to th
 #* the recipe specify the size of eggs to be used. - 菜谱明确规定了所用鸡蛋的大小。
 </pre>
 </div>
-<div created="20210816040545956" modified="20210816040942635" tags="[[Sisyphus's Rock]] Journal" title="16th August 2021">
+<div created="20210816040545956" modified="20210816043254146" tags="[[Sisyphus's Rock]] Journal" title="16th August 2021">
 <pre>https://www.valgrind.org/docs/manual/manual-core-adv.html
 
 ! &lt;a name=&quot;manual-core-adv.gdbserver-simple&quot;&gt;&lt;/a&gt;3.2.1. Quick Start: debugging in 3 steps
@@ -10926,7 +10926,16 @@ Valgrind gdbserver.  The sections below describe more advanced
 functionality provided by the combination of Valgrind and GDB. Note
 that the command line flag &lt;code class=&quot;option&quot;&gt;--vgdb=yes&lt;/code&gt; can be omitted,
 as this is the default value.
-&lt;/p&gt;</pre>
+&lt;/p&gt;
+
+
+```
+set(THREADS_PREFER_PTHREAD_FLAG TRUE)
+find_package(Threads REQUIRED)
+
+add_executable(test test.cpp)
+target_link_libraries(test Threads::Threads)
+```</pre>
 </div>
 <div created="20210215172044496" modified="20210217144118232" tags="英语学习 Journal [[February 2021]]" title="16th February 2021">
 <pre>[[''Vaccine Hesitancy'']]
