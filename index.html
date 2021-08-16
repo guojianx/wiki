@@ -10893,7 +10893,7 @@ Note that even the exact runtime function f doesn’t give an exact answer to th
 #* the recipe specify the size of eggs to be used. - 菜谱明确规定了所用鸡蛋的大小。
 </pre>
 </div>
-<div created="20210816040545956" modified="20210816085550669" tags="[[Sisyphus's Rock]] Journal" title="16th August 2021">
+<div created="20210816040545956" modified="20210816085624054" tags="[[Sisyphus's Rock]] Journal" title="16th August 2021">
 <pre>https://www.valgrind.org/docs/manual/manual-core-adv.html
 
 ! &lt;a name=&quot;manual-core-adv.gdbserver-simple&quot;&gt;&lt;/a&gt;3.2.1. Quick Start: debugging in 3 steps
@@ -10915,9 +10915,9 @@ gdb prog
 &lt;/pre&gt;
 &lt;p&gt;Then give the following command to GDB:
 &lt;/p&gt;
-&lt;pre&gt;
+```
 (gdb) target remote | vgdb
-&lt;/pre&gt;
+```
 &lt;p&gt;You can now debug your program e.g. by inserting a breakpoint
 and then using the GDB &lt;code class=&quot;computeroutput&quot;&gt;continue&lt;/code&gt;
 command.&lt;/p&gt;
@@ -10930,8 +10930,6 @@ as this is the default value.
 
 
 ```
-target_link_libraries(test Threads::Threads)
-
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
