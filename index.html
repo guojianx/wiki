@@ -10893,7 +10893,7 @@ Note that even the exact runtime function f doesn’t give an exact answer to th
 #* the recipe specify the size of eggs to be used. - 菜谱明确规定了所用鸡蛋的大小。
 </pre>
 </div>
-<div created="20210816040545956" modified="20210816040647523" tags="[[Sisyphus's Rock]] Journal" title="16th August 2021">
+<div created="20210816040545956" modified="20210816040915483" tags="[[Sisyphus's Rock]] Journal" title="16th August 2021">
 <pre>! &lt;a name=&quot;manual-core-adv.gdbserver-simple&quot;&gt;&lt;/a&gt;3.2.1. Quick Start: debugging in 3 steps
 &lt;p&gt;The simplest way to get started is to run Valgrind with the
 flag &lt;code class=&quot;option&quot;&gt;--vgdb-error=0&lt;/code&gt;.  Then follow the on-screen
@@ -10903,17 +10903,17 @@ and connect it to your program.&lt;/p&gt;
 &lt;p&gt;If you want to debug a program with GDB when using the Memcheck
 tool, start Valgrind like this:
 &lt;/p&gt;
-&lt;pre class=&quot;screen&quot;&gt;
+&lt;pre&gt;
 valgrind --vgdb=yes --vgdb-error=0 prog
 &lt;/pre&gt;
 &lt;p&gt;In another shell, start GDB:
 &lt;/p&gt;
-&lt;pre class=&quot;screen&quot;&gt;
+&lt;pre&gt;
 gdb prog
 &lt;/pre&gt;
 &lt;p&gt;Then give the following command to GDB:
 &lt;/p&gt;
-&lt;pre class=&quot;screen&quot;&gt;
+&lt;pre&gt;
 (gdb) target remote | vgdb
 &lt;/pre&gt;
 &lt;p&gt;You can now debug your program e.g. by inserting a breakpoint
