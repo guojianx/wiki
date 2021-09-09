@@ -11847,7 +11847,7 @@ Note: breakpoint 1 also set at pc 0x507490.
 Breakpoint 2 at 0x507490: file src/libavfilter/graphparser.c, line 263.
 ```</pre>
 </div>
-<div created="20210908090228428" modified="20210909091032583" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
+<div created="20210908090228428" modified="20210909092344061" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
 <pre>!Symptom
 
 &lt;p&gt;flv muxer report error &quot;DTS Invalid&quot; and caused the program shutdown the connection 
@@ -11874,11 +11874,11 @@ When I removed max_interleave_delta setting codes, another issue emerged. the pr
 
 What I do to find out the stuck point are:
 
-locate the stuck point with gdb
+locate the stuck point with gdb, here is the trick I use for that:
 
 ```
 /*
- * In the program code, I print each thread's id with the following code
+ * In the program code, print each thread's id with the following code
  */
 ostringstream ss;
 ss &lt;&lt; this_thread::get_id();
@@ -11887,8 +11887,14 @@ snprintf(tag, sizeof(tag), &quot;[tid @ 0x%lx]&quot;, me);
 
 /*
  * It probably occured in the encoding &amp; output thread, 
+ * find the tid from the program's log, and get in the thread:
  */
+# gdb -p &lt;pid&gt;
+&gt; set log on
+&gt; info threads          // put the threads info in gdb.txt.
 
+/* find the thread number with the tid in gdb.txt. */
+ 
 
 
 ```
