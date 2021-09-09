@@ -11847,7 +11847,7 @@ Note: breakpoint 1 also set at pc 0x507490.
 Breakpoint 2 at 0x507490: file src/libavfilter/graphparser.c, line 263.
 ```</pre>
 </div>
-<div created="20210908090228428" modified="20210909092344061" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
+<div created="20210908090228428" modified="20210909095836466" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
 <pre>!Symptom
 
 &lt;p&gt;flv muxer report error &quot;DTS Invalid&quot; and caused the program shutdown the connection 
@@ -11872,33 +11872,26 @@ I searched max_interleave_delta in the offical code, to look for the way to set 
 
 When I removed max_interleave_delta setting codes, another issue emerged. the program would get stuck occasionally.
 
-What I do to find out the stuck point are:
+;To locate the stuck point with gdb, here is the trick I use for that:
 
-locate the stuck point with gdb, here is the trick I use for that:
-
+:In the program code, print each thread's id with the following code
 ```
-/*
- * In the program code, print each thread's id with the following code
- */
 ostringstream ss;
 ss &lt;&lt; this_thread::get_id();
 size_t tid = stoll(ss.str());
 snprintf(tag, sizeof(tag), &quot;[tid @ 0x%lx]&quot;, me);
-
-/*
- * It probably occured in the encoding &amp; output thread, 
- * find the tid from the program's log, and get in the thread:
- */
-# gdb -p &lt;pid&gt;
-&gt; set log on
-&gt; info threads          // put the threads info in gdb.txt.
-
-/* find the thread number with the tid in gdb.txt. */
- 
-
+```
+: To find out the suspicious thread: the stuck point probably is in the encode&amp;output thread. there's hundrens threads within the process, record the threads info in a file, and searching the file with vim will much easier to find the thread number for gdb-thread command use.
 
 ```
+# gdb -p &lt;pid&gt;
+&gt; set log on
+&gt; info threads
 
+search gdb.txt file with the encode&amp;output thread's tid, get the thread number &lt;num&gt;.
+
+&gt; thread &lt;num&gt;
+```
 
  
 
