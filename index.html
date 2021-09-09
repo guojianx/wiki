@@ -145,6 +145,8 @@ Error message and password prompt
 
 <li>$:/config/RelinkOnRename</li>
 
+<li>$:/config/TimestampDisable</li>
+
 <li>$:/core</li>
 
 <li>$:/GitHub/Branch</li>
@@ -156,8 +158,6 @@ Error message and password prompt
 <li>$:/GitHub/Repo</li>
 
 <li>$:/GitHub/Username</li>
-
-<li>$:/Import</li>
 
 <li>$:/isEncrypted</li>
 
@@ -175,6 +175,8 @@ Error message and password prompt
 
 <li>$:/state/sidebar</li>
 
+<li>$:/state/tab--1963855381</li>
+
 <li>$:/state/tab--2112689675</li>
 
 <li>$:/state/tab-1749438307</li>
@@ -182,6 +184,8 @@ Error message and password prompt
 <li>$:/state/tab-2065006209</li>
 
 <li>$:/state/tab/sidebar--595412856</li>
+
+<li>$:/state/tabs/controlpanel/toolbars-1345989671</li>
 
 <li>$:/state/tag-manager/Journal</li>
 
@@ -220,6 +224,12 @@ Error message and password prompt
 <li>$:/themes/tiddlywiki/snowwhite</li>
 
 <li>$:/themes/tiddlywiki/vanilla</li>
+
+<li>$:/themes/tiddlywiki/vanilla/metrics/storyright</li>
+
+<li>$:/themes/tiddlywiki/vanilla/metrics/storywidth</li>
+
+<li>$:/view</li>
 
 <li>01st February 2021</li>
 
@@ -516,6 +526,9 @@ Error message and password prompt
 </div>
 <div created="20210726030915348" modified="20210726030915348" title="$:/config/RelinkOnRename">
 <pre>yes</pre>
+</div>
+<div created="20210909023507360" modified="20210909023507360" title="$:/config/TimestampDisable">
+<pre>no</pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="" description="TiddlyWiki5 core" list="readme" name="Core" plugin-priority="0" plugin-type="plugin" title="$:/core" type="application/json" version="5.1.23">
 <pre>{
@@ -10396,11 +10409,6 @@ Error message and password prompt
 <div created="20201228153456878" modified="20201228153456878" title="$:/GitHub/Username">
 <pre>guojianx</pre>
 </div>
-<div status="complete" title="$:/Import">
-<pre>The following tiddlers were imported:
-
-# [[tcp_close_wait.drawio.svg]]</pre>
-</div>
 <div title="$:/isEncrypted">
 <pre>no</pre>
 </div>
@@ -10422,20 +10430,26 @@ Error message and password prompt
 <div created="20201230023808396" modified="20210908090245378" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20201228150048917" modified="20210909023334336" title="$:/state/sidebar">
+<div created="20201228150048917" modified="20210909023434800" title="$:/state/sidebar">
 <pre>yes</pre>
+</div>
+<div created="20210909023547312" modified="20210909023605584" title="$:/state/tab--1963855381">
+<pre>$:/themes/tiddlywiki/vanilla/themetweaks</pre>
 </div>
 <div created="20201228150044385" modified="20201228150046350" title="$:/state/tab--2112689675">
 <pre>$:/core/ui/ControlPanel/Basics</pre>
 </div>
-<div created="20201228150116711" modified="20210909022938416" title="$:/state/tab-1749438307">
-<pre>$:/core/ui/ControlPanel/Settings</pre>
+<div created="20201228150116711" modified="20210909023544071" title="$:/state/tab-1749438307">
+<pre>$:/core/ui/ControlPanel/Appearance</pre>
 </div>
 <div created="20201228150122303" modified="20201228195420655" title="$:/state/tab-2065006209">
 <pre>$:/core/ui/ControlPanel/Saving/GitHub</pre>
 </div>
-<div created="20201228150013909" modified="20210909023020392" title="$:/state/tab/sidebar--595412856">
-<pre>$:/core/ui/SideBar/Tools</pre>
+<div created="20201228150013909" modified="20210909023536840" title="$:/state/tab/sidebar--595412856">
+<pre>TableOfContents</pre>
+</div>
+<div created="20210909023601112" modified="20210909023601112" title="$:/state/tabs/controlpanel/toolbars-1345989671">
+<pre>$:/core/ui/ControlPanel/Toolbars/PageControls</pre>
 </div>
 <div created="20210217112900892" modified="20210217112903138" title="$:/state/tag-manager/Journal">
 <pre>closed</pre>
@@ -10485,7 +10499,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210909014840181" list="$:/Import" modified="20210909023108928" title="$:/StoryList">
+<div created="20210909014840181" list="$:/ControlPanel [[Sisyphus's Rock]]" modified="20210909023659608" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -10596,6 +10610,15 @@ Error message and password prompt
         }
     }
 }</pre>
+</div>
+<div created="20210909023628391" modified="20210909023640720" title="$:/themes/tiddlywiki/vanilla/metrics/storyright">
+<pre>1070px</pre>
+</div>
+<div created="20210909023712592" modified="20210909023714886" title="$:/themes/tiddlywiki/vanilla/metrics/storywidth">
+<pre>1070px</pre>
+</div>
+<div created="20210909023448784" modified="20210909023501584" title="$:/view">
+<pre>classic</pre>
 </div>
 <div created="20210131171503618" modified="20210217114701440" tags="英语学习 Journal [[February 2021]]" title="01st February 2021">
 <pre>[[topcoder|https://www.topcoder.com/community/competitive-programming/tutorials/computational-complexity-section-1/]]
