@@ -11847,7 +11847,7 @@ Note: breakpoint 1 also set at pc 0x507490.
 Breakpoint 2 at 0x507490: file src/libavfilter/graphparser.c, line 263.
 ```</pre>
 </div>
-<div created="20210908090228428" modified="20210909065944385" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
+<div created="20210908090228428" modified="20210909070221593" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
 <pre>!Symptom
 
 &lt;p&gt;flv muxer report error &quot;DTS Invalid&quot; and caused the program shutdown the connection 
@@ -11872,10 +11872,13 @@ av_interleave_write_frame() failed will cause av_write_trailer() to be called to
 
 -----------------------------
 
-!ffmpeg compile command:
+!ffmpeg modification:
 ```
 ../configure --host-ldflags=-ldl --enable-gpl --enable-static --disable-shared --extra-ldflags=-ldl --enable-libx264 --enable-debug=3 --disable-stripping --prefix=/usr
 
+
+# git describe --contains &quot;f95d951&quot;
+n4.5-dev~1874
 
 # git diff libavformat/rtmpproto.c
 diff --git a/libavformat/rtmpproto.c b/libavformat/rtmpproto.c
