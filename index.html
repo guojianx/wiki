@@ -11847,7 +11847,7 @@ Note: breakpoint 1 also set at pc 0x507490.
 Breakpoint 2 at 0x507490: file src/libavfilter/graphparser.c, line 263.
 ```</pre>
 </div>
-<div created="20210908090228428" modified="20210909040308001" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
+<div created="20210908090228428" modified="20210909040343042" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
 <pre>!Symptom
 
 &lt;p&gt;flv muxer report error &quot;DTS Invalid&quot; and caused the program shutdown the connection 
@@ -11859,11 +11859,11 @@ GDB, tcpdump, netstat, poll(), tcp half-closed.
 
 !Process
 
-*Running av_interleave_write_frame() failed will cause av_write_trailer() to be called to shut the connection between the server and the daobo down. Short before disconnecting, I observed the log &quot;force output&quot;, then flv muxer print invalid dts, it directly cause av_interleaved_write_frame() returned failure.
+:Running av_interleave_write_frame() failed will cause av_write_trailer() to be called to shut the connection between the server and the daobo down. Short before disconnecting, I observed the log &quot;force output&quot;, then flv muxer print invalid dts, it directly cause av_interleaved_write_frame() returned failure.
 
-*&lt;p&gt;max_interleave_delta: Using gdb is very easy to find out that ~AVFormatContext.max_interleave_delta&lt;/p&gt;
+:&lt;p&gt;max_interleave_delta: Using gdb is very easy to find out that ~AVFormatContext.max_interleave_delta&lt;/p&gt;
 
-*&lt;p&gt;I searched max_interleave_delta in the offical code, to look for the way to set this variable correctly;  and find out there is nowhere this variable be set, it may be better not to change this variable manually.&lt;/p&gt;
+:&lt;p&gt;I searched max_interleave_delta in the offical code, to look for the way to set this variable correctly;  and find out there is nowhere this variable be set, it may be better not to change this variable manually.&lt;/p&gt;
 
 
 
