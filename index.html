@@ -10432,7 +10432,7 @@ Error message and password prompt
 <div created="20201230023808396" modified="20210908090245378" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20201228150048917" modified="20210909075918387" title="$:/state/sidebar">
+<div created="20201228150048917" modified="20210909084248784" title="$:/state/sidebar">
 <pre>no</pre>
 </div>
 <div created="20210909023547312" modified="20210909023605584" title="$:/state/tab--1963855381">
@@ -11847,7 +11847,7 @@ Note: breakpoint 1 also set at pc 0x507490.
 Breakpoint 2 at 0x507490: file src/libavfilter/graphparser.c, line 263.
 ```</pre>
 </div>
-<div created="20210908090228428" modified="20210909084237352" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
+<div created="20210908090228428" modified="20210909084437176" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
 <pre>!Symptom
 
 &lt;p&gt;flv muxer report error &quot;DTS Invalid&quot; and caused the program shutdown the connection 
@@ -11868,7 +11868,7 @@ av_interleave_write_frame() failed and it caused av_write_trailer() to be called
 
 : By reading the ffmpeg code, I didn't spend much time to get fully understand the related logic, just got some sense about that ~AVFormateContext::max_interleve_delta cause the problem, it made &quot;forcing output&quot; occured in mux.c, and that would cause flv_write_packet() return EINVAL. 
 
-I searched max_interleave_delta in the offical code, to look for the way to set this variable propurly;  and I saw that there is nowhere this variable be set, it may be better not to change this variable manually.
+I searched max_interleave_delta in the offical code, to look for the way to set this variable propurly;  but I saw that there is nowhere this variable be set, it may be better not to change this variable manually.
 
 -----------------------------
 
