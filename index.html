@@ -11847,7 +11847,7 @@ Note: breakpoint 1 also set at pc 0x507490.
 Breakpoint 2 at 0x507490: file src/libavfilter/graphparser.c, line 263.
 ```</pre>
 </div>
-<div created="20210908090228428" modified="20210909084509552" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
+<div created="20210908090228428" modified="20210909091032583" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
 <pre>!Symptom
 
 &lt;p&gt;flv muxer report error &quot;DTS Invalid&quot; and caused the program shutdown the connection 
@@ -11869,6 +11869,32 @@ av_interleave_write_frame() failed and it caused av_write_trailer() to be called
 By reading the ffmpeg code, I didn't spend much time to get fully understand the related logic, just got some sense about that ~AVFormateContext::max_interleve_delta cause the problem, it made &quot;forcing output&quot; occured in mux.c, and that would cause flv_write_packet() return EINVAL. 
 
 I searched max_interleave_delta in the offical code, to look for the way to set this variable propurly;  but I saw that there is nowhere this variable be set, it may be better not to change this variable manually.
+
+When I removed max_interleave_delta setting codes, another issue emerged. the program would get stuck occasionally.
+
+What I do to find out the stuck point are:
+
+locate the stuck point with gdb
+
+```
+/*
+ * In the program code, I print each thread's id with the following code
+ */
+ostringstream ss;
+ss &lt;&lt; this_thread::get_id();
+size_t tid = stoll(ss.str());
+snprintf(tag, sizeof(tag), &quot;[tid @ 0x%lx]&quot;, me);
+
+/*
+ * It probably occured in the encoding &amp; output thread, 
+ */
+
+
+
+```
+
+
+ 
 
 -----------------------------
 
