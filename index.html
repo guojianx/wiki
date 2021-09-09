@@ -11847,7 +11847,7 @@ Note: breakpoint 1 also set at pc 0x507490.
 Breakpoint 2 at 0x507490: file src/libavfilter/graphparser.c, line 263.
 ```</pre>
 </div>
-<div created="20210908090228428" modified="20210909101225711" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
+<div created="20210908090228428" modified="20210909101357920" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
 <pre>!Symptom
 
 &lt;p&gt;flv muxer report error &quot;DTS Invalid&quot; and caused the program shutdown the connection 
@@ -11881,7 +11881,7 @@ ss &lt;&lt; this_thread::get_id();
 size_t tid = stoll(ss.str());
 snprintf(tag, sizeof(tag), &quot;[tid @ 0x%lx]&quot;, me);
 ```
-: To find out the suspicious thread: the stuck point probably is in the encode&amp;output thread. there's hundrens threads within the process, record the threads info in a file, and searching the file with vim will much easier to find the thread number for gdb-thread command use.
+: To find out the suspicious thread: the stuck point probably is in the encode&amp;output thread. there's hundreds threads within the process, record the threads info in a file, and searching the file with vim will much easier to find the thread number for gdb-thread command use.
 
 ```
 # gdb -p &lt;pid&gt;
