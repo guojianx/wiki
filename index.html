@@ -10432,7 +10432,7 @@ Error message and password prompt
 <div created="20201230023808396" modified="20210908090245378" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20201228150048917" modified="20210909034537755" title="$:/state/sidebar">
+<div created="20201228150048917" modified="20210909065812121" title="$:/state/sidebar">
 <pre>no</pre>
 </div>
 <div created="20210909023547312" modified="20210909023605584" title="$:/state/tab--1963855381">
@@ -10501,7 +10501,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210909034439618" list="[[8th September 2021]]" modified="20210909034510482" title="$:/StoryList">
+<div created="20210909065806263" list="[[8th September 2021]]" modified="20210909065806263" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11847,7 +11847,7 @@ Note: breakpoint 1 also set at pc 0x507490.
 Breakpoint 2 at 0x507490: file src/libavfilter/graphparser.c, line 263.
 ```</pre>
 </div>
-<div created="20210908090228428" modified="20210909041800824" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
+<div created="20210908090228428" modified="20210909065944385" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
 <pre>!Symptom
 
 &lt;p&gt;flv muxer report error &quot;DTS Invalid&quot; and caused the program shutdown the connection 
@@ -11869,6 +11869,48 @@ av_interleave_write_frame() failed will cause av_write_trailer() to be called to
 :&lt;p&gt;max_interleave_delta: Using gdb is very easy to find out that ~AVFormatContext.max_interleave_delta&lt;/p&gt;
 
 :&lt;p&gt;I searched max_interleave_delta in the offical code, to look for the way to set this variable correctly;  and find out there is nowhere this variable be set, it may be better not to change this variable manually.&lt;/p&gt;
+
+-----------------------------
+
+!ffmpeg compile command:
+```
+../configure --host-ldflags=-ldl --enable-gpl --enable-static --disable-shared --extra-ldflags=-ldl --enable-libx264 --enable-debug=3 --disable-stripping --prefix=/usr
+
+
+# git diff libavformat/rtmpproto.c
+diff --git a/libavformat/rtmpproto.c b/libavformat/rtmpproto.c
+index d9741bc..0da1398 100644
+--- a/libavformat/rtmpproto.c
++++ b/libavformat/rtmpproto.c
+@@ -123,6 +123,7 @@ typedef struct RTMPContext {
+     int           listen_timeout;             ///&lt; listen timeout to wait for new connections
+     int           nb_streamid;                ///&lt; The next stream id to return on createStream calls
+     double        duration;                   ///&lt; Duration of the stream in seconds as returned by the server (only valid if non-zer
++    int           timeout;                    ///&lt; timeout for tcp read/write operations
+     char          username[50];
+     char          password[50];
+     char          auth_params[500];
+@@ -2655,8 +2656,9 @@ static int rtmp_open(URLContext *s, const char *uri, int flags, AVDictionary **o
+             ff_url_join(buf, sizeof(buf), &quot;tcp&quot;, NULL, hostname, port,
+                         &quot;?listen&amp;listen_timeout=%d&quot;,
+                         rt-&gt;listen_timeout * 1000);
+-        else
+-            ff_url_join(buf, sizeof(buf), &quot;tcp&quot;, NULL, hostname, port, NULL);
++        else {
++            ff_url_join(buf, sizeof(buf), &quot;tcp&quot;, NULL, hostname, port, &quot;?timeout=%d&quot;, rt-&gt;timeout);
++        }
+     }
+
+ reconnect:
+@@ -3115,7 +3117,7 @@ static const AVOption rtmp_options[] = {
+     {&quot;rtmp_tcurl&quot;, &quot;URL of the target stream. Defaults to proto://host[:port]/app.&quot;, OFFSET(tcurl), AV_OPT_TYPE_STRING, {.str = NULL
+     {&quot;rtmp_listen&quot;, &quot;Listen for incoming rtmp connections&quot;, OFFSET(listen), AV_OPT_TYPE_INT, {.i64 = 0}, INT_MIN, INT_MAX, DEC, &quot;rtmp
+     {&quot;listen&quot;,      &quot;Listen for incoming rtmp connections&quot;, OFFSET(listen), AV_OPT_TYPE_INT, {.i64 = 0}, INT_MIN, INT_MAX, DEC, &quot;rtmp
+-    {&quot;timeout&quot;, &quot;Maximum timeout (in seconds) to wait for incoming connections. -1 is infinite. Implies -rtmp_listen 1&quot;,  OFFSET(list
++    {&quot;timeout&quot;, &quot;set timeout (in microseconds) of socket I/O operations&quot;,  OFFSET(timeout), AV_OPT_TYPE_INT, {.i64 = 0}, 0, INT_MAX,
+     { NULL },
+ };
+```
 
 
 
