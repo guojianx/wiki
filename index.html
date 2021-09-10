@@ -11847,7 +11847,7 @@ Note: breakpoint 1 also set at pc 0x507490.
 Breakpoint 2 at 0x507490: file src/libavfilter/graphparser.c, line 263.
 ```</pre>
 </div>
-<div created="20210908090228428" modified="20210910023529629" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
+<div created="20210908090228428" modified="20210910031355873" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
 <pre>!Symptom
 
 &lt;p&gt;flv muxer report error &quot;DTS Invalid&quot; and caused the program shutdown the connection 
@@ -11862,7 +11862,7 @@ GDB, tcpdump, netstat, poll(), tcp half-closed.
 ;To find out ~AVFormateContext::max_interleve_delta and its side effects:
 av_interleave_write_frame() failed and it caused av_write_trailer() to be called to shut the connection between the server and the daobo down. Short before disconnecting, I observed the log &quot;forcing output&quot;, then flv muxer print invalid dts, it directly caused av_interleaved_write_frame() returned failure.
 
-&lt;p&gt;There were two approaches I could take:&lt;/p&gt;
+There were two approaches I could take:
 
 # Read the code of ffmpeg and figure out what made the problem happen.
 # Compare with the official ffmpeg tool, find out the difference between daobo and ffmpeg tool.
@@ -11894,7 +11894,16 @@ snprintf(tag, sizeof(tag), &quot;[tid @ 0x%lx]&quot;, tid);
 :In the thread, I found out poll() the tcp socket always return 0, and no `revent` occurs, that cause ff_network_wait_fd_timeout() hang in an inifinity loop.
 
 ;To find out what happened on the tcp connection:
-: by reading the Manual, poll() returned 0, means the tcp socket was not ready to write, and the `revent` field was zero. 
+: by reading the Manual, poll() returned 0, means the tcp socket was not ready to write, and the `revent` field was zero, it indicated that no error occured. 
+
+:by using tcpdump and netstat to get some clue
+```
+$ netstat -antp
+   -a, --all
+       Show  both  listening  and  non-listening (for TCP this means established connections) sockets. 
+   --numeric , -n
+       Show numerical addresses instead of trying to determine symbolic host, port or user names.
+```
  
 
 -----------------------------
