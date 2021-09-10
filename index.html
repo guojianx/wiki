@@ -11847,7 +11847,7 @@ Note: breakpoint 1 also set at pc 0x507490.
 Breakpoint 2 at 0x507490: file src/libavfilter/graphparser.c, line 263.
 ```</pre>
 </div>
-<div created="20210908090228428" modified="20210910080901475" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
+<div created="20210908090228428" modified="20210910081621619" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
 <pre>!Symptom
 
 &lt;p&gt;flv muxer report error &quot;DTS Invalid&quot; and caused the program shutdown the connection 
@@ -11927,7 +11927,7 @@ tcp        0      0 192.168.1.32:53638      192.168.0.61:1936       ESTABLISHED 
               The remote end has shut down, waiting for the socket to close.
 ```
 
-:found out that about 3 seconds after connecting to the Live Streaming Server, the server send a FIN to the daobo. 
+:found out that about 3 seconds after connecting to the Live Streaming Server, the server send a FIN to the daobo. the server end has shut down the connection but the client end is still waiting the socket to be writable by calling poll().
 
 ```
 # tcpdump -i eth0 -nn 'tcp[tcpflags] &amp; (tcp-syn|tcp-fin) != 0 and port 1935'
@@ -11940,6 +11940,8 @@ tcp        0      0 192.168.1.32:53638      192.168.0.61:1936       ESTABLISHED 
  *     -nn    Don't convert protocol and port numbers etc. to names either.
  */
 ```
+
+;To figure out a solution:
 
 -----------------------------
 
