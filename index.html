@@ -11847,7 +11847,7 @@ Note: breakpoint 1 also set at pc 0x507490.
 Breakpoint 2 at 0x507490: file src/libavfilter/graphparser.c, line 263.
 ```</pre>
 </div>
-<div created="20210908090228428" modified="20210910064539379" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
+<div created="20210908090228428" modified="20210910080833219" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
 <pre>!Symptom
 
 &lt;p&gt;flv muxer report error &quot;DTS Invalid&quot; and caused the program shutdown the connection 
@@ -11921,10 +11921,24 @@ tcp        1      0 192.168.1.32:54998      192.168.0.181:3306      CLOSE_WAIT  
 tcp        0    157 192.168.1.32:39180      221.196.251.229:1935    CLOSE_WAIT  19694/daobo
 tcp        0      0 192.168.1.32:53638      192.168.0.61:1936       ESTABLISHED 19694/daobo
 ```
-: According to the netstat outputs, I saw the connection to the Live Streaming Server was CLOSE_WAIT, see the following explanation.
+: According to the netstat outputs, I saw the connection to the Live Streaming Server was CLOSE_WAIT, see the following explanation. That is the reason why poll() return 0 without any returned event (revent == 0).
 ```
         CLOSE_WAIT
               The remote end has shut down, waiting for the socket to close.
+```
+
+:found out that about 3 seconds after connecting to the Live Streaming Server, the server send a FIN to the daobo. 
+
+```
+# tcpdump -i eth0 -nn 'tcp[tcpflags] &amp; (tcp-syn|tcp-fin) != 0 and port 1935'
+15:59:51.594637 IP 192.168.1.32.40004 &gt; 192.168.0.61.1935: Flags [S], seq 1223734074, ...
+15:59:51.596332 IP 192.168.0.61.1935 &gt; 192.168.1.32.40004: Flags [S.], seq 1049677996, ...
+15:59:54.921741 IP 192.168.0.61.1935 &gt; 192.168.1.32.40004: Flags [F.], seq 3593, ack 3810...
+
+/*
+  *     -n     Don't convert host addresses to names.  This can be used to avoid DNS lookups.
+  *     -nn    Don't convert protocol and port numbers etc. to names either.
+  */
 ```
 
 -----------------------------
