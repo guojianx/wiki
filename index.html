@@ -10429,10 +10429,10 @@ Error message and password prompt
 <div created="20210909023053209" modified="20210909023053209" title="$:/state/importpreviewtype">
 <pre>$:/core/ui/ImportPreviews/Fields</pre>
 </div>
-<div created="20201230023808396" modified="20210908090245378" title="$:/state/showeditpreview">
+<div created="20201230023808396" modified="20210910063625658" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20201228150048917" modified="20210910014907496" title="$:/state/sidebar">
+<div created="20201228150048917" modified="20210910063534954" title="$:/state/sidebar">
 <pre>no</pre>
 </div>
 <div created="20210909023547312" modified="20210909023605584" title="$:/state/tab--1963855381">
@@ -10501,7 +10501,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210910014804688" list="[[8th September 2021]]" modified="20210910014804688" title="$:/StoryList">
+<div created="20210910063533242" list="[[8th September 2021]]" modified="20210910063533242" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11847,7 +11847,7 @@ Note: breakpoint 1 also set at pc 0x507490.
 Breakpoint 2 at 0x507490: file src/libavfilter/graphparser.c, line 263.
 ```</pre>
 </div>
-<div created="20210908090228428" modified="20210910032009337" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
+<div created="20210908090228428" modified="20210910063803603" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
 <pre>!Symptom
 
 &lt;p&gt;flv muxer report error &quot;DTS Invalid&quot; and caused the program shutdown the connection 
@@ -11909,6 +11909,18 @@ $ netstat -antp
        Show the PID and name of the program to which each socket belongs.
 ```
 : the command I used was `watch -n 0.5 &quot;netstat -antp | grep daobo&quot;`, 'watch' is better then 'netstat -c', which is easier to read.
+
+```
+# watch -n 0.5 &quot;netstat -anpt | grep daobo&quot;
+Every 0.5s: netstat -anpt | grep daobo                                                                        Fri Sep 10 14:36:32 2021
+
+tcp     6507      0 192.168.1.32:48974      182.138.102.134:1935    ESTABLISHED 19694/daobo
+tcp        0      0 192.168.1.32:46650      192.168.0.61:1936       ESTABLISHED 19694/daobo
+tcp        0      0 192.168.1.32:44454      120.52.72.9:1935        ESTABLISHED 19694/daobo
+tcp        1      0 192.168.1.32:54998      192.168.0.181:3306      CLOSE_WAIT  19694/daobo
+tcp        0    157 192.168.1.32:39180      221.196.251.229:1935    CLOSE_WAIT  19694/daobo
+tcp        0      0 192.168.1.32:53638      192.168.0.61:1936       ESTABLISHED 19694/daobo
+```
  
 
 -----------------------------
