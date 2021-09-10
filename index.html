@@ -11847,7 +11847,7 @@ Note: breakpoint 1 also set at pc 0x507490.
 Breakpoint 2 at 0x507490: file src/libavfilter/graphparser.c, line 263.
 ```</pre>
 </div>
-<div created="20210908090228428" modified="20210910020558624" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
+<div created="20210908090228428" modified="20210910023133254" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
 <pre>!Symptom
 
 &lt;p&gt;flv muxer report error &quot;DTS Invalid&quot; and caused the program shutdown the connection 
@@ -11891,6 +11891,9 @@ snprintf(tag, sizeof(tag), &quot;[tid @ 0x%lx]&quot;, tid);
 &gt; thread &lt;num&gt;
 ```
 :In the thread, I found out poll() the tcp socket always return 0, and no `revent` occurs, that cause ff_network_wait_fd_timeout() hang in an inifinity loop.
+
+;To find out what happened on the tcp connection:
+: by reading the Manual, poll() returned 0, means the tcp socket was not ready to write, and the `revent` field was zero. 
  
 
 -----------------------------
