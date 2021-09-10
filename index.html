@@ -11847,7 +11847,7 @@ Note: breakpoint 1 also set at pc 0x507490.
 Breakpoint 2 at 0x507490: file src/libavfilter/graphparser.c, line 263.
 ```</pre>
 </div>
-<div created="20210908090228428" modified="20210910014918329" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
+<div created="20210908090228428" modified="20210910014956585" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
 <pre>!Symptom
 
 &lt;p&gt;flv muxer report error &quot;DTS Invalid&quot; and caused the program shutdown the connection 
@@ -11859,7 +11859,7 @@ GDB, tcpdump, netstat, poll(), tcp half-closed.
 
 !Process
 
-av_interleave_write_frame() failed and it caused av_write_trailer() to be called to shut the connection between the server and the daobo down. Short before disconnecting, I observed the log &quot;forcing output&quot;, then flv muxer print invalid dts, it directly cause av_interleaved_write_frame() returned failure.
+av_interleave_write_frame() failed and it caused av_write_trailer() to be called to shut the connection between the server and the daobo down. Short before disconnecting, I observed the log &quot;forcing output&quot;, then flv muxer print invalid dts, it directly caused av_interleaved_write_frame() returned failure.
 
 &lt;p&gt;There were two approaches I could take:&lt;/p&gt;
 
