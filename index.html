@@ -10930,10 +10930,10 @@ int main()
 # from time to time - 有时、时常
 # as a side note - 注意</pre>
 </div>
-<div created="20210913072620011" modified="20210913074052173" tags="[[Sisyphus's Rock]] Journal" title="13th September 2021">
+<div created="20210913072620011" modified="20210913074321056" tags="[[Sisyphus's Rock]] Journal" title="13th September 2021">
 <pre># 将取值范围为正整数的宏块转换为0为中心-128到的127的矩阵；
-# DCT变换，得到频域的系数矩阵；
-# 量化，将高频分量置成0；
+# DCT变换，得到频域的系数矩阵，直流分量在左上交，高频交流分量位于右下角；
+# 量化，将高频分量置成0；右下角的高频分量大多被置了0；
 # zigzag编码，去掉多余的0。
 
 https://en.wikipedia.org/wiki/JPEG#Discrete_cosine_transform</pre>
