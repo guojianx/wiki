@@ -10962,7 +10962,7 @@ Five-and-a-half hours’ drive north-west from Solar Star, at a national laborat
 # specialize - 专门从事
 </pre>
 </div>
-<div created="20210914030137852" modified="20210914030714579" tags="[[Sisyphus's Rock]] Journal" title="14th September 2021">
+<div created="20210914030137852" modified="20210914031806618" tags="[[Sisyphus's Rock]] Journal" title="14th September 2021">
 <pre>!ffmpeg configure fail when test whether if ~OpenSSL exist:
 
 ```
@@ -10984,7 +10984,24 @@ gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_POSIX_C_SOURC
 ERROR: openssl not found
 ```
 
-</pre>
+;Search with yum to find the development package, if not find a correct version then go to build from the official source code, git clone it and switch the corresponding commint:
+```
+# yum search openssl
+......
+openssl-devel.i686 : Files for development of applications which will use OpenSSL
+openssl-devel.x86_64 : Files for development of applications which will use OpenSSL
+.....
+
+# repoquery -l openssl-devel | tee openssl.list | grep &quot;openssl/ssl.h&quot;
+.....
+/usr/include/openssl/ssl.h
+
+#  grep SSL_library_init /usr/include/openssl/ssl.h
+    # define OpenSSL_add_ssl_algorithms()    SSL_library_init()
+    # define SSLeay_add_ssl_algorithms()     SSL_library_init()
+    int SSL_library_init(void);
+
+```</pre>
 </div>
 <div created="20210215002553631" modified="20210218012808539" tags="英语学习 Journal [[February 2021]]" title="15th February 2021">
 <pre>Finally, formal definitions
