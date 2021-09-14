@@ -10455,8 +10455,8 @@ Error message and password prompt
 <div created="20201230023808396" modified="20210910063625658" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20201228150048917" modified="20210914091126067" title="$:/state/sidebar">
-<pre>yes</pre>
+<div created="20201228150048917" modified="20210914101145292" title="$:/state/sidebar">
+<pre>no</pre>
 </div>
 <div created="20210909023547312" modified="20210909023605584" title="$:/state/tab--1963855381">
 <pre>$:/themes/tiddlywiki/vanilla/themetweaks</pre>
@@ -10527,7 +10527,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210914064351063" list="XDraft [[14th September 2021]] [[Sisyphus's Rock]]" modified="20210914091128666" title="$:/StoryList">
+<div created="20210914101133397" list="[[14th September 2021]]" modified="20210914101133397" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -10962,7 +10962,7 @@ Five-and-a-half hours’ drive north-west from Solar Star, at a national laborat
 # specialize - 专门从事
 </pre>
 </div>
-<div created="20210914030137852" modified="20210914071823798" tags="[[Sisyphus's Rock]] Journal" title="14th September 2021">
+<div created="20210914030137852" modified="20210914101208534" tags="[[Sisyphus's Rock]] Journal" title="14th September 2021">
 <pre>!ffmpeg configure fail when test whether if ~OpenSSL exist:
 
 ```
@@ -11008,6 +11008,69 @@ openssl-devel.x86_64 : Files for development of applications which will use Open
 #../configure --enable-gpl --enable-static --disable-shared --extra-ldflags=-ldl --enable-libx264 --enable-debug=3 --disable-stripping --prefix=/usr --enable-openssl --enable-nonfree
 
 # ./ffprobe -show_frames https://livepgc.chinamcache.com/pgc/4cc59971fd423ae81ba210b4b250b095.m3u8?auth_key=1631948282-0-0-cb4ee9b9328eb5009cf3a0e1274e1a7d
+```
+
+------------------------------------------------------------
+```
+# git diff
+diff --git a/TaskBroadcast.cpp b/TaskBroadcast.cpp
+index bd2acbb..ee3c323 100644
+--- a/TaskBroadcast.cpp
++++ b/TaskBroadcast.cpp
+@@ -6,6 +6,10 @@
+ #include &lt;pcrecpp.h&gt;
+ #include &lt;unordered_map&gt;
+
++extern &quot;C&quot; {
++#include &lt;libavutil/avstring.h&gt;
++};
++
+ #define gettid() syscall(__NR_gettid)
+ #define SAMPLE_RATE 44100
+ using namespace std;
+@@ -1533,12 +1537,19 @@ static int Interrupt_CB(void* p) {
+  */
+ bool TaskBroadcast::isNetStreamUrl(const std::string&amp; url)
+ {
+-       pcrecpp::RE oPattern1(&quot;^rtmp://&quot;),oPattern2(&quot;^rtsp://&quot;),oPattern3(&quot;^https*://.+m3u8$&quot;), oPattern5(&quot;^https*://&quot;),oPattern6(&quot;^ft
++    char proto[10] = &quot;&quot;, path[4096] = &quot;&quot;;
++    char *p = NULL;
++
++    av_url_split(proto, sizeof(proto), NULL, 0, NULL, 0, NULL, path, sizeof(path), url.c_str());
++    if (p = strchr(path, '?'))
++        *p = '\0';
++
+     DaoboLog(this, &quot;Check if %s is a live stream.\n&quot;, url.c_str());
+-       if (oPattern1.PartialMatch(url) || oPattern2.PartialMatch(url) || \
+-            oPattern3.PartialMatch(url) || oPattern8.PartialMatch(url)) {
++    DaoboLog(this, &quot;Check live stream: proto = %s, path = %s, av_match_ext(path, \'m3u8\') = %d, av_match_name(proto, \&quot;https,http,rt
++    if ( av_match_name(proto, &quot;rtmp,rtsp&quot;) ||
++        (av_match_name(proto, &quot;https,http&quot;) &amp;&amp; av_match_ext(path, &quot;m3u8&quot;))) {
+                return true;
+-       }
++    }
+
+        return false;
+ }
+diff --git a/makefile b/makefile
+index 54e412d..be1e36c 100644
+--- a/makefile
++++ b/makefile
+@@ -9,12 +9,7 @@ $(PROJECT): daobo.o\
+                        FilterMgr.o FFmpegEncoder.o NetStreamListen.o VMix.o AMix.o StreamMix.o\
+                        Broadcast.o JsonParse.o TaskBroadcast.o\
+                        ResourceCreater.o JsonConf.o Serial.o TaskApply.o socketlog.o DaoboLog.o FrameQueue.o PthreadTools.o
+-                       $(LINK) -o $(PROJECT) $(LIBS)  \
+-       daobo.o Decoder.o DecoderNet.o DecoderFile.o DecoderPicture.o PictureStream.o filter.o  AspectRatio.o \
+-       logoFilter.o DrawText.o split.o AudioResample.o Mosaic.o TimeMark.o TaskBroadcast.o FFmpegEncoder.o Broadcast.o \
+-       JsonParse.o ResourceCreater.o FilterMgr.o NetStreamListen.o JsonConf.o VMix.o AMix.o StreamMix.o Serial.o  \
+-       TaskApply.o socketlog.o DaoboLog.o FrameQueue.o PthreadTools.o \
+-       -lavformat -lavfilter -lpostproc -lavcodec -lavutil -lswscale -lswresample -luuid -lcurl -lpcrecpp -pthread -lm -lx264 -pthrea
++                       $(LINK) -o $(PROJECT) $(LIBS) daobo.o Decoder.o DecoderNet.o DecoderFile.o DecoderPicture.o PictureStream.o fi
+
+ daobo.o:daobo.cpp
+        $(CC) -c $(CFLAGS) $(INCLS) -o daobo.o daobo.cpp
+(END)
 ```</pre>
 </div>
 <div created="20210215002553631" modified="20210218012808539" tags="英语学习 Journal [[February 2021]]" title="15th February 2021">
