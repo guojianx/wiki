@@ -11104,7 +11104,7 @@ Note that even the exact runtime function f doesn’t give an exact answer to th
 #* the recipe specify the size of eggs to be used. - 菜谱明确规定了所用鸡蛋的大小。
 </pre>
 </div>
-<div created="20210915023305700" modified="20210915025043316" tags="[[Sisyphus's Rock]] Journal" title="15th September 2021">
+<div created="20210915023305700" modified="20210915033007512" tags="[[Sisyphus's Rock]] Journal" title="15th September 2021">
 <pre>!Stream got stuck or freezing for a while when switch to/from Emergency Stream
 ;Possible Reasons:
 #timestamps has gap between the two stream;
@@ -11118,6 +11118,22 @@ Note that even the exact runtime function f doesn’t give an exact answer to th
  */
 
 # ffprobe -show_entries frame=pkt_pts_time,media_type -of compact | tee stream.info
+
+#0  compact_print_str (wctx=0x25c6480, key=0x157bd94 &quot;pkt_pts_time&quot;, value=0x7fffffffd090 &quot;30810.990667&quot;)
+    at src/fftools/ffprobe.c:1165
+#1  0x00000000004975c8 in writer_print_string (flags=&lt;optimized out&gt;, val=&lt;optimized out&gt;, key=&lt;optimized out&gt;,
+    wctx=&lt;optimized out&gt;) at src/fftools/ffprobe.c:768
+#2  writer_print_time (wctx=wctx@entry=0x25c6480, key=key@entry=0x157bd94 &quot;pkt_pts_time&quot;, ts=&lt;optimized out&gt;,
+    time_base=time_base@entry=0x2644258, is_duration=0) at src/fftools/ffprobe.c:792
+#3  0x0000000000498e97 in show_frame (w=w@entry=0x25c6480, frame=frame@entry=0x279af40, stream=0x2644240,
+    fmt_ctx=fmt_ctx@entry=0x25c8ec0) at src/fftools/ffprobe.c:2146
+#4  0x000000000049aedb in process_frame (packet_new=&lt;synthetic pointer&gt;, pkt=0x7fffffffdab0, frame=0x279af40,
+    ifile=&lt;optimized out&gt;, w=0x25c6480) at src/fftools/ffprobe.c:2330
+#5  read_interval_packets (w=w@entry=0x25c6480, interval=interval@entry=0x7fffffffe050, cur_ts=cur_ts@entry=0x7fffffffe028,
+    ifile=&lt;optimized out&gt;, ifile=&lt;optimized out&gt;) at src/fftools/ffprobe.c:2443
+#6  0x000000000048cf2d in read_packets (ifile=0x7fffffffe030, w=0x25c6480) at src/fftools/ffprobe.c:2473
+#7  probe_file (print_filename=&lt;optimized out&gt;, filename=&lt;optimized out&gt;, wctx=0x25c6480) at src/fftools/ffprobe.c:3038
+#8  main (argc=&lt;optimized out&gt;, argv=&lt;optimized out&gt;) at src/fftools/ffprobe.c:3720
 
 ```</pre>
 </div>
