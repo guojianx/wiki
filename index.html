@@ -267,6 +267,8 @@ Error message and password prompt
 
 <li>15th February 2021</li>
 
+<li>15th September 2021</li>
+
 <li>16th August 2021</li>
 
 <li>16th February 2021</li>
@@ -10455,7 +10457,7 @@ Error message and password prompt
 <div created="20201230023808396" modified="20210910063625658" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20201228150048917" modified="20210915023043389" title="$:/state/sidebar">
+<div created="20201228150048917" modified="20210915023308939" title="$:/state/sidebar">
 <pre>no</pre>
 </div>
 <div created="20210909023547312" modified="20210909023605584" title="$:/state/tab--1963855381">
@@ -10527,7 +10529,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210915022929565" list="[[14th September 2021]] [[13th September 2021]] cmake XDraft MindMap" modified="20210915023026477" title="$:/StoryList">
+<div created="20210915022929565" list="[[15th September 2021]]" modified="20210915023301507" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11101,6 +11103,23 @@ Note that even the exact runtime function f doesn’t give an exact answer to th
 #* the agency failed to specify that the workers were not their employees. 这家代理没明确说明这些工人不是它的雇员。
 #* the recipe specify the size of eggs to be used. - 菜谱明确规定了所用鸡蛋的大小。
 </pre>
+</div>
+<div created="20210915023305700" modified="20210915025043316" tags="[[Sisyphus's Rock]] Journal" title="15th September 2021">
+<pre>!Stream got stuck or freezing for a while when switch to/from Emergency Stream
+;Possible Reasons:
+#timestamps has gap between the two stream;
+#Live Streaming Server disconnect;
+#There were unexpected delay on av_interleaved_write_frame().
+
+;To determine whether or not those reason cause the problem
+```
+/* Add time string in the ffprobe's log. 
+ * [2021/09/15-10:38:14] xxx
+ */
+
+# ffprobe -show_entries frame=pkt_pts_time,media_type -of compact | tee stream.info
+
+```</pre>
 </div>
 <div created="20210816040545956" modified="20210816145229065" tags="[[Sisyphus's Rock]] Journal" title="16th August 2021">
 <pre>https://www.valgrind.org/docs/manual/manual-core-adv.html
