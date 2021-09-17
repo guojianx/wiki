@@ -10465,8 +10465,8 @@ Error message and password prompt
 <div created="20201230023808396" modified="20210910063625658" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20201228150048917" modified="20210917033638653" title="$:/state/sidebar">
-<pre>yes</pre>
+<div created="20201228150048917" modified="20210917065332556" title="$:/state/sidebar">
+<pre>no</pre>
 </div>
 <div created="20210909023547312" modified="20210909023605584" title="$:/state/tab--1963855381">
 <pre>$:/themes/tiddlywiki/vanilla/themetweaks</pre>
@@ -10537,7 +10537,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210917034129197" list="[[17th September 2021 -- Switching to Emergency Stream, video jerky]] GettingStarted" modified="20210917034141117" title="$:/StoryList">
+<div created="20210917065323948" list="[[17th September 2021 -- Switching to Emergency Stream, video jerky]]" modified="20210917065323948" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11318,7 +11318,7 @@ Must be set after all options are set but before all use.
 ** Time base for the incoming frames
 </pre>
 </div>
-<div created="20210917024808699" modified="20210917034146862" tags="[[Sisyphus's Rock]] Journal" title="17th September 2021 -- Switching to Emergency Stream, video jerky">
+<div created="20210917024808699" modified="20210917065907469" tags="[[Sisyphus's Rock]] Journal" title="17th September 2021 -- Switching to Emergency Stream, video jerky">
 <pre>;Video Jerky due to there is one second within which ffprobe receive audio only, see below:
 
 ```
@@ -11395,8 +11395,10 @@ Must be set after all options are set but before all use.
 [2021-09-17 10:46:04]frame|media_type=video|key_frame=0|pkt_pts_time=101.576000
 [2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.595000
 ```
+; The root cause see the figure below, the solution is picking those packet which's pts smaller than the master clock and put them to the muxer's interleave queue when purge the packetq.
+[img[mindmap-Page-5.drawio.svg]]
 
-[img[mindmap-Page-5.drawio.svg]]</pre>
+</pre>
 </div>
 <div created="20210818023602314" modified="20210818023656722" tags="[[Sisyphus's Rock]] Journal" title="18th August 2021">
 <pre>```
