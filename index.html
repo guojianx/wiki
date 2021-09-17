@@ -11318,7 +11318,7 @@ Must be set after all options are set but before all use.
 ** Time base for the incoming frames
 </pre>
 </div>
-<div created="20210917024808699" modified="20210917070601941" tags="[[Sisyphus's Rock]] Journal" title="17th September 2021 -- Switching to Emergency Stream, video jerky">
+<div created="20210917024808699" modified="20210917070626401" tags="[[Sisyphus's Rock]] Journal" title="17th September 2021 -- Switching to Emergency Stream, video jerky">
 <pre>;Video Jerky due to there is one second within which ffprobe receive audio only, see below:
 
 ```
@@ -11398,7 +11398,7 @@ Must be set after all options are set but before all use.
 ; The root cause see the figure below, the solution is picking those packet which's pts smaller than the master clock and put them to the muxer's interleave queue when purge the packetq.
 [img[mindmap-Page-5.drawio.svg]]
 
-# Refactor ~WritePacket(), encapsulate interleave writing and reconnecting operations into a new function WrtePacketInternal();
+# Refactor ~WritePacket(), encapsulate interleave writing and reconnecting operations into a new function ~WritePacketInternal();
 # Turn ~PacketClear() into ~PurgeAndWritePacket()
 
 </pre>
