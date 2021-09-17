@@ -363,6 +363,8 @@ Error message and password prompt
 
 <li>done</li>
 
+<li>Draft of '17th September 2021 -- Switching to Emergency Stream, video jerky'</li>
+
 <li>English</li>
 
 <li>EnglishRead - I have a dream (.by 马丁路德金)</li>
@@ -10537,7 +10539,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210917033648831" list="$:/Import [[17th September 2021 -- Switching to Emergency Stream, video jerky]]" modified="20210917033648831" title="$:/StoryList">
+<div created="20210917033648831" list="$:/Import [[Draft of '17th September 2021 -- Switching to Emergency Stream, video jerky']]" modified="20210917033648831" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -12464,6 +12466,86 @@ https://trac.ffmpeg.org/wiki/FilteringGuide</pre>
 </div>
 <div color="#2ef209" created="20201228194702570" modified="20201228194702570" title="done">
 <pre></pre>
+</div>
+<div created="20210917024808699" draft.of="17th September 2021 -- Switching to Emergency Stream, video jerky" draft.title="17th September 2021 -- Switching to Emergency Stream, video jerky" modified="20210917033843375" tags="[[Sisyphus's Rock]] Journal" title="Draft of '17th September 2021 -- Switching to Emergency Stream, video jerky'">
+<pre>;Video Jerky due to there is one second within which ffprobe receive audio only, see below:
+
+```
+[2021-09-17 10:46:03]frame|media_type=video|key_frame=0|pkt_pts_time=100.096000
+[2021-09-17 10:46:03]frame|media_type=audio|key_frame=1|pkt_pts_time=100.109000
+[2021-09-17 10:46:03]frame|media_type=audio|key_frame=1|pkt_pts_time=100.132000
+[2021-09-17 10:46:03]frame|media_type=video|key_frame=0|pkt_pts_time=100.136000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.156000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.179000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.202000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.225000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.248000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.272000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.295000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.318000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.341000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.365000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.388000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.411000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.434000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.457000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.481000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.504000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.527000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.550000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.574000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.597000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.620000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.643000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.666000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.690000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.713000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.736000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.759000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.783000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.806000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.829000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.852000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.875000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.899000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.922000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.945000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.968000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=100.992000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.015000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.038000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.061000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.084000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.108000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.131000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.154000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.177000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.200000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.224000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.247000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.270000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.293000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.317000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.340000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.363000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.386000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.410000
+[2021-09-17 10:46:04]frame|media_type=video|key_frame=1|pkt_pts_time=101.416000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.433000
+[2021-09-17 10:46:04]frame|media_type=video|key_frame=0|pkt_pts_time=101.456000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.456000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.479000
+[2021-09-17 10:46:04]frame|media_type=video|key_frame=0|pkt_pts_time=101.496000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.503000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.526000
+[2021-09-17 10:46:04]frame|media_type=video|key_frame=0|pkt_pts_time=101.536000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.549000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.572000
+[2021-09-17 10:46:04]frame|media_type=video|key_frame=0|pkt_pts_time=101.576000
+[2021-09-17 10:46:04]frame|media_type=audio|key_frame=1|pkt_pts_time=101.595000
+```
+
+[img[mindmap-Page-5.drawio.svg]]</pre>
 </div>
 <div created="20210719063936869" modified="20210813091150920" tags="[[Sisyphus's Rock]]" title="English">
 <pre>''NAL (Network Abstraction Layer) units:''
