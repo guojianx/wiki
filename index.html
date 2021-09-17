@@ -10461,8 +10461,8 @@ Error message and password prompt
 <div created="20201230023808396" modified="20210910063625658" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20201228150048917" modified="20210916072843295" title="$:/state/sidebar">
-<pre>no</pre>
+<div created="20201228150048917" modified="20210917020024523" title="$:/state/sidebar">
+<pre>yes</pre>
 </div>
 <div created="20210909023547312" modified="20210909023605584" title="$:/state/tab--1963855381">
 <pre>$:/themes/tiddlywiki/vanilla/themetweaks</pre>
@@ -10533,7 +10533,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210916053231479" list="[[16th September 2021 -- Video Corrupt after Switch to Emergency Streams]]" modified="20210916072442135" title="$:/StoryList">
+<div created="20210917020037667" list="[[16th September 2021 -- Video Corrupt after Switch to Emergency Streams]]" modified="20210917020037667" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11246,12 +11246,14 @@ Almost as soon as biomedical researchers began working on vaccines against sars-
 #* fellow citizens - 同胞们
 # reluctance - 不情愿</pre>
 </div>
-<div created="20210916053303344" modified="20210916075256307" tags="[[Sisyphus's Rock]] Journal" title="16th September 2021 -- Video Corrupt after Switch to Emergency Streams">
+<div created="20210916053303344" modified="20210917022308382" tags="[[Sisyphus's Rock]] Journal" title="16th September 2021 -- Video Corrupt after Switch to Emergency Streams">
 <pre># ''[DONE]'' Move the operation of picking frames to behind of state changing;
 # ''[DONE]'' Remove the delay during switching emergency streams;
 # ''[FAILED]''Remove the legacy-purging  operations. --&gt; That will raise issues due to the packet queue for delay.
 
 ! Video Corrupt after Switch to Emergency Streams
+
+The root cause is checking dts and dropping those packet which contains fall back dts. Simply removing this approach could fix the problem, but the critical issues are ''why fall-back dts generated and where they came from. ''
 
 
 </pre>
