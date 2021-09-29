@@ -449,8 +449,6 @@ Error message and password prompt
 
 <li>done</li>
 
-<li>Draft of '&lt;PROBLEM&gt; Changing audio properties on the fly is not supported.'</li>
-
 <li>English</li>
 
 <li>EnglishRead - 丘吉尔的演讲</li>
@@ -571,8 +569,34 @@ Error message and password prompt
 <!--~~ Ordinary tiddlers ~~-->
 
 <div id="storeArea" style="display:none;">
-<div created="20210929034749152" modified="20210929035022197" tags="MindMap" title="&lt;PROBLEM&gt; Changing audio properties on the fly is not supported.">
-<pre></pre>
+<div created="20210929034749152" modified="20210929040535005" tags="MindMap" title="&lt;PROBLEM&gt; Changing audio properties on the fly is not supported.">
+<pre>
+```
+[2021/09/29-11:46:31][25241] [ain0 @ 0x7fc2a89fcb80] filter context - fmt: fltp r: 44100 layout: 3 ch: 2, incoming frame - fmt: fltp r: 48000 layout: 3 ch: 2 pts_time: 1746.46
+[2021/09/29-11:46:31][25241] [ain0 @ 0x7fc2a89fcb80] Changing audio frame properties on the fly is not supported.
+```
+
+[img[ChangingAudioOnTheFly.drawio.svg]]
+
+;According to the error log, I thought the root cause would be giving wrong filter's parameters  to either `abuffer` or `aformat`.
+: But after seeing the below logs and compare the log with the success ones, there's nothing different.
+
+```
+avfilter_graph_create_filter(abuffer: time_base=1/48000:sample_rate=48000:sample_fmt=fltp:channels=2:channel_layout=stereo)
+avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:sample_rates=44100,volume=volume=1.000000[aout0])
+avfilter_graph_create_filter(abuffer: time_base=1/48000:sample_rate=48000:sample_fmt=fltp:channels=6:channel_layout=5.1)
+avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:sample_rates=44100,volume=volume=1.000000[aout0])
+[ain0 @ 0x7f4738197c00] filter context - fmt: fltp r: 44100 layout: 3 ch: 2, incoming frame - fmt: fltp r: 48000 layout: 3 ch: 2 pts_time: 103148
+[ain0 @ 0x7f4738197c00] Changing audio frame properties on the fly is not supported.
+
+/* the success ones */
+avfilter_graph_parse_ptr([vin0]scale=900:720,pad=1280:720:190:0,format=pix_fmts=yuv420p[vout0])
+avfilter_graph_create_filter(abuffer: time_base=1/48000:sample_rate=48000:sample_fmt=fltp:channels=2:channel_layout=stereo)
+avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:sample_rates=44100,volume=volume=1.000000[aout0])
+avfilter_graph_create_filter(abuffer: time_base=1/48000:sample_rate=48000:sample_fmt=fltp:channels=6:channel_layout=5.1)
+avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:sample_rates=44100,volume=volume=1.000000[aout0])
+```
+</pre>
 </div>
 <div created="20210909023338553" modified="20210909023342120" title="$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/import">
 <pre>hide</pre>
@@ -10485,11 +10509,11 @@ Error message and password prompt
 <div created="20210909023053209" modified="20210909023053209" title="$:/state/importpreviewtype">
 <pre>$:/core/ui/ImportPreviews/Fields</pre>
 </div>
-<div created="20201230023808396" modified="20210928091315060" title="$:/state/showeditpreview">
-<pre>no</pre>
-</div>
-<div created="20201228150048917" modified="20210929034713388" title="$:/state/sidebar">
+<div created="20201230023808396" modified="20210929035631356" title="$:/state/showeditpreview">
 <pre>yes</pre>
+</div>
+<div created="20201228150048917" modified="20210929035629731" title="$:/state/sidebar">
+<pre>no</pre>
 </div>
 <div created="20210909023547312" modified="20210909023605584" title="$:/state/tab--1963855381">
 <pre>$:/themes/tiddlywiki/vanilla/themetweaks</pre>
@@ -10560,7 +10584,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210929012647938" list="$:/Import MindMap [[Draft of '&lt;PROBLEM&gt; Changing audio properties on the fly is not supported.']] [[Sisyphus's Rock]] [[29th September 2021]] [[28th September 2021]] GettingStarted" modified="20210929034743156" title="$:/StoryList">
+<div created="20210929012647938" list="$:/Import MindMap [[&lt;PROBLEM&gt; Changing audio properties on the fly is not supported.]] [[Sisyphus's Rock]] [[29th September 2021]] [[28th September 2021]] GettingStarted" modified="20210929034743156" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -12923,15 +12947,6 @@ https://trac.ffmpeg.org/wiki/FilteringGuide</pre>
 </div>
 <div color="#2ef209" created="20201228194702570" modified="20201228194702570" title="done">
 <pre></pre>
-</div>
-<div created="20210929034749152" draft.of="&lt;PROBLEM&gt; Changing audio properties on the fly is not supported." draft.title="&lt;PROBLEM&gt; Changing audio properties on the fly is not supported." modified="20210929035102391" tags="MindMap" title="Draft of '&lt;PROBLEM&gt; Changing audio properties on the fly is not supported.'">
-<pre>
-```
-[2021/09/29-11:46:31][25241] [ain0 @ 0x7fc2a89fcb80] filter context - fmt: fltp r: 44100 layout: 3 ch: 2, incoming frame - fmt: fltp r: 48000 layout: 3 ch: 2 pts_time: 1746.46
-[2021/09/29-11:46:31][25241] [ain0 @ 0x7fc2a89fcb80] Changing audio frame properties on the fly is not supported.
-```
-
-</pre>
 </div>
 <div created="20210719063936869" modified="20210813091150920" tags="[[Sisyphus's Rock]]" title="English">
 <pre>''NAL (Network Abstraction Layer) units:''
