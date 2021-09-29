@@ -570,8 +570,7 @@ Error message and password prompt
 
 <div id="storeArea" style="display:none;">
 <div created="20210929034749152" modified="20210929041148404" tags="MindMap" title="&lt;PROBLEM&gt; Changing audio properties on the fly is not supported.">
-<pre>
-```
+<pre>```
 [2021/09/29-11:46:31][25241] [ain0 @ 0x7fc2a89fcb80] filter context - fmt: fltp r: 44100 layout: 3 ch: 2, incoming frame - fmt: fltp r: 48000 layout: 3 ch: 2 pts_time: 1746.46
 [2021/09/29-11:46:31][25241] [ain0 @ 0x7fc2a89fcb80] Changing audio frame properties on the fly is not supported.
 ```
@@ -10513,8 +10512,8 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div created="20201230023808396" modified="20210929035631356" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20201228150048917" modified="20210929035629731" title="$:/state/sidebar">
-<pre>no</pre>
+<div created="20201228150048917" modified="20210929100003629" title="$:/state/sidebar">
+<pre>yes</pre>
 </div>
 <div created="20210909023547312" modified="20210909023605584" title="$:/state/tab--1963855381">
 <pre>$:/themes/tiddlywiki/vanilla/themetweaks</pre>
@@ -10528,8 +10527,8 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div created="20201228150122303" modified="20201228195420655" title="$:/state/tab-2065006209">
 <pre>$:/core/ui/ControlPanel/Saving/GitHub</pre>
 </div>
-<div created="20201228150013909" modified="20210929035549316" title="$:/state/tab/sidebar--595412856">
-<pre>$:/core/ui/SideBar/Tools</pre>
+<div created="20201228150013909" modified="20210929100005475" title="$:/state/tab/sidebar--595412856">
+<pre>TableOfContents</pre>
 </div>
 <div created="20210909023601112" modified="20210909023601112" title="$:/state/tabs/controlpanel/toolbars-1345989671">
 <pre>$:/core/ui/ControlPanel/Toolbars/PageControls</pre>
@@ -10585,7 +10584,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20210929012647938" list="$:/Import MindMap [[&lt;PROBLEM&gt; Changing audio properties on the fly is not supported.]] [[Sisyphus's Rock]] [[29th September 2021]] [[28th September 2021]] GettingStarted" modified="20210929034743156" title="$:/StoryList">
+<div created="20210929100008636" list="[[29th September 2021]]" modified="20210929100008636" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -12140,7 +12139,7 @@ class B : public A      // class A is final, compile error.
 
 </pre>
 </div>
-<div created="20210929013947520" modified="20210929014003518" tags="[[Sisyphus's Rock]] Journal" title="29th September 2021">
+<div created="20210929013947520" modified="20210929100219212" tags="[[Sisyphus's Rock]] Journal" title="29th September 2021">
 <pre>```
 #0  AMix::init_effectfilter (this=0x7fa412d7c330, task_=...) at AMix.cpp:70
 #1  0x00000000004d77ba in filterBase::init_filter (this=0x7fa412d7c330, task_=...) at filter.cpp:51
@@ -12160,6 +12159,44 @@ class B : public A      // class A is final, compile error.
 #11 0x00007fa48501f330 in ?? () from /lib64/libstdc++.so.6
 #12 0x00007fa484b3fe65 in start_thread () from /lib64/libpthread.so.0
 #13 0x00007fa48486888d in clone () from /lib64/libc.so.6
+```
+
+;exec &amp; IPC to tackle ffprobe no return issue
+```
+cmd = &quot;/root/ffmpeg/build4/ffprobe_g -show_entries frame=media_type,pkt_pts_time -of compact rtmp://alpha-livein.yunshicloud.com/nnfq53/90bxad 2&gt;/dev/null | tee info.txt&quot;
+systemx(cmd);
+
+int systemx(const char *arg)
+{
+    struct rlimit old, new;
+    const char *cmd = &quot;/usr/bin/bash&quot;;
+    int status;
+
+    pid_t child = fork();
+    if (child == 0) {
+        execl(cmd, &quot;sh&quot;, &quot;-c&quot;, arg, (char*)0);
+        perror(arg);
+    }
+    else if (child &lt; 0) printf(&quot;IMPOSSIBLE: execve() failed for %s %s\n&quot;, cmd, arg);
+    else {
+        new.rlim_cur = 1;
+        new.rlim_max = 2;
+        if (prlimit(child, RLIMIT_CPU, &amp;new, &amp;old) &lt; 0)
+            perror(&quot;prlimit()&quot;);
+        printf(&quot;Previous limits: soft=%lld; hard=%lld\n&quot;, (long long) old.rlim_cur, (long long) old.rlim_max);
+        printf(&quot;Current  limits: soft=%lld; hard=%lld\n&quot;, (long long) new.rlim_cur, (long long) new.rlim_max);
+
+        printf(&quot;waitpid[%d] %s\n&quot;, child, arg);
+        pid_t w = waitpid(child, &amp;status, WUNTRACED | WCONTINUED);
+        if (w &lt; 0) {
+            printf(&quot;IMPOSSIBLE: waitpid(%d) failed for %s\n&quot;, w, arg);
+            perror(&quot;waitpid&quot;);
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    return 0;
+}
 ```</pre>
 </div>
 <div created="20210402151935509" modified="20210408004934418" tags="英语学习 Journal April" title="2nd April 2021">
