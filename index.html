@@ -569,7 +569,7 @@ Error message and password prompt
 <!--~~ Ordinary tiddlers ~~-->
 
 <div id="storeArea" style="display:none;">
-<div created="20210929034749152" modified="20210929040551853" tags="MindMap" title="&lt;PROBLEM&gt; Changing audio properties on the fly is not supported.">
+<div created="20210929034749152" modified="20210929041148404" tags="MindMap" title="&lt;PROBLEM&gt; Changing audio properties on the fly is not supported.">
 <pre>
 ```
 [2021/09/29-11:46:31][25241] [ain0 @ 0x7fc2a89fcb80] filter context - fmt: fltp r: 44100 layout: 3 ch: 2, incoming frame - fmt: fltp r: 48000 layout: 3 ch: 2 pts_time: 1746.46
@@ -595,7 +595,9 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 avfilter_graph_create_filter(abuffer: time_base=1/48000:sample_rate=48000:sample_fmt=fltp:channels=6:channel_layout=5.1)
 avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:sample_rates=44100,volume=volume=1.000000[aout0])
 ```
-</pre>
+
+;According to the above analysis, the filter's setup is correct, the problem may hide in the process timing.
+:I checked sample_rate of the frames putted in StreamMix. It's supposed to be 44100, but it still was the original value, 48000. That seems the 'aformat' filter doesn't work.</pre>
 </div>
 <div created="20210909023338553" modified="20210909023342120" title="$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/import">
 <pre>hide</pre>
