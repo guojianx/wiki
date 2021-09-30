@@ -12338,14 +12338,14 @@ Note that for our example equation we won’t be able to prove it for N = 1, bec
 # substitution - 替换
 # induction - 归纳</pre>
 </div>
-<div created="20210930011350263" modified="20210930025640794" tags="[[Sisyphus's Rock]] Journal" title="30th September 2021 - IPC and sample rate issue">
+<div created="20210930011350263" modified="20210930025733324" tags="[[Sisyphus's Rock]] Journal" title="30th September 2021 - IPC and sample rate issue">
 <pre>;Turn the system() into a call with timeout.
 # exec family and waitpid()
 # turn waitpid() into waitpid_timeout()
 ##alarm() and kill(child) within signal(SIGALRM, handle() )
 ##*sleep() may be implemented using SIGALRM, mixing calls to alarm() and sleep() is a bad idea.
 ##*scheduling delay can, ''as ever'', cause the execution of the process to be delayed by an arbitrary amount of time.
-##Start a thread to kill(child)
+##Start a thread to kill(child), waiting by pthread_cond_timedwait()
 ##sigtimedwait()
 
 Reference - https://www.tutorialspoint.com/inter_process_communication/inter_process_communication_system_v_posix.htm
