@@ -12338,8 +12338,16 @@ Note that for our example equation we won’t be able to prove it for N = 1, bec
 # substitution - 替换
 # induction - 归纳</pre>
 </div>
-<div created="20210930011350263" modified="20210930011504206" tags="[[Sisyphus's Rock]] Journal" title="30th September 2021 - IPC and sample rate issue">
-<pre>Reference - https://www.tutorialspoint.com/inter_process_communication/inter_process_communication_system_v_posix.htm</pre>
+<div created="20210930011350263" modified="20210930023632291" tags="[[Sisyphus's Rock]] Journal" title="30th September 2021 - IPC and sample rate issue">
+<pre>;Turn the system() into a call with timeout.
+# exec family and waitpid()
+# turn waitpid() into waitpid_timeout()
+##alarm() and kill(child) within signal(SIGALRM, handle() )
+##*sleep() may be implemented using SIGALRM, mixing calls to alarm() and sleep() is a bad idea.
+##*scheduling delay can, ''as ever'', cause the execution of the process to be delayed by an arbitrary amount of time.
+
+Reference - https://www.tutorialspoint.com/inter_process_communication/inter_process_communication_system_v_posix.htm
+</pre>
 </div>
 <div created="20210531030034801" modified="20210531082026555" tags="May Journal" title="31st May 2021">
 <pre>Hey everyone and thanks for ''stopping by for another episode'' of the edit with me monday show. The show where we make editing in lightroom super super simple. so you can ''go ahead'' and ''crush those edits''. Now first of all I just want to say there are a bunch of new faces around the channel so if you're one of the ones who subscribed because of that tone curve video thank you so much and you're also gonna love this video because today I'm breaking down the HSL slash Color panel in lightroom. now much like the tone curve the HSL color panel looks a lot more confusing than it is. it's actually very very simple, the most complicated part is that there's just four different ways to view the exact same thing. so I'm going to show you the best and easiest way to use the panel so that you can get some tasty color in your photos. let's dive in.
