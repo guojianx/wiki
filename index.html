@@ -10514,8 +10514,8 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div created="20201230023808396" modified="20210929035631356" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20201228150048917" modified="20210930012305108" title="$:/state/sidebar">
-<pre>no</pre>
+<div created="20201228150048917" modified="20210930031357466" title="$:/state/sidebar">
+<pre>yes</pre>
 </div>
 <div created="20210909023547312" modified="20210909023605584" title="$:/state/tab--1963855381">
 <pre>$:/themes/tiddlywiki/vanilla/themetweaks</pre>
@@ -12338,7 +12338,7 @@ Note that for our example equation we won’t be able to prove it for N = 1, bec
 # substitution - 替换
 # induction - 归纳</pre>
 </div>
-<div created="20210930011350263" modified="20210930031326442" tags="[[Sisyphus's Rock]] Journal" title="30th September 2021 - IPC and sample rate issue">
+<div created="20210930011350263" modified="20210930040202018" tags="[[Sisyphus's Rock]] Journal" title="30th September 2021 - IPC and sample rate issue">
 <pre>;Turn the system() into a call with timeout.
 # exec family and waitpid()
 # turn waitpid() into waitpid_timeout()
@@ -12346,7 +12346,7 @@ Note that for our example equation we won’t be able to prove it for N = 1, bec
 #**sleep() may be implemented using SIGALRM, mixing calls to alarm() and sleep() is a bad idea.
 #**scheduling delay can, ''as ever'', cause the execution of the process to be delayed by an arbitrary amount of time.
 #*Start a thread to kill(child), waiting by pthread_cond_timedwait()
-#*sigtimedwait(SIGCHLD)
+#*sigtimedwait(SIGCHLD) : When the child process exec() stopped or terminated, parent process will recieve SIGCHLD.
 
 Reference - https://www.tutorialspoint.com/inter_process_communication/inter_process_communication_system_v_posix.htm
 </pre>
