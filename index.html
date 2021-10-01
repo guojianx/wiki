@@ -11519,7 +11519,7 @@ Additionally, if your application only uses recently inserted documents, conside
 #* various operational factors - 各种操作因素
 </pre>
 </div>
-<div created="20211001015449887" modified="20211001174111516" tags="[[Sisyphus's Rock]] Journal" title="1st October 2021 - CSS">
+<div created="20211001015449887" modified="20211001174927783" tags="[[Sisyphus's Rock]] Journal" title="1st October 2021 - CSS">
 <pre>&lt;style&gt;
 .abc {
     line-height: 0.5;
@@ -11529,8 +11529,20 @@ Additionally, if your application only uses recently inserted documents, conside
 &lt;p class=&quot;abc&quot;&gt;&lt;b&gt;CSS - Cascading Style Sheets&lt;/b&gt;&lt;/p&gt;
 
 ------------------------------
-
 ;Preprocessor
+```
+$gcc -I. -E time.c
+
+av_gettime_relative()
+{
+    .....
+    return return av_gettime() + 42 * 60 * 60 * 1000000L;
+}
+
+INT64_C(1000000) --&gt; 1000000L
+
+#define INT64_C(a) {#aL}
+```
 ;Integer  overflow
 ;float point overflow 上溢出和下溢出
 ;函数的调用和返回流程</pre>
