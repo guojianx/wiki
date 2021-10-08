@@ -10520,8 +10520,8 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div created="20201230023808396" modified="20210929035631356" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20201228150048917" modified="20211008040510667" title="$:/state/sidebar">
-<pre>yes</pre>
+<div created="20201228150048917" modified="20211008040649570" title="$:/state/sidebar">
+<pre>no</pre>
 </div>
 <div created="20210909023547312" modified="20210909023605584" title="$:/state/tab--1963855381">
 <pre>$:/themes/tiddlywiki/vanilla/themetweaks</pre>
@@ -12427,7 +12427,7 @@ Note: breakpoint 1 also set at pc 0x507490.
 Breakpoint 2 at 0x507490: file src/libavfilter/graphparser.c, line 263.
 ```</pre>
 </div>
-<div created="20211008023516717" modified="20211008031816043" tags="[[Sisyphus's Rock]] Journal" title="8th October 2021">
+<div created="20211008023516717" modified="20211008043141770" tags="[[Sisyphus's Rock]] Journal" title="8th October 2021">
 <pre>&lt;style&gt;
 .highlight {
     font-size: 21px;
@@ -12467,13 +12467,31 @@ split.cpp:    in_buffer-&gt;name = av_strdup(&quot;ain0&quot;);
 [2021/10/08-11:10:59][9144][0x7f16ea645270] Error while feeding audio[4] filtergraph.
 ```
 
-&lt;a class=highlight&gt;3.&lt;/a&gt; the issue is not in any of the files I got on above, it's AMix.cpp:
+&lt;a class=highlight&gt;3.&lt;/a&gt; the issue is not in any of the files I got on the above, it's AMix.cpp:
 
 ```
 AMix.cpp:               snprintf(ain, 16, &quot;ain%d&quot;, j);
 AMix.cpp:               ret = avfilter_graph_create_filter(&amp;aCtx, avfilter_get_by_name(&quot;abuffer&quot;), ain, abuff, NULL, audio_graph);
 AMix.cpp:                        val.id, aCtx, ain, abuff, ret);
-```</pre>
+```
+
+[img[Mix.drawio.svg]]
+
+&lt;a class=highlight&gt;4.&lt;/a&gt; gdb break in AMix to check whether if AudioResample is in the Filter Chain, because the log, incomming frame is &quot;layout: 3F ch: 6&quot; and AudioResample parameter is &quot;aformat=stereo:sample_rates=44100&quot;. if incomming frame pass through the aformat filter, it shouldn't be ch: 6. (Confirm that with gdb log)
+
+```
+#0  StreamMix::PutFrame (this=0x7f17563bdd80, type=1, frame=0x7f174d7f2800, pin=4) at StreamMix.cpp:271
+#1  0x000000000054037f in StreamMix::BroadData (this=0x7f17563bdd80, p=..., pin=4) at StreamMix.cpp:340
+#2  0x0000000000541901 in Pin::fillBuffer (this=0x7f1754177f20, p=...) at MediaBase.h:57
+#3  0x00000000004d8092 in AspectRatio::fillBuffer (this=0x7f16e81f38f0, p=...) at AspectRatio.cpp:30
+#4  0x00000000004dd4dd in split::pushStream (this=0x7f175474a290, p=..., in=0x7f16ea663480, out_pre=0x7f16ea66c1c0,
+    out_from=0x7f175418da00, type=AUDIO, push=true) at split.cpp:226
+#5  0x00000000004dcc2a in split::fillBuffer (this=0x7f175474a290, p=...) at split.cpp:33
+#6  0x00000000004c72f2 in Decoder::sendFrame (this=0x7f1754199f80, frame=0x7f174c02f880, type=AUDIO, force_keyframe=false)
+    at Decoder.cpp:81
+```
+
+Audio Frames did not go through ~AudioResample module.</pre>
 </div>
 <div created="20210908090228428" modified="20210910101058240" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
 <pre>!Symptom
