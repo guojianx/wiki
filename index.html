@@ -12425,8 +12425,14 @@ Note: breakpoint 1 also set at pc 0x507490.
 Breakpoint 2 at 0x507490: file src/libavfilter/graphparser.c, line 263.
 ```</pre>
 </div>
-<div created="20211008023516717" modified="20211008024859828" tags="[[Sisyphus's Rock]] Journal" title="8th October 2021">
-<pre>[git cherry-pick usage] https://www.atlassian.com/git/tutorials/cherry-pick
+<div created="20211008023516717" modified="20211008025549620" tags="[[Sisyphus's Rock]] Journal" title="8th October 2021">
+<pre>&lt;style&gt;
+.highlight {
+    font-size: 21px;
+}
+&lt;/style&gt;
+
+[git cherry-pick usage] https://www.atlassian.com/git/tutorials/cherry-pick
 
 
 ```
@@ -12434,7 +12440,7 @@ Breakpoint 2 at 0x507490: file src/libavfilter/graphparser.c, line 263.
 [2021/10/08-10:45:12][4883] [ain0 @ 0x7feac74f8840] filter context - fmt: fltp r: 44100 layout: 3 ch: 2, incoming frame - fmt: fltp r: 48000 layout: 3F ch: 6 pts_time: 159.847
 ```
 
-`ain0` is the key, &lt;b&gt;which&lt;/b&gt; source file contain it?
+&lt;a class=highlight&gt;1.&lt;/a&gt; `ain0` is the key, &lt;b&gt;which&lt;/b&gt; source file contain it?
 
 ```
 # grep &quot;ain0&quot; *.cpp
@@ -12443,7 +12449,10 @@ AudioResample.cpp:    in-&gt;name = av_strdup(&quot;ain0&quot;);
 filter.cpp:     int ret = avfilter_graph_create_filter(&amp;abuffer_Ctx, avfilter_get_by_name(&quot;abuffer&quot;), &quot;ain0&quot;, args, NULL, audio_graph);
 split.cpp:    snprintf(args,128,&quot;[ain0]asplit=2[aout0][aoutSp]&quot;);
 split.cpp:    in_buffer-&gt;name = av_strdup(&quot;ain0&quot;);
-```</pre>
+```
+
+&lt;a class=highlight&gt;2.&lt;/a&gt; filter.cpp is suspicious, change all of them to make the names meaningful.
+</pre>
 </div>
 <div created="20210908090228428" modified="20210910101058240" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
 <pre>!Symptom
