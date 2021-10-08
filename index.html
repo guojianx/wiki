@@ -12425,7 +12425,7 @@ Note: breakpoint 1 also set at pc 0x507490.
 Breakpoint 2 at 0x507490: file src/libavfilter/graphparser.c, line 263.
 ```</pre>
 </div>
-<div created="20211008023516717" modified="20211008025549620" tags="[[Sisyphus's Rock]] Journal" title="8th October 2021">
+<div created="20211008023516717" modified="20211008031535019" tags="[[Sisyphus's Rock]] Journal" title="8th October 2021">
 <pre>&lt;style&gt;
 .highlight {
     font-size: 21px;
@@ -12452,6 +12452,18 @@ split.cpp:    in_buffer-&gt;name = av_strdup(&quot;ain0&quot;);
 ```
 
 &lt;a class=highlight&gt;2.&lt;/a&gt; filter.cpp is suspicious, change all of them to make the names meaningful.
+
+```
+[2021/10/08-11:10:59][9144][0x7f16ea332b70] Audio Frame Sample Rate pin[4] -&gt; idx[0]: 48000
+[2021/10/08-11:10:59][9144][0x7f16ea332b70] Audio Frame Sample Rate pin[5] -&gt; idx[1]: 48000
+[2021/10/08-11:10:59][9144] [ain1 @ 0x7f16ea649a40] filter context - fmt: fltp r: 44100 layout: 3 ch: 2, incoming frame - fmt: fltp r: 48000 layout: 3F ch: 6 pts_time: 106.296
+[2021/10/08-11:10:59][9144] [ain1 @ 0x7f16ea649a40] Changing audio frame properties on the fly is not supported.
+     Last message repeated 1 times.
+[2021/10/08-11:10:59][9144][0x7f16ea645270] Error while feeding audio[5] filtergraph.
+[2021/10/08-11:10:59][9144] [ain0 @ 0x7f16ea648c40] filter context - fmt: fltp r: 44100 layout: 3 ch: 2, incoming frame - fmt: fltp r: 48000 layout: 3F ch: 6 pts_time: 106.324
+[2021/10/08-11:10:59][9144] [ain0 @ 0x7f16ea648c40] Changing audio frame properties on the fly is not supported.
+[2021/10/08-11:10:59][9144][0x7f16ea645270] Error while feeding audio[4] filtergraph.
+```
 </pre>
 </div>
 <div created="20210908090228428" modified="20210910101058240" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
