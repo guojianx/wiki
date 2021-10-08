@@ -10518,8 +10518,8 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div created="20201230023808396" modified="20210929035631356" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20201228150048917" modified="20211003153611285" title="$:/state/sidebar">
-<pre>yes</pre>
+<div created="20201228150048917" modified="20211008024646875" title="$:/state/sidebar">
+<pre>no</pre>
 </div>
 <div created="20210909023547312" modified="20210909023605584" title="$:/state/tab--1963855381">
 <pre>$:/themes/tiddlywiki/vanilla/themetweaks</pre>
@@ -10590,7 +10590,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20211008022011253" list="[[Sisyphus's Rock]] [[8th October 2021]] [[30th September 2021 - IPC and sample rate issue]]" modified="20211008023513451" title="$:/StoryList">
+<div created="20211008022011253" list="[[8th October 2021]]" modified="20211008023513451" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -12425,8 +12425,16 @@ Note: breakpoint 1 also set at pc 0x507490.
 Breakpoint 2 at 0x507490: file src/libavfilter/graphparser.c, line 263.
 ```</pre>
 </div>
-<div created="20211008023516717" modified="20211008023550332" tags="[[Sisyphus's Rock]] Journal" title="8th October 2021">
-<pre>[git cherry-pick usage] https://www.atlassian.com/git/tutorials/cherry-pick</pre>
+<div created="20211008023516717" modified="20211008024751861" tags="[[Sisyphus's Rock]] Journal" title="8th October 2021">
+<pre>[git cherry-pick usage] https://www.atlassian.com/git/tutorials/cherry-pick
+
+
+```
+[2021/10/08-10:45:12][4883][0x7feb28304010] Audio Frame Sample Rate pin[4] -&gt; idx[0]: 48000
+[2021/10/08-10:45:12][4883] [ain0 @ 0x7feac74f8840] filter context - fmt: fltp r: 44100 layout: 3 ch: 2, incoming frame - fmt: fltp r: 48000 layout: 3F ch: 6 pts_time: 159.847
+```
+
+`ain0` is the key, &lt;b&gt;which&lt;/b&gt; source file contain it?</pre>
 </div>
 <div created="20210908090228428" modified="20210910101058240" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
 <pre>!Symptom
