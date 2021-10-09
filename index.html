@@ -269,6 +269,8 @@ Error message and password prompt
 
 <li>014 - 15th September 2021</li>
 
+<li>015 - 22nd September 2021</li>
+
 <li>01st February 2021</li>
 
 <li>03rd February 2021</li>
@@ -320,8 +322,6 @@ Error message and password prompt
 <li>22nd February 2021</li>
 
 <li>22nd January 2021</li>
-
-<li>22nd September 2021</li>
 
 <li>23rd March 2021</li>
 
@@ -10592,7 +10592,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20211009030429671" list="[[014 - 15th September 2021]] [[011 - 8th September 2021]] [[012 - 13th September 2021]] [[Sisyphus's Rock]] [[002 - 26th July 2021 -- lvalue, rvalue, unique_ptr &amp; shared_ptr]] GettingStarted" modified="20211009031003333" title="$:/StoryList">
+<div created="20211009030429671" list="[[015 - 22nd September 2021]] [[014 - 15th September 2021]] [[011 - 8th September 2021]] [[012 - 13th September 2021]] [[Sisyphus's Rock]] [[002 - 26th July 2021 -- lvalue, rvalue, unique_ptr &amp; shared_ptr]] GettingStarted" modified="20211009031031893" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11312,6 +11312,51 @@ index 54e412d..be1e36c 100644
 ;The root cause was neither disconnection nor delay, it's update_req on a wrong frame.
 [img[mindmap-Daobo-LiveProductionSwitcher.drawio.svg]]</pre>
 </div>
+<div created="20210922075012289" modified="20211009031043590" tags="[[Sisyphus's Rock]] Journal MindMap" title="015 - 22nd September 2021">
+<pre>RTMP、HLS、H264、Color Space
+
+;longtime experience of programming on Linux platform
+:编译问题、链接问题：
+:vim
+:Makefile, cmake, pkt-config
+:gdb, valgrind
+:tcpdump, netstat
+:ldd 运行时的链接问题
+:现在的日常开发中极少能遇到我觉得困难，需要求助于他人的问题了。GCC,  Makefile, cmake, pkt-config 等工具。vim的使用我也不需要能看起来炫酷的功能，如果有必要我会去学会用它，
+
+;FFmpeg (libav)
+: 清晰的模块划分，只要头脑里有面向的思维方式，阅读它的代码就会很容易，不论遇到什么问题，定位到抛出问题的代码段，读懂了对应模块的工作原理，就没有解决不了的问题。
+
+;Codec，Container，Protocols
+:读代码  Container和Protocols在
+:读官网的说明、别人写的文章、代码里的文档、Wiki、git-log，中英文都读
+----------------------------------------------------------
+;adaptive streaming V.S. progressive streaming
+```
+https://github.com/leandromoreira/ffmpeg-libav-tutorial
+https://github.com/leandromoreira/ffmpeg-libav-tutorial#learn-ffmpeg-libav-the-hard-way
+https://bitmovin.com/adaptive-streaming/
+
+```
+
+----------------------------------------------------------
+```
+I graduated from university in 2010, have over 10 years of experience in software development; Focus on multimedia field.
+Have rich experience in using ffmpeg (libav), as you can see in my resume, when I was working at RealNetworks, I developed and coded inside the FFmpeg codes for developing adaptive stream playing over HLS; and the job I'm working for now, is using FFmpeg API to implement a cloud-based Live Production Switcher. 
+```
+
+; Personal basic infomation: When I graduated and How long have I been working
+: I graduated from the university in 2010. (optional: major) 
+
+; What's My expertise: Focus on multimedia field, good at FFmpeg which is an open-source project
+: focus on multimedia field: prety good at using and developing FFmpeg, not only use its API but also good at develop the inside modules. (give two examples for explain how good I am)
+
+;Debugging Technics on Linux: gdb, valgrind, tcpdump, ldd, find, watch, pkg-config
+:Linux mastery level: I've been working on Linux platform for over a decade
+
+;Quick Learner
+:I'm a quick learner: I expert in C/C++ programing, have little experience in other languages such as Javascript, python, or Java etc. But I can use them whenever I need. (give two examples: wrote a web page with javascript for displaying ~WebRTC stream in one day; )</pre>
+</div>
 <div created="20210131171503618" modified="20210217114701440" tags="英语学习 Journal [[February 2021]]" title="01st February 2021">
 <pre>[[topcoder|https://www.topcoder.com/community/competitive-programming/tutorials/computational-complexity-section-1/]]
 
@@ -11991,51 +12036,6 @@ The next logical step is to show how to estimate the time complexity of a given 
 # prominent - important 
 # weighted in to oppose the ban 
 # precedent - 先例 set a precedent 设置了一个先例</pre>
-</div>
-<div created="20210922075012289" modified="20210924032200351" tags="[[Sisyphus's Rock]] Journal MindMap" title="22nd September 2021">
-<pre>RTMP、HLS、H264、Color Space
-
-;longtime experience of programming on Linux platform
-:编译问题、链接问题：
-:vim
-:Makefile, cmake, pkt-config
-:gdb, valgrind
-:tcpdump, netstat
-:ldd 运行时的链接问题
-:现在的日常开发中极少能遇到我觉得困难，需要求助于他人的问题了。GCC,  Makefile, cmake, pkt-config 等工具。vim的使用我也不需要能看起来炫酷的功能，如果有必要我会去学会用它，
-
-;FFmpeg (libav)
-: 清晰的模块划分，只要头脑里有面向的思维方式，阅读它的代码就会很容易，不论遇到什么问题，定位到抛出问题的代码段，读懂了对应模块的工作原理，就没有解决不了的问题。
-
-;Codec，Container，Protocols
-:读代码  Container和Protocols在
-:读官网的说明、别人写的文章、代码里的文档、Wiki、git-log，中英文都读
-----------------------------------------------------------
-;adaptive streaming V.S. progressive streaming
-```
-https://github.com/leandromoreira/ffmpeg-libav-tutorial
-https://github.com/leandromoreira/ffmpeg-libav-tutorial#learn-ffmpeg-libav-the-hard-way
-https://bitmovin.com/adaptive-streaming/
-
-```
-
-----------------------------------------------------------
-```
-I graduated from university in 2010, have over 10 years of experience in software development; Focus on multimedia field.
-Have rich experience in using ffmpeg (libav), as you can see in my resume, when I was working at RealNetworks, I developed and coded inside the FFmpeg codes for developing adaptive stream playing over HLS; and the job I'm working for now, is using FFmpeg API to implement a cloud-based Live Production Switcher. 
-```
-
-; Personal basic infomation: When I graduated and How long have I been working
-: I graduated from the university in 2010. (optional: major) 
-
-; What's My expertise: Focus on multimedia field, good at FFmpeg which is an open-source project
-: focus on multimedia field: prety good at using and developing FFmpeg, not only use its API but also good at develop the inside modules. (give two examples for explain how good I am)
-
-;Debugging Technics on Linux: gdb, valgrind, tcpdump, ldd, find, watch, pkg-config
-:Linux mastery level: I've been working on Linux platform for over a decade
-
-;Quick Learner
-:I'm a quick learner: I expert in C/C++ programing, have little experience in other languages such as Javascript, python, or Java etc. But I can use them whenever I need. (give two examples: wrote a web page with javascript for displaying ~WebRTC stream in one day; )</pre>
 </div>
 <div created="20210322213614350" modified="20210322214734729" tags="英语学习 Journal [[March 2021]]" title="23rd March 2021">
 <pre>Example 3. The sorting algorithm MergeSort described in pseudocode.
