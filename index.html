@@ -287,6 +287,8 @@ Error message and password prompt
 
 <li>022 - 30th September 2021 - IPC and sample rate issue</li>
 
+<li>023 - 1st October 2021 - CSS</li>
+
 <li>03rd February 2021</li>
 
 <li>0421 Microsoft interview</li>
@@ -324,8 +326,6 @@ Error message and password prompt
 <li>19th January 2021</li>
 
 <li>19th March 2021</li>
-
-<li>1st October 2021 - CSS</li>
 
 <li>20th February 2021</li>
 
@@ -10592,7 +10592,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20211009032838596" list="[[022 - 30th September 2021 - IPC and sample rate issue]] [[021 - 29th September 2021]] [[020 - 28th September 2021]] [[019 - 27th September 2021 - Daobo UML]] [[018 - 26th September 2021]] [[017 - 24th September 2021]]" modified="20211009033020075" title="$:/StoryList">
+<div created="20211009032838596" list="[[023 - 1st October 2021 - CSS]] [[022 - 30th September 2021 - IPC and sample rate issue]] [[021 - 29th September 2021]] [[020 - 28th September 2021]] [[019 - 27th September 2021 - Daobo UML]] [[018 - 26th September 2021]] [[017 - 24th September 2021]]" modified="20211009033032661" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11653,6 +11653,34 @@ int systemx(const char *arg)
 Reference - https://www.tutorialspoint.com/inter_process_communication/inter_process_communication_system_v_posix.htm
 </pre>
 </div>
+<div created="20211001015449887" modified="20211009033039604" tags="[[Sisyphus's Rock]] Journal" title="023 - 1st October 2021 - CSS">
+<pre>&lt;style&gt;
+.abc {
+    line-height: 0.5;
+}
+&lt;/style&gt;
+
+&lt;p class=&quot;abc&quot;&gt;&lt;b&gt;CSS - Cascading Style Sheets&lt;/b&gt;&lt;/p&gt;
+
+------------------------------
+;Preprocessor
+```
+$gcc -I. -E time.c
+
+av_gettime_relative()
+{
+    .....
+    return return av_gettime() + 42 * 60 * 60 * 1000000L;
+}
+
+INT64_C(1000000) --&gt; 1000000L
+
+#define INT64_C(a) {#aL}
+```
+;Integer  overflow
+;float point overflow 上溢出和下溢出
+;函数的调用和返回流程</pre>
+</div>
 <div created="20210202175517701" modified="20210217115005143" tags="英语学习 Journal [[February 2021]]" title="03rd February 2021">
 <pre>A neat trick
 
@@ -12164,34 +12192,6 @@ Additionally, if your application only uses recently inserted documents, conside
 #* the environments are locally various - 环境有局部差异
 #* various operational factors - 各种操作因素
 </pre>
-</div>
-<div created="20211001015449887" modified="20211001174927783" tags="[[Sisyphus's Rock]] Journal" title="1st October 2021 - CSS">
-<pre>&lt;style&gt;
-.abc {
-    line-height: 0.5;
-}
-&lt;/style&gt;
-
-&lt;p class=&quot;abc&quot;&gt;&lt;b&gt;CSS - Cascading Style Sheets&lt;/b&gt;&lt;/p&gt;
-
-------------------------------
-;Preprocessor
-```
-$gcc -I. -E time.c
-
-av_gettime_relative()
-{
-    .....
-    return return av_gettime() + 42 * 60 * 60 * 1000000L;
-}
-
-INT64_C(1000000) --&gt; 1000000L
-
-#define INT64_C(a) {#aL}
-```
-;Integer  overflow
-;float point overflow 上溢出和下溢出
-;函数的调用和返回流程</pre>
 </div>
 <div created="20210220001801950" modified="20210221004348624" tags="英语学习 Journal [[February 2021]]" title="20th February 2021">
 <pre>When speaking about the time/memory complexity of an algorithm, instead of using the formal [img[http://community.topcoder.com/i/education/complexity4.png]](f (n))-notation we may simply state the class of functions f belongs to. E.g. if f (N) = [img[http://community.topcoder.com/i/education/complexity4.png]](N), we call the algorithm linear. More examples:
