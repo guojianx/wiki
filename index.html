@@ -243,6 +243,24 @@ Error message and password prompt
 
 <li>002 - 26th July 2021 -- lvalue, rvalue, unique_ptr &amp; shared_ptr</li>
 
+<li>003 - 28th July 2021 - hash &amp; unordered_map</li>
+
+<li>004 - 29th July 2021</li>
+
+<li>005 - 30th July 2021</li>
+
+<li>006 - 6th August 2021 -- gdb compare strings</li>
+
+<li>007 - 9th August 2021 - SSD and AC Energy</li>
+
+<li>008 - 10th August 2021 - pgrep</li>
+
+<li>009 - 13th August 2021</li>
+
+<li>009 - 18th August 2021</li>
+
+<li>010 - 16th August 2021</li>
+
 <li>01st February 2021</li>
 
 <li>03rd February 2021</li>
@@ -251,15 +269,11 @@ Error message and password prompt
 
 <li>05th February 2021</li>
 
-<li>10th August 2021 - pgrep</li>
-
 <li>11th January 2021</li>
 
 <li>12th February 2021</li>
 
 <li>12th January 2021</li>
-
-<li>13th August 2021</li>
 
 <li>13th January 2021</li>
 
@@ -275,15 +289,11 @@ Error message and password prompt
 
 <li>15th September 2021</li>
 
-<li>16th August 2021</li>
-
 <li>16th February 2021</li>
 
 <li>17th March 2021</li>
 
 <li>17th May 2021</li>
-
-<li>18th August 2021</li>
 
 <li>18th February 2021</li>
 
@@ -337,27 +347,17 @@ Error message and password prompt
 
 <li>2nd April 2021</li>
 
-<li>3 - 28th July 2021 - hash &amp; unordered_map</li>
-
-<li>30th July 2021</li>
-
 <li>30th March 2021</li>
 
 <li>30th September 2021 - IPC and sample rate issue</li>
 
 <li>31st May 2021</li>
 
-<li>4 - 29th July 2021</li>
-
-<li>6th August 2021 -- gdb compare strings</li>
-
 <li>8th October 2021</li>
 
 <li>8th September 2021</li>
 
 <li>9th April 2021</li>
-
-<li>9th August 2021 - SSD and AC Energy</li>
 
 <li>北京自来水是否可以冲奶</li>
 
@@ -10592,7 +10592,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20211009022607993" list="[[002 - 26th July 2021 -- lvalue, rvalue, unique_ptr &amp; shared_ptr]] [[001 - 23rd July 2021 -- vector's capability and subscript operator]]" modified="20211009024439104" title="$:/StoryList">
+<div created="20211009022607993" list="[[007 - 9th August 2021 - SSD and AC Energy]] [[006 - 6th August 2021 -- gdb compare strings]] [[009 - 18th August 2021]] [[010 - 16th August 2021]] [[009 - 13th August 2021]] [[008 - 10th August 2021 - pgrep]] [[005 - 30th July 2021]] [[004 - 29th July 2021]] [[003 - 28th July 2021 - hash &amp; unordered_map]] [[002 - 26th July 2021 -- lvalue, rvalue, unique_ptr &amp; shared_ptr]] [[001 - 23rd July 2021 -- vector's capability and subscript operator]]" modified="20211009024717815" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -10751,6 +10751,259 @@ Function's returns are l-value, temprary values are r-value; &quot;a = b&quot; y
 
 https://www.learncpp.com/cpp-tutorial/rvalue-references/</pre>
 </div>
+<div created="20210729030827382" modified="20211009024451704" tags="[[Sisyphus's Rock]] Journal" title="003 - 28th July 2021 - hash &amp; unordered_map">
+<pre>```
+class A { ... };
+
+shared_ptr&lt;A&gt; ptr = make_shared&lt;A&gt;();
+hash&lt;A*&gt; ptrHash;
+size_t hashValue;
+unordered_map&lt;size_t, shared_ptr&lt;A&gt;&gt; listA;
+
+hashValue = ptrHash(ptr.get());
+listA[hashValue] = ptr;
+
+for (auto &amp;[key, val] : listA) {
+    ...
+}
+
+```
+
+
+</pre>
+</div>
+<div created="20210729031434558" modified="20211009024500616" tags="[[Sisyphus's Rock]] Journal" title="004 - 29th July 2021">
+<pre>! ''override'' specifier
+
+标记的函数要不是从父类继承的就编译错误。
+
+```
+class A {
+    virtual int dothings(int a) { ... }
+};
+
+class B : public A
+{
+    virtual int dothings(int a) const override    // A::dothing() is not const，compile error.
+    { ... }
+};
+
+```
+
+! ''final'' specifier
+
+标记的类或函数不允许继承和重载。
+
+```
+class A {
+   virtual int dothings(int a) {... }
+};
+
+class B : public A {
+   virtual int dothings(int a) override final
+   { ... }
+};
+
+class C : public B {
+   virtual int dothings(int a) overrride // B::dothings() is final, compile error.
+   { ... }
+}
+
+class A final
+{ ... };
+
+class B : public A      // class A is final, compile error.
+{ ... };
+
+```
+
+
+</pre>
+</div>
+<div created="20210730072330611" modified="20211009024516096" tags="[[Sisyphus's Rock]] Journal" title="005 - 30th July 2021">
+<pre>! ''Element Management in PVW base on the below command.''
+
+```
+
+ffmpeg -i ../bbb_h264_480p_30fps_aac.mp4 -i ../sample.mp4 -filter_complex &quot;nullsrc=s=1270x720[bg];[0:v]null,[bg]overlay=0:0[mid1];[1:v]scale=100:100,[mid1]overlay=100:100[mid2];[mid2]drawtext=box=1:boxborderw=13:boxcolor=#ffffff@0.0:x='if(gte(t,0),if(eq(ld(0),0),st(0,t),NAN));if(gte(t,0), (main_w-mod((t-ld(0))*88.00,main_w+2425.00)), NAN)':y=55.00:fontcolor=#ffffff@1.0:fontsize=48:text='xxxxxxxxxxxxxxxxxxxx'[mid3];[0:a][1:a]amix[aout]&quot; -map &quot;[mid3]&quot; -map &quot;[aout]&quot; -c:v libx264 -c:a aac  abc.mp4
+```
+
+!'' [X264 Reading]  copy yuv from x264_picture_t to x264_frame_t''
+
+x264_plane_copy_deinterleave_c(pixel *dsta, int i_dsta, pixel *dstb, int i_dstb, pixel *src, int i_src, int w, int h);
+
+CSP -- Colorspace Profile (NV12, I420, YUVU, ...), two types: planar | packed
+
+```
+
+struct x264_t {
+    x264_mc_functions_t mc;
+}
+
+struct x264_picture_t {
+    x264_image_t  img;
+};
+
+struct x264_image_t {
+    uint8_t *plane[4];  
+    // YUVU : [0] YU YV YU YV ...
+};
+
+struct x264_frame_t {
+    pixel *plane[3];          // pixel AKA uint8_t   [0] Y , [1] UV
+    // plane[1]
+   
+};
+
+x264_encoder_encode(x264_t *h, ... , x264_picture_t pic_in, x264_picture_t pic_out)
+    x264_frame_t *fenc = ... &quot;get a frame buffer from somewhere&quot;;
+    x264_frame_copy_picture(h, fenc, pic_in); 
+        h-&gt;mc.plane_copy_deinterleave_yuvu( ... ); // this function AKA x264_plane_copy_deinterleave_c( ... );
+        
+        
+
+```
+
+Next Step: x264_adaptive_quant_frame( ... )
+</pre>
+</div>
+<div created="20210806034642280" modified="20211009024715375" tags="[[Sisyphus's Rock]] Journal" title="006 - 6th August 2021 -- gdb compare strings">
+<pre>''[gdb compare strings]''
+
+```
+(gdb) help function
+Placeholder command for showing help on convenience functions.
+
+List of function subcommands:
+
+function _memeq -- $_memeq - compare bytes of memory
+function _regex -- $_regex - check if a string matches a regular expression
+function _streq -- $_streq - check string equality
+function _strlen -- $_strlen - compute string length
+function caller_is -- Return True if the calling function's name is equal to a string
+function caller_matches -- Return True if the calling function's name matches a string
+function in_scope -- Return True if all the given variables or macros are in scope
+
+Type &quot;help function&quot; followed by function subcommand name for full documentation.
+Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;.
+Command name abbreviations are allowed if unambiguous.
+(gdb) break link_filter_inouts if $_streq(filt_ctx-&gt;filter-&gt;name, &quot;amix&quot;)
+Note: breakpoint 1 also set at pc 0x507490.
+Breakpoint 2 at 0x507490: file src/libavfilter/graphparser.c, line 263.
+```</pre>
+</div>
+<div created="20210809082501299" modified="20211009024732160" tags="[[Sisyphus's Rock]] Journal" title="007 - 9th August 2021 - SSD and AC Energy">
+<pre>SSD (Sum of Squared Difference) -- 方差
+
+AC Energy -- 交流能量：宏块内各像素值差别越大，方差越大，交流量越大；反之，纯色块其方差为0，属直流宏块。
+
+x264_8_adaptive_quant_frame (x264_t h, x264_frame_t  frame, ..)  -- 计算frame的平均SSD 和 sum 存入 frame 中的 i_pixel_ssd[] 和 i_pixel_sum 成员变量。</pre>
+</div>
+<div created="20210810022709724" modified="20211009024740311" tags="[[Sisyphus's Rock]] Journal" title="008 - 10th August 2021 - pgrep">
+<pre>https://www.thegeekstuff.com/2012/08/gprof-tutorial/
+
+https://sourceware.org/binutils/docs/gprof/
+
+```
+$ gprof -a -b ./x264 gmon.out | tee analyze.log
+```</pre>
+</div>
+<div created="20210813085456818" modified="20211009024753168" tags="[[Sisyphus's Rock]] Journal" title="009 - 13th August 2021">
+<pre>What did I get today?
+
+When I get an audio equipment, I'm not as excited as getting a camera or that kind of things.
+
+~Peter ~McKinnon: it's never as exciting as getting a new camera or something else like that. because it's so easy overlooked.</pre>
+</div>
+<div created="20210818023602314" modified="20211009024623856" tags="[[Sisyphus's Rock]] Journal" title="009 - 18th August 2021">
+<pre>```
+valgrind --vgdb=yes --vgdb-error=0 ./testpvw
+valgrind --track-origins=yes --log-file=&quot;valgrind.log&quot; ./testpvw
+
+```</pre>
+</div>
+<div created="20210816040545956" modified="20211009024811170" tags="[[Sisyphus's Rock]] Journal" title="010 - 16th August 2021">
+<pre>https://www.valgrind.org/docs/manual/manual-core-adv.html
+
+! &lt;a name=&quot;manual-core-adv.gdbserver-simple&quot;&gt;&lt;/a&gt;3.2.1. Quick Start: debugging in 3 steps
+&lt;p&gt;The simplest way to get started is to run Valgrind with the
+flag &lt;code class=&quot;option&quot;&gt;--vgdb-error=0&lt;/code&gt;.  Then follow the on-screen
+directions, which give you the precise commands needed to start GDB
+and connect it to your program.&lt;/p&gt;
+&lt;p&gt;Otherwise, here's a slightly more verbose overview.&lt;/p&gt;
+&lt;p&gt;If you want to debug a program with GDB when using the Memcheck
+tool, start Valgrind like this:
+&lt;/p&gt;
+&lt;pre&gt;
+valgrind --vgdb=yes --vgdb-error=0 prog
+&lt;/pre&gt;
+&lt;p&gt;In another shell, start GDB:
+&lt;/p&gt;
+&lt;pre&gt;
+gdb prog
+&lt;/pre&gt;
+&lt;p&gt;Then give the following command to GDB:
+&lt;/p&gt;
+&lt;pre&gt;
+(gdb) target remote | vgdb
+&lt;/pre&gt;
+&lt;p&gt;You can now debug your program e.g. by inserting a breakpoint
+and then using the GDB &lt;code class=&quot;computeroutput&quot;&gt;continue&lt;/code&gt;
+command.&lt;/p&gt;
+&lt;p&gt;This quick start information is enough for basic usage of the
+Valgrind gdbserver.  The sections below describe more advanced
+functionality provided by the combination of Valgrind and GDB. Note
+that the command line flag &lt;code class=&quot;option&quot;&gt;--vgdb=yes&lt;/code&gt; can be omitted,
+as this is the default value.
+&lt;/p&gt;
+
+
+```
+target_link_libraries(test Threads::Threads)
+
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+
+target_link_libraries(test PRIVATE Engine ... Threads::Threads)
+```
+
+
+
+&lt;pre&gt;
+/**
+ * Clip a signed integer value into the 0-255 range.
+ * @param a value to clip
+ * @return clipped value
+ */
+static av_always_inline av_const uint8_t av_clip_uint8_c(int a)
+{
+    if (a&amp;amp;(~0xFF)) return (~a)&amp;gt;&amp;gt;31;
+    else           return a;
+}
+&lt;/pre&gt;
+
+左移操作取决于符号位，符号位是0则左移补0，符号位是1左移则补1； ''右移''操作始终补0.
+
+
+YUV
+
+```
+4:2:0 并不意味着只有 Y、Cb，而没有Cr分量。它指得是对每行扫描线来说，只有一种色度分量以 2:1 的抽样率存储。相邻的扫描行存储不同的色度分量， 也就是说，如果一行是 4:2:0 的话，下一行就是 4:0:2，再下一行是4:2:0... 以此类推。对每个色度分量来说，水平方向和竖直方向的抽样率都是 2:1，所以可以说色度的抽样率是4:1。对非压缩的 8bit 量化的视频来说，每个由 2x2 个 2 行 2 列相邻的像素组成的宏像素需要占用 6 字节内存（亮度4个字节,两个色度各1个字节）。
+
+下面八个像素为：
+
+[Y0 U0 V0]  [Y1 U1 V1]  [Y2 U2 V2]  [Y3 U3 V3]
+
+[Y5 U5 V5]  [Y6 U6 V6]  [Y7 U7 V7]  [Y8 U8 V8]
+存放的码流为：
+
+Y0 U0  Y1  Y2 U2  Y3  Y5 V5  Y6  Y7 V7  Y8
+映射出的像素点为：
+
+[Y0 U0 V5]  [Y1 U0 V5]  [Y2 U2 V7]  [Y3 U2 V7]
+[Y5 U0 V5]  [Y6 U0 V5]  [Y7 U2 V7]  [Y8 U2 V7]
+```</pre>
+</div>
 <div created="20210131171503618" modified="20210217114701440" tags="英语学习 Journal [[February 2021]]" title="01st February 2021">
 <pre>[[topcoder|https://www.topcoder.com/community/competitive-programming/tutorials/computational-complexity-section-1/]]
 
@@ -10895,15 +11148,6 @@ Clearly this will occur always when one of the runtime functions grows asymptoti
 # neglect - 忽视
 # asymptotically - 逐渐地</pre>
 </div>
-<div created="20210810022709724" modified="20210810022842571" tags="[[Sisyphus's Rock]] Journal" title="10th August 2021 - pgrep">
-<pre>https://www.thegeekstuff.com/2012/08/gprof-tutorial/
-
-https://sourceware.org/binutils/docs/gprof/
-
-```
-$ gprof -a -b ./x264 gmon.out | tee analyze.log
-```</pre>
-</div>
 <div created="20210110221624935" modified="20210217113120531" tags="英语学习 Journal [[January 2021]]" title="11th January 2021">
 <pre>THE MEGAPHONE has been taken away. On January 8th Twitter, a social network, announced that it was “permanently suspending” President Donald Trump's account. Viewed in isolation, the two tweets that led to the ban were, by Mr Trump’s standards, fairly innocuous. But Twitter said it had taken its decision in the wake of the riot at America's Congress on January 6th, in which five people died as legislators' offices were ransacked by a crowd of Mr Trump's supporters after Mr Trump had encouraged them to march on the Capitol. The social network said that continuing to give Mr Trump access risked allowing him to incite further violence.
 
@@ -10963,13 +11207,6 @@ One early flashpoint could be India, where Facebook is embroiled in the struggle
 # 100km north of downtown Los Angeles 
 # the grid - 输电网
 # civilization - 现代生活</pre>
-</div>
-<div created="20210813085456818" modified="20210926132737676" tags="[[Sisyphus's Rock]] Journal" title="13th August 2021">
-<pre>What did I get today?
-
-When I get an audio equipment, I'm not as excited as getting a camera or that kind of things.
-
-~Peter ~McKinnon: it's never as exciting as getting a new camera or something else like that. because it's so easy overlooked.</pre>
 </div>
 <div created="20210113011120137" modified="20210217115302188" tags="英语学习 Journal [[January 2021]]" title="13th January 2021">
 <pre>Other social networks have taken a similarly tough line. Facebook has said that Mr Trump's account will be banned for “at least” the remainder of his term in office, which is due to expire on January 20th. Snapchat, a smaller social network, has likewise blocked the president's access. Besides defenestrating Mr Trump, Twitter also banned the accounts of Michael Flynn and Sidney Powell, two of the president’s dwindling circle of allies. And it promised to do the same for accounts dedicated to QAnon, a nutty but resilient conspiracy theory that holds that America is run by a cabal of Satanic paedophiles.
@@ -11238,88 +11475,6 @@ Note that even the exact runtime function f doesn’t give an exact answer to th
 ;The root cause was neither disconnection nor delay, it's update_req on a wrong frame.
 [img[mindmap-Daobo-LiveProductionSwitcher.drawio.svg]]</pre>
 </div>
-<div created="20210816040545956" modified="20210816145229065" tags="[[Sisyphus's Rock]] Journal" title="16th August 2021">
-<pre>https://www.valgrind.org/docs/manual/manual-core-adv.html
-
-! &lt;a name=&quot;manual-core-adv.gdbserver-simple&quot;&gt;&lt;/a&gt;3.2.1. Quick Start: debugging in 3 steps
-&lt;p&gt;The simplest way to get started is to run Valgrind with the
-flag &lt;code class=&quot;option&quot;&gt;--vgdb-error=0&lt;/code&gt;.  Then follow the on-screen
-directions, which give you the precise commands needed to start GDB
-and connect it to your program.&lt;/p&gt;
-&lt;p&gt;Otherwise, here's a slightly more verbose overview.&lt;/p&gt;
-&lt;p&gt;If you want to debug a program with GDB when using the Memcheck
-tool, start Valgrind like this:
-&lt;/p&gt;
-&lt;pre&gt;
-valgrind --vgdb=yes --vgdb-error=0 prog
-&lt;/pre&gt;
-&lt;p&gt;In another shell, start GDB:
-&lt;/p&gt;
-&lt;pre&gt;
-gdb prog
-&lt;/pre&gt;
-&lt;p&gt;Then give the following command to GDB:
-&lt;/p&gt;
-&lt;pre&gt;
-(gdb) target remote | vgdb
-&lt;/pre&gt;
-&lt;p&gt;You can now debug your program e.g. by inserting a breakpoint
-and then using the GDB &lt;code class=&quot;computeroutput&quot;&gt;continue&lt;/code&gt;
-command.&lt;/p&gt;
-&lt;p&gt;This quick start information is enough for basic usage of the
-Valgrind gdbserver.  The sections below describe more advanced
-functionality provided by the combination of Valgrind and GDB. Note
-that the command line flag &lt;code class=&quot;option&quot;&gt;--vgdb=yes&lt;/code&gt; can be omitted,
-as this is the default value.
-&lt;/p&gt;
-
-
-```
-target_link_libraries(test Threads::Threads)
-
-set(THREADS_PREFER_PTHREAD_FLAG ON)
-find_package(Threads REQUIRED)
-
-target_link_libraries(test PRIVATE Engine ... Threads::Threads)
-```
-
-
-
-&lt;pre&gt;
-/**
- * Clip a signed integer value into the 0-255 range.
- * @param a value to clip
- * @return clipped value
- */
-static av_always_inline av_const uint8_t av_clip_uint8_c(int a)
-{
-    if (a&amp;amp;(~0xFF)) return (~a)&amp;gt;&amp;gt;31;
-    else           return a;
-}
-&lt;/pre&gt;
-
-左移操作取决于符号位，符号位是0则左移补0，符号位是1左移则补1； ''右移''操作始终补0.
-
-
-YUV
-
-```
-4:2:0 并不意味着只有 Y、Cb，而没有Cr分量。它指得是对每行扫描线来说，只有一种色度分量以 2:1 的抽样率存储。相邻的扫描行存储不同的色度分量， 也就是说，如果一行是 4:2:0 的话，下一行就是 4:0:2，再下一行是4:2:0... 以此类推。对每个色度分量来说，水平方向和竖直方向的抽样率都是 2:1，所以可以说色度的抽样率是4:1。对非压缩的 8bit 量化的视频来说，每个由 2x2 个 2 行 2 列相邻的像素组成的宏像素需要占用 6 字节内存（亮度4个字节,两个色度各1个字节）。
-
-下面八个像素为：
-
-[Y0 U0 V0]  [Y1 U1 V1]  [Y2 U2 V2]  [Y3 U3 V3]
-
-[Y5 U5 V5]  [Y6 U6 V6]  [Y7 U7 V7]  [Y8 U8 V8]
-存放的码流为：
-
-Y0 U0  Y1  Y2 U2  Y3  Y5 V5  Y6  Y7 V7  Y8
-映射出的像素点为：
-
-[Y0 U0 V5]  [Y1 U0 V5]  [Y2 U2 V7]  [Y3 U2 V7]
-[Y5 U0 V5]  [Y6 U0 V5]  [Y7 U2 V7]  [Y8 U2 V7]
-```</pre>
-</div>
 <div created="20210215172044496" modified="20210217144118232" tags="英语学习 Journal [[February 2021]]" title="16th February 2021">
 <pre>[[''Vaccine Hesitancy'']]
 
@@ -11392,13 +11547,6 @@ Must be set after all options are set but before all use.
 * incoming
 ** Time base for the incoming frames
 </pre>
-</div>
-<div created="20210818023602314" modified="20210818023656722" tags="[[Sisyphus's Rock]] Journal" title="18th August 2021">
-<pre>```
-valgrind --vgdb=yes --vgdb-error=0 ./testpvw
-valgrind --track-origins=yes --log-file=&quot;valgrind.log&quot; ./testpvw
-
-```</pre>
 </div>
 <div created="20210218011111671" modified="20210219005021428" tags="英语学习 Journal [[February 2021]]" title="18th February 2021">
 <pre>The f (N) = O(N^^2^^) upper bound gives us almost the same – it guarantees that the growth of the runtime function is at most quadratic.
@@ -12201,74 +12349,6 @@ A side note. If the reader doesn’t trust the simplifications we made when usin
 
 # arbitrary - 任意的</pre>
 </div>
-<div created="20210729030827382" modified="20211009022519250" tags="[[Sisyphus's Rock]] Journal" title="3 - 28th July 2021 - hash &amp; unordered_map">
-<pre>```
-class A { ... };
-
-shared_ptr&lt;A&gt; ptr = make_shared&lt;A&gt;();
-hash&lt;A*&gt; ptrHash;
-size_t hashValue;
-unordered_map&lt;size_t, shared_ptr&lt;A&gt;&gt; listA;
-
-hashValue = ptrHash(ptr.get());
-listA[hashValue] = ptr;
-
-for (auto &amp;[key, val] : listA) {
-    ...
-}
-
-```
-
-
-</pre>
-</div>
-<div created="20210730072330611" modified="20210730103436113" tags="[[Sisyphus's Rock]] Journal" title="30th July 2021">
-<pre>! ''Element Management in PVW base on the below command.''
-
-```
-
-ffmpeg -i ../bbb_h264_480p_30fps_aac.mp4 -i ../sample.mp4 -filter_complex &quot;nullsrc=s=1270x720[bg];[0:v]null,[bg]overlay=0:0[mid1];[1:v]scale=100:100,[mid1]overlay=100:100[mid2];[mid2]drawtext=box=1:boxborderw=13:boxcolor=#ffffff@0.0:x='if(gte(t,0),if(eq(ld(0),0),st(0,t),NAN));if(gte(t,0), (main_w-mod((t-ld(0))*88.00,main_w+2425.00)), NAN)':y=55.00:fontcolor=#ffffff@1.0:fontsize=48:text='xxxxxxxxxxxxxxxxxxxx'[mid3];[0:a][1:a]amix[aout]&quot; -map &quot;[mid3]&quot; -map &quot;[aout]&quot; -c:v libx264 -c:a aac  abc.mp4
-```
-
-!'' [X264 Reading]  copy yuv from x264_picture_t to x264_frame_t''
-
-x264_plane_copy_deinterleave_c(pixel *dsta, int i_dsta, pixel *dstb, int i_dstb, pixel *src, int i_src, int w, int h);
-
-CSP -- Colorspace Profile (NV12, I420, YUVU, ...), two types: planar | packed
-
-```
-
-struct x264_t {
-    x264_mc_functions_t mc;
-}
-
-struct x264_picture_t {
-    x264_image_t  img;
-};
-
-struct x264_image_t {
-    uint8_t *plane[4];  
-    // YUVU : [0] YU YV YU YV ...
-};
-
-struct x264_frame_t {
-    pixel *plane[3];          // pixel AKA uint8_t   [0] Y , [1] UV
-    // plane[1]
-   
-};
-
-x264_encoder_encode(x264_t *h, ... , x264_picture_t pic_in, x264_picture_t pic_out)
-    x264_frame_t *fenc = ... &quot;get a frame buffer from somewhere&quot;;
-    x264_frame_copy_picture(h, fenc, pic_in); 
-        h-&gt;mc.plane_copy_deinterleave_yuvu( ... ); // this function AKA x264_plane_copy_deinterleave_c( ... );
-        
-        
-
-```
-
-Next Step: x264_adaptive_quant_frame( ... )
-</pre>
-</div>
 <div created="20210330024613380" modified="20210402005902160" tags="[[March 2021]] Journal 英语学习" title="30th March 2021">
 <pre>Notes on logarithms
 
@@ -12353,79 +12433,6 @@ crush - 击碎
 go ahead - 继续
 ```
 </pre>
-</div>
-<div created="20210729031434558" modified="20211009022507154" tags="[[Sisyphus's Rock]] Journal" title="4 - 29th July 2021">
-<pre>! ''override'' specifier
-
-标记的函数要不是从父类继承的就编译错误。
-
-```
-class A {
-    virtual int dothings(int a) { ... }
-};
-
-class B : public A
-{
-    virtual int dothings(int a) const override    // A::dothing() is not const，compile error.
-    { ... }
-};
-
-```
-
-! ''final'' specifier
-
-标记的类或函数不允许继承和重载。
-
-```
-class A {
-   virtual int dothings(int a) {... }
-};
-
-class B : public A {
-   virtual int dothings(int a) override final
-   { ... }
-};
-
-class C : public B {
-   virtual int dothings(int a) overrride // B::dothings() is final, compile error.
-   { ... }
-}
-
-class A final
-{ ... };
-
-class B : public A      // class A is final, compile error.
-{ ... };
-
-```
-
-
-</pre>
-</div>
-<div created="20210806034642280" modified="20210810094442843" tags="[[Sisyphus's Rock]] Journal" title="6th August 2021 -- gdb compare strings">
-<pre>''[gdb compare strings]''
-
-```
-(gdb) help function
-Placeholder command for showing help on convenience functions.
-
-List of function subcommands:
-
-function _memeq -- $_memeq - compare bytes of memory
-function _regex -- $_regex - check if a string matches a regular expression
-function _streq -- $_streq - check string equality
-function _strlen -- $_strlen - compute string length
-function caller_is -- Return True if the calling function's name is equal to a string
-function caller_matches -- Return True if the calling function's name matches a string
-function in_scope -- Return True if all the given variables or macros are in scope
-
-Type &quot;help function&quot; followed by function subcommand name for full documentation.
-Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;.
-Command name abbreviations are allowed if unambiguous.
-(gdb) break link_filter_inouts if $_streq(filt_ctx-&gt;filter-&gt;name, &quot;amix&quot;)
-Note: breakpoint 1 also set at pc 0x507490.
-Breakpoint 2 at 0x507490: file src/libavfilter/graphparser.c, line 263.
-```</pre>
 </div>
 <div created="20211008023516717" modified="20211008075114077" tags="[[Sisyphus's Rock]] Journal" title="8th October 2021">
 <pre>&lt;style&gt;
@@ -12706,13 +12713,6 @@ Now we want to sum the work done on all levels of the tree. Again, this is a geo
 It follows that the total amount of work in our tree is [img[https://images.ctfassets.net/piwi0eufbb2g/2L64R8CZ5vytan2FAbZi5o/0ed5a6a567481f00051246d880a4f470/new92.png]] and we are done.
 
 Note that the base-3 logarithm ends in the exponent, that’s why the base is important. If the base was different, also the result would be asymptotically different.</pre>
-</div>
-<div created="20210809082501299" modified="20210809083417459" tags="[[Sisyphus's Rock]] Journal" title="9th August 2021 - SSD and AC Energy">
-<pre>SSD (Sum of Squared Difference) -- 方差
-
-AC Energy -- 交流能量：宏块内各像素值差别越大，方差越大，交流量越大；反之，纯色块其方差为0，属直流宏块。
-
-x264_8_adaptive_quant_frame (x264_t h, x264_frame_t  frame, ..)  -- 计算frame的平均SSD 和 sum 存入 frame 中的 i_pixel_ssd[] 和 i_pixel_sum 成员变量。</pre>
 </div>
 <div created="20210113072853970" modified="20210219182419146" tags="[[ToDo List]] task done" title="北京自来水是否可以冲奶">
 <pre>黄帝内经 - 异法方宜论 : 
