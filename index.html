@@ -289,6 +289,8 @@ Error message and password prompt
 
 <li>023 - 1st October 2021 - CSS</li>
 
+<li>024 - 8th October 2021</li>
+
 <li>03rd February 2021</li>
 
 <li>0421 Microsoft interview</li>
@@ -354,8 +356,6 @@ Error message and password prompt
 <li>30th March 2021</li>
 
 <li>31st May 2021</li>
-
-<li>8th October 2021</li>
 
 <li>9th April 2021</li>
 
@@ -10592,7 +10592,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20211009032838596" list="[[023 - 1st October 2021 - CSS]] [[022 - 30th September 2021 - IPC and sample rate issue]] [[021 - 29th September 2021]] [[020 - 28th September 2021]] [[019 - 27th September 2021 - Daobo UML]] [[018 - 26th September 2021]] [[017 - 24th September 2021]]" modified="20211009033032661" title="$:/StoryList">
+<div created="20211009032838596" list="[[024 - 8th October 2021]] [[023 - 1st October 2021 - CSS]] [[022 - 30th September 2021 - IPC and sample rate issue]] [[021 - 29th September 2021]] [[020 - 28th September 2021]] [[019 - 27th September 2021 - Daobo UML]] [[018 - 26th September 2021]] [[017 - 24th September 2021]]" modified="20211009033041893" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11681,6 +11681,80 @@ INT64_C(1000000) --&gt; 1000000L
 ;float point overflow 上溢出和下溢出
 ;函数的调用和返回流程</pre>
 </div>
+<div created="20211008023516717" modified="20211009033050429" tags="[[Sisyphus's Rock]] Journal" title="024 - 8th October 2021">
+<pre>&lt;style&gt;
+.highlight {
+    font-size: 21px;
+}
+&lt;/style&gt;
+
+[git cherry-pick usage] https://www.atlassian.com/git/tutorials/cherry-pick
+
+
+```
+[2021/10/08-10:45:12][4883][0x7feb28304010] Audio Frame Sample Rate pin[4] -&gt; idx[0]: 48000
+[2021/10/08-10:45:12][4883] [ain0 @ 0x7feac74f8840] filter context - fmt: fltp r: 44100 layout: 3 ch: 2, incoming frame - fmt: fltp r: 48000 layout: 3F ch: 6 pts_time: 159.847
+```
+
+&lt;a class=highlight&gt;1.&lt;/a&gt; `ain0` is the key, &lt;b&gt;which&lt;/b&gt; source file contain it?
+
+```
+# grep &quot;ain0&quot; *.cpp
+AudioResample.cpp:    snprintf(args, 512, &quot;[ain0]aformat=sample_fmts=%s:channel_layouts=%s:sample_rates=%d,volume=volume=%lf[aout0]&quot;,
+AudioResample.cpp:    in-&gt;name = av_strdup(&quot;ain0&quot;);
+filter.cpp:     int ret = avfilter_graph_create_filter(&amp;abuffer_Ctx, avfilter_get_by_name(&quot;abuffer&quot;), &quot;ain0&quot;, args, NULL, audio_graph);
+split.cpp:    snprintf(args,128,&quot;[ain0]asplit=2[aout0][aoutSp]&quot;);
+split.cpp:    in_buffer-&gt;name = av_strdup(&quot;ain0&quot;);
+```
+
+&lt;a class=highlight&gt;2.&lt;/a&gt; filter.cpp is suspicious, change all of them to make the names meaningful.
+
+```
+[2021/10/08-11:10:59][9144][0x7f16ea332b70] Audio Frame Sample Rate pin[4] -&gt; idx[0]: 48000
+[2021/10/08-11:10:59][9144][0x7f16ea332b70] Audio Frame Sample Rate pin[5] -&gt; idx[1]: 48000
+[2021/10/08-11:10:59][9144] [ain1 @ 0x7f16ea649a40] filter context - fmt: fltp r: 44100 layout: 3 ch: 2, incoming frame - fmt: fltp r: 48000 layout: 3F ch: 6 pts_time: 106.296
+[2021/10/08-11:10:59][9144] [ain1 @ 0x7f16ea649a40] Changing audio frame properties on the fly is not supported.
+     Last message repeated 1 times.
+[2021/10/08-11:10:59][9144][0x7f16ea645270] Error while feeding audio[5] filtergraph.
+[2021/10/08-11:10:59][9144] [ain0 @ 0x7f16ea648c40] filter context - fmt: fltp r: 44100 layout: 3 ch: 2, incoming frame - fmt: fltp r: 48000 layout: 3F ch: 6 pts_time: 106.324
+[2021/10/08-11:10:59][9144] [ain0 @ 0x7f16ea648c40] Changing audio frame properties on the fly is not supported.
+[2021/10/08-11:10:59][9144][0x7f16ea645270] Error while feeding audio[4] filtergraph.
+```
+
+&lt;a class=highlight&gt;3.&lt;/a&gt; the issue is not in any of the files I got on the above, it's AMix.cpp:
+
+```
+AMix.cpp:               snprintf(ain, 16, &quot;ain%d&quot;, j);
+AMix.cpp:               ret = avfilter_graph_create_filter(&amp;aCtx, avfilter_get_by_name(&quot;abuffer&quot;), ain, abuff, NULL, audio_graph);
+AMix.cpp:                        val.id, aCtx, ain, abuff, ret);
+```
+
+[img[Mix.drawio.svg]]
+
+&lt;a class=highlight&gt;4.&lt;/a&gt; gdb break in AMix to check if ~AudioResample is in the Filter Chain, because of the log, incomming frame is &quot;layout: 3F ch: 6&quot; and ~AudioResample parameter is &quot;aformat=stereo:sample_rates=44100&quot;. if incomming frame pass through the &quot;aformat&quot; filter, it shouldn't be ch: 6. (Confirm that with gdb log)
+
+```
+#0  StreamMix::PutFrame (this=0x7f17563bdd80, type=1, frame=0x7f174d7f2800, pin=4) at StreamMix.cpp:271
+#1  0x000000000054037f in StreamMix::BroadData (this=0x7f17563bdd80, p=..., pin=4) at StreamMix.cpp:340
+#2  0x0000000000541901 in Pin::fillBuffer (this=0x7f1754177f20, p=...) at MediaBase.h:57
+#3  0x00000000004d8092 in AspectRatio::fillBuffer (this=0x7f16e81f38f0, p=...) at AspectRatio.cpp:30
+#4  0x00000000004dd4dd in split::pushStream (this=0x7f175474a290, p=..., in=0x7f16ea663480, out_pre=0x7f16ea66c1c0,
+    out_from=0x7f175418da00, type=AUDIO, push=true) at split.cpp:226
+#5  0x00000000004dcc2a in split::fillBuffer (this=0x7f175474a290, p=...) at split.cpp:33
+#6  0x00000000004c72f2 in Decoder::sendFrame (this=0x7f1754199f80, frame=0x7f174c02f880, type=AUDIO, force_keyframe=false)
+    at Decoder.cpp:81
+```
+
+Audio Frames did not go through ~AudioResample module.
+
+&lt;a class=highlight&gt;5.&lt;/a&gt; Rearranging the ~SetupFilter() this issue is ''fixed''.
+
+What I got from this issue is Audio Frames with wrong parameter could be passed to encoder and muxer, and the output streams can be played smooth.
+
+-------------------------------------------------------------------------------
+
+Wrap the whole process, and isolate the related resources.</pre>
+</div>
 <div created="20210202175517701" modified="20210217115005143" tags="英语学习 Journal [[February 2021]]" title="03rd February 2021">
 <pre>A neat trick
 
@@ -12586,80 +12660,6 @@ crush - 击碎
 go ahead - 继续
 ```
 </pre>
-</div>
-<div created="20211008023516717" modified="20211008075114077" tags="[[Sisyphus's Rock]] Journal" title="8th October 2021">
-<pre>&lt;style&gt;
-.highlight {
-    font-size: 21px;
-}
-&lt;/style&gt;
-
-[git cherry-pick usage] https://www.atlassian.com/git/tutorials/cherry-pick
-
-
-```
-[2021/10/08-10:45:12][4883][0x7feb28304010] Audio Frame Sample Rate pin[4] -&gt; idx[0]: 48000
-[2021/10/08-10:45:12][4883] [ain0 @ 0x7feac74f8840] filter context - fmt: fltp r: 44100 layout: 3 ch: 2, incoming frame - fmt: fltp r: 48000 layout: 3F ch: 6 pts_time: 159.847
-```
-
-&lt;a class=highlight&gt;1.&lt;/a&gt; `ain0` is the key, &lt;b&gt;which&lt;/b&gt; source file contain it?
-
-```
-# grep &quot;ain0&quot; *.cpp
-AudioResample.cpp:    snprintf(args, 512, &quot;[ain0]aformat=sample_fmts=%s:channel_layouts=%s:sample_rates=%d,volume=volume=%lf[aout0]&quot;,
-AudioResample.cpp:    in-&gt;name = av_strdup(&quot;ain0&quot;);
-filter.cpp:     int ret = avfilter_graph_create_filter(&amp;abuffer_Ctx, avfilter_get_by_name(&quot;abuffer&quot;), &quot;ain0&quot;, args, NULL, audio_graph);
-split.cpp:    snprintf(args,128,&quot;[ain0]asplit=2[aout0][aoutSp]&quot;);
-split.cpp:    in_buffer-&gt;name = av_strdup(&quot;ain0&quot;);
-```
-
-&lt;a class=highlight&gt;2.&lt;/a&gt; filter.cpp is suspicious, change all of them to make the names meaningful.
-
-```
-[2021/10/08-11:10:59][9144][0x7f16ea332b70] Audio Frame Sample Rate pin[4] -&gt; idx[0]: 48000
-[2021/10/08-11:10:59][9144][0x7f16ea332b70] Audio Frame Sample Rate pin[5] -&gt; idx[1]: 48000
-[2021/10/08-11:10:59][9144] [ain1 @ 0x7f16ea649a40] filter context - fmt: fltp r: 44100 layout: 3 ch: 2, incoming frame - fmt: fltp r: 48000 layout: 3F ch: 6 pts_time: 106.296
-[2021/10/08-11:10:59][9144] [ain1 @ 0x7f16ea649a40] Changing audio frame properties on the fly is not supported.
-     Last message repeated 1 times.
-[2021/10/08-11:10:59][9144][0x7f16ea645270] Error while feeding audio[5] filtergraph.
-[2021/10/08-11:10:59][9144] [ain0 @ 0x7f16ea648c40] filter context - fmt: fltp r: 44100 layout: 3 ch: 2, incoming frame - fmt: fltp r: 48000 layout: 3F ch: 6 pts_time: 106.324
-[2021/10/08-11:10:59][9144] [ain0 @ 0x7f16ea648c40] Changing audio frame properties on the fly is not supported.
-[2021/10/08-11:10:59][9144][0x7f16ea645270] Error while feeding audio[4] filtergraph.
-```
-
-&lt;a class=highlight&gt;3.&lt;/a&gt; the issue is not in any of the files I got on the above, it's AMix.cpp:
-
-```
-AMix.cpp:               snprintf(ain, 16, &quot;ain%d&quot;, j);
-AMix.cpp:               ret = avfilter_graph_create_filter(&amp;aCtx, avfilter_get_by_name(&quot;abuffer&quot;), ain, abuff, NULL, audio_graph);
-AMix.cpp:                        val.id, aCtx, ain, abuff, ret);
-```
-
-[img[Mix.drawio.svg]]
-
-&lt;a class=highlight&gt;4.&lt;/a&gt; gdb break in AMix to check if ~AudioResample is in the Filter Chain, because of the log, incomming frame is &quot;layout: 3F ch: 6&quot; and ~AudioResample parameter is &quot;aformat=stereo:sample_rates=44100&quot;. if incomming frame pass through the &quot;aformat&quot; filter, it shouldn't be ch: 6. (Confirm that with gdb log)
-
-```
-#0  StreamMix::PutFrame (this=0x7f17563bdd80, type=1, frame=0x7f174d7f2800, pin=4) at StreamMix.cpp:271
-#1  0x000000000054037f in StreamMix::BroadData (this=0x7f17563bdd80, p=..., pin=4) at StreamMix.cpp:340
-#2  0x0000000000541901 in Pin::fillBuffer (this=0x7f1754177f20, p=...) at MediaBase.h:57
-#3  0x00000000004d8092 in AspectRatio::fillBuffer (this=0x7f16e81f38f0, p=...) at AspectRatio.cpp:30
-#4  0x00000000004dd4dd in split::pushStream (this=0x7f175474a290, p=..., in=0x7f16ea663480, out_pre=0x7f16ea66c1c0,
-    out_from=0x7f175418da00, type=AUDIO, push=true) at split.cpp:226
-#5  0x00000000004dcc2a in split::fillBuffer (this=0x7f175474a290, p=...) at split.cpp:33
-#6  0x00000000004c72f2 in Decoder::sendFrame (this=0x7f1754199f80, frame=0x7f174c02f880, type=AUDIO, force_keyframe=false)
-    at Decoder.cpp:81
-```
-
-Audio Frames did not go through ~AudioResample module.
-
-&lt;a class=highlight&gt;5.&lt;/a&gt; Rearranging the ~SetupFilter() this issue is ''fixed''.
-
-What I got from this issue is Audio Frames with wrong parameter could be passed to encoder and muxer, and the output streams can be played smooth.
-
--------------------------------------------------------------------------------
-
-Wrap the whole process, and isolate the related resources.</pre>
 </div>
 <div created="20210409025901069" modified="20210409031210651" tags="英语学习 Journal April" title="9th April 2021">
 <pre>''Example 6. ''Let’s try to apply our new “recursion tree” method to solve the following recurrence equation:
