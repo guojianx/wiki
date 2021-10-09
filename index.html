@@ -331,13 +331,13 @@ Error message and password prompt
 
 <li>27th September 2021 - Daobo UML</li>
 
-<li>28th July 2021 - hash &amp; unordered_map</li>
-
 <li>28th September 2021</li>
 
 <li>29th September 2021</li>
 
 <li>2nd April 2021</li>
+
+<li>3 - 28th July 2021 - hash &amp; unordered_map</li>
 
 <li>30th July 2021</li>
 
@@ -10592,7 +10592,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20211009022232466" list="[[28th July 2021 - hash &amp; unordered_map]] [[4 - 29th July 2021]] [[2 - 26th July 2021 -- lvalue, rvalue, unique_ptr &amp; shared_ptr]] [[1 - 23rd July 2021 -- vector's capability and subscript operator]] [[Sisyphus's Rock]]" modified="20211009022455705" title="$:/StoryList">
+<div created="20211009022232466" list="[[3 - 28th July 2021 - hash &amp; unordered_map]] [[4 - 29th July 2021]] [[2 - 26th July 2021 -- lvalue, rvalue, unique_ptr &amp; shared_ptr]] [[1 - 23rd July 2021 -- vector's capability and subscript operator]] [[Sisyphus's Rock]]" modified="20211009022455705" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -12018,27 +12018,6 @@ gcc -ldl -Wl,--as-needed -Wl,-z,noexecstack -I/usr/include/freetype2 -o /tmp/ffc
 ```
 </pre>
 </div>
-<div created="20210729030827382" modified="20210729031355292" tags="[[Sisyphus's Rock]] Journal" title="28th July 2021 - hash &amp; unordered_map">
-<pre>```
-class A { ... };
-
-shared_ptr&lt;A&gt; ptr = make_shared&lt;A&gt;();
-hash&lt;A*&gt; ptrHash;
-size_t hashValue;
-unordered_map&lt;size_t, shared_ptr&lt;A&gt;&gt; listA;
-
-hashValue = ptrHash(ptr.get());
-listA[hashValue] = ptr;
-
-for (auto &amp;[key, val] : listA) {
-    ...
-}
-
-```
-
-
-</pre>
-</div>
 <div created="20210928020345791" modified="20210928100731252" tags="[[Sisyphus's Rock]] Journal" title="28th September 2021">
 <pre>;Merge the local branch to the remote daobo.git branch alpha.
 :Reference: https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
@@ -12221,6 +12200,27 @@ Combining both observations we get the final result: The total amount of work do
 A side note. If the reader doesn’t trust the simplifications we made when using this method, he is invited to treat this method as a “way of making a good guess” and then to prove the result using the substitution method. However, with a little effort the application of this method could also be upgraded to a full formal proof.
 
 # arbitrary - 任意的</pre>
+</div>
+<div created="20210729030827382" modified="20211009022519250" tags="[[Sisyphus's Rock]] Journal" title="3 - 28th July 2021 - hash &amp; unordered_map">
+<pre>```
+class A { ... };
+
+shared_ptr&lt;A&gt; ptr = make_shared&lt;A&gt;();
+hash&lt;A*&gt; ptrHash;
+size_t hashValue;
+unordered_map&lt;size_t, shared_ptr&lt;A&gt;&gt; listA;
+
+hashValue = ptrHash(ptr.get());
+listA[hashValue] = ptr;
+
+for (auto &amp;[key, val] : listA) {
+    ...
+}
+
+```
+
+
+</pre>
 </div>
 <div created="20210730072330611" modified="20210730103436113" tags="[[Sisyphus's Rock]] Journal" title="30th July 2021">
 <pre>! ''Element Management in PVW base on the below command.''
