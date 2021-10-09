@@ -10522,8 +10522,8 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div created="20201230023808396" modified="20210929035631356" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20201228150048917" modified="20211009095232926" title="$:/state/sidebar">
-<pre>yes</pre>
+<div created="20201228150048917" modified="20211009095302590" title="$:/state/sidebar">
+<pre>no</pre>
 </div>
 <div created="20210909023547312" modified="20210909023605584" title="$:/state/tab--1963855381">
 <pre>$:/themes/tiddlywiki/vanilla/themetweaks</pre>
@@ -11757,7 +11757,7 @@ What I got from this issue is Audio Frames with wrong parameter could be passed 
 
 Wrap the whole process, and isolate the related resources.</pre>
 </div>
-<div created="20211009033119125" modified="20211009095257591" tags="[[Sisyphus's Rock]] Journal" title="025 - 9th October 2021">
+<div created="20211009033119125" modified="20211009095832710" tags="[[Sisyphus's Rock]] Journal" title="025 - 9th October 2021">
 <pre>! Move Semantic
 : lvalue &amp; rvalue: rvalue has no storage and has no location.
 : motifiable lvalue, motifiable means non-const
@@ -11771,6 +11771,7 @@ Wrap the whole process, and isolate the related resources.</pre>
 ! Daobo Refactoring
 # To decouple mixer, manager and encPush from ~TaskBroadcast.cpp
 ## [Done] Create()
+##* [ToDo] move silent_auido_id to the front of Init(task), and remove it from Start(silent_audio_id)
 ## [Ongoing] ~UpdateStream()
 # To encapulate mixer manager and encPush into pvw and pgm module.
 
