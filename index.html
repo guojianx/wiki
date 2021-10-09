@@ -10520,8 +10520,8 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div created="20201230023808396" modified="20210929035631356" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20201228150048917" modified="20211009022220442" title="$:/state/sidebar">
-<pre>yes</pre>
+<div created="20201228150048917" modified="20211009031349156" title="$:/state/sidebar">
+<pre>no</pre>
 </div>
 <div created="20210909023547312" modified="20210909023605584" title="$:/state/tab--1963855381">
 <pre>$:/themes/tiddlywiki/vanilla/themetweaks</pre>
@@ -10592,7 +10592,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20211009030429671" list="[[016 - 23rd September 2021 - Live Production Switcher Summary]] [[015 - 22nd September 2021]] [[014 - 15th September 2021]] [[011 - 8th September 2021]] [[012 - 13th September 2021]] [[Sisyphus's Rock]] [[002 - 26th July 2021 -- lvalue, rvalue, unique_ptr &amp; shared_ptr]] GettingStarted" modified="20211009031045797" title="$:/StoryList">
+<div created="20211009030429671" list="[[016 - 23rd September 2021 - Live Production Switcher Summary]] [[015 - 22nd September 2021]] [[014 - 15th September 2021]] [[011 - 8th September 2021]] [[Sisyphus's Rock]] GettingStarted" modified="20211009031045797" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11004,7 +11004,7 @@ Y0 U0  Y1  Y2 U2  Y3  Y5 V5  Y6  Y7 V7  Y8
 [Y5 U0 V5]  [Y6 U0 V5]  [Y7 U2 V7]  [Y8 U2 V7]
 ```</pre>
 </div>
-<div created="20210908090228428" modified="20211009030820248" tags="[[Sisyphus's Rock]] Journal" title="011 - 8th September 2021">
+<div created="20210908090228428" modified="20211009031412095" tags="[[Sisyphus's Rock]] Journal" title="011 - 8th September 2021">
 <pre>!Symptom
 
 &lt;p&gt;flv muxer report error &quot;DTS Invalid&quot; and caused the program shutdown the connection 
@@ -11026,7 +11026,7 @@ There were two approaches I could take:
 
 By reading the ffmpeg code, I didn't spend much time to get fully understand the related logic, just got some sense about that ~AVFormateContext::max_interleve_delta cause the problem, it made &quot;forcing output&quot; occured in mux.c, and that would cause flv_write_packet() return EINVAL. 
 
-I searched max_interleave_delta in the offical code, to look for the way to set this variable propurly;  but I saw that there is nowhere this variable be set, it may be better not to change this variable manually.
+I searched max_interleave_delta in the offical code, to find a way to set this variable propurly;  but I saw that there is nowhere this variable be set, it may be better not to change this variable manually.
 
 When I removed max_interleave_delta setting codes, another issue emerged. the program would get stuck occasionally.
 
