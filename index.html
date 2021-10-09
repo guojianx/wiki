@@ -261,7 +261,13 @@ Error message and password prompt
 
 <li>010 - 16th August 2021</li>
 
-<li>011 - 13th September 2021</li>
+<li>011 - 8th September 2021</li>
+
+<li>012 - 13th September 2021</li>
+
+<li>013 - 14th September 2021</li>
+
+<li>014 - 15th September 2021</li>
 
 <li>01st February 2021</li>
 
@@ -283,11 +289,7 @@ Error message and password prompt
 
 <li>14th January 2021</li>
 
-<li>14th September 2021</li>
-
 <li>15th February 2021</li>
-
-<li>15th September 2021</li>
 
 <li>16th February 2021</li>
 
@@ -354,8 +356,6 @@ Error message and password prompt
 <li>31st May 2021</li>
 
 <li>8th October 2021</li>
-
-<li>8th September 2021</li>
 
 <li>9th April 2021</li>
 
@@ -10592,7 +10592,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20211009030429671" list="[[011 - 13th September 2021]] [[Sisyphus's Rock]] [[002 - 26th July 2021 -- lvalue, rvalue, unique_ptr &amp; shared_ptr]] GettingStarted" modified="20211009030639205" title="$:/StoryList">
+<div created="20211009030429671" list="[[014 - 15th September 2021]] [[011 - 8th September 2021]] [[012 - 13th September 2021]] [[Sisyphus's Rock]] [[002 - 26th July 2021 -- lvalue, rvalue, unique_ptr &amp; shared_ptr]] GettingStarted" modified="20211009031003333" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -11004,13 +11004,313 @@ Y0 U0  Y1  Y2 U2  Y3  Y5 V5  Y6  Y7 V7  Y8
 [Y5 U0 V5]  [Y6 U0 V5]  [Y7 U2 V7]  [Y8 U2 V7]
 ```</pre>
 </div>
-<div created="20210913072620011" modified="20211009030750743" tags="[[Sisyphus's Rock]] Journal" title="011 - 13th September 2021">
+<div created="20210908090228428" modified="20211009030820248" tags="[[Sisyphus's Rock]] Journal" title="011 - 8th September 2021">
+<pre>!Symptom
+
+&lt;p&gt;flv muxer report error &quot;DTS Invalid&quot; and caused the program shutdown the connection 
+ with the RTMP Live Streaming Server&lt;/p&gt;
+
+!Keys
+
+GDB, tcpdump, netstat, poll(), tcp half-closed.
+
+!Process
+
+;To find out ~AVFormateContext::max_interleve_delta and its side effects:
+av_interleave_write_frame() failed and it caused av_write_trailer() to be called to shut the connection between the server and the daobo down. Short before disconnecting, I observed the log &quot;forcing output&quot;, then flv muxer print invalid dts, it directly caused av_interleaved_write_frame() returned failure.
+
+There were two approaches I could take:
+
+# Read the code of ffmpeg and figure out what made the problem happen.
+# Compare with the official ffmpeg tool, find out the difference between daobo and ffmpeg tool.
+
+By reading the ffmpeg code, I didn't spend much time to get fully understand the related logic, just got some sense about that ~AVFormateContext::max_interleve_delta cause the problem, it made &quot;forcing output&quot; occured in mux.c, and that would cause flv_write_packet() return EINVAL. 
+
+I searched max_interleave_delta in the offical code, to look for the way to set this variable propurly;  but I saw that there is nowhere this variable be set, it may be better not to change this variable manually.
+
+When I removed max_interleave_delta setting codes, another issue emerged. the program would get stuck occasionally.
+
+;To locate the stuck point with gdb, here is the trick I use for that:
+
+:In the program code, print every threads' tid with the following code
+```
+ostringstream ss;
+ss &lt;&lt; this_thread::get_id();
+size_t tid = stoll(ss.str());
+snprintf(tag, sizeof(tag), &quot;[tid @ 0x%lx]&quot;, tid);
+```
+: To find out the suspicious thread: the stuck point probably is in the encode&amp;output thread. there's hundreds threads within the process, record the threads info in a file, and searching the file with vim will much easier to find the thread number for gdb-thread command use.
+
+```
+# gdb -p &lt;pid&gt;
+&gt; set log on
+&gt; info threads
+/* search gdb.txt file with the encode&amp;output thread's tid, get the thread number &lt;num&gt;. */
+&gt; thread &lt;num&gt;
+```
+:In the thread, I found out poll() the tcp socket always return 0, and no `revent` occurs, that cause ff_network_wait_fd_timeout() hang in an inifinity loop.
+
+;To find out what happened on the tcp connection:
+: by reading the Manual, poll() returned 0, means the tcp socket was not ready to write, and the `revent` field was zero, it indicated that no error occured. 
+
+:by using tcpdump and netstat to get some clue
+```
+$ netstat -antp
+   -a, --all
+       Show  both  listening  and  non-listening (for TCP this means established connections) sockets. 
+   --numeric , -n
+       Show numerical addresses instead of trying to determine symbolic host, port or user names.
+   -t
+       Show TCP sockets only.
+   -p, --program
+       Show the PID and name of the program to which each socket belongs.
+```
+: the command I used was `watch -n 0.5 &quot;netstat -antp | grep daobo&quot;`, 'watch' is better then 'netstat -c', which is easier to read.
+
+```
+# watch -n 0.5 &quot;netstat -anpt | grep daobo&quot;
+Every 0.5s: netstat -anpt | grep daobo                                                                        Fri Sep 10 14:36:32 2021
+
+tcp     6507      0 192.168.1.32:48974      182.138.102.134:1935    ESTABLISHED 19694/daobo
+tcp        0      0 192.168.1.32:46650      192.168.0.61:1936       ESTABLISHED 19694/daobo
+tcp        0      0 192.168.1.32:44454      120.52.72.9:1935        ESTABLISHED 19694/daobo
+tcp        1      0 192.168.1.32:54998      192.168.0.181:3306      CLOSE_WAIT  19694/daobo
+tcp        0    157 192.168.1.32:39180      221.196.251.229:1935    CLOSE_WAIT  19694/daobo
+tcp        0      0 192.168.1.32:53638      192.168.0.61:1936       ESTABLISHED 19694/daobo
+```
+: According to the netstat outputs, I saw the connection to the Live Streaming Server was CLOSE_WAIT, see the following explanation. That is the reason why poll() return 0 without any returned event (revent == 0).
+```
+        CLOSE_WAIT
+              The remote end has shut down, waiting for the socket to close.
+```
+
+:found out that about 3 seconds after connecting to the Live Streaming Server, the server send a FIN to the daobo. the server end has shut down the connection but the client end is still waiting the socket to be writable by calling poll().
+
+```
+# tcpdump -i eth0 -nn 'tcp[tcpflags] &amp; (tcp-syn|tcp-fin) != 0 and port 1935'
+15:59:51.594637 IP 192.168.1.32.40004 &gt; 192.168.0.61.1935: Flags [S], seq 1223734074, ...
+15:59:51.596332 IP 192.168.0.61.1935 &gt; 192.168.1.32.40004: Flags [S.], seq 1049677996, ...
+15:59:54.921741 IP 192.168.0.61.1935 &gt; 192.168.1.32.40004: Flags [F.], seq 3593, ack 3810...
+
+/*
+ *     -n     Don't convert host addresses to names.  This can be used to avoid DNS lookups.
+ *     -nn    Don't convert protocol and port numbers etc. to names either.
+ */
+```
+
+;To figure out a solution:
+: The problem is the program hang in av_interleaved_write_frame(), so by reading the code of ffmpeg, I saw TCPContext::rw_timeout could break the loop. And AVOption &quot;timeout&quot; could set this field, URI parameters `tcp://0.0.0.0?timeout=555` also can make a change on it.
+
+[img[tcp_close_wait2.drawio.svg]]
+
+: But when I set the AVOption from the outside of the flv muxer with av_dict_set(), met an issue, see the following figure;
+
+[img[tcp_close_wait3.drawio.svg]]
+
+: Therefore I have to change the ffmpeg code, see below:
+-----------------------------
+
+!ffmpeg modification:
+```
+../configure --host-ldflags=-ldl --enable-gpl --enable-static --disable-shared --extra-ldflags=-ldl --enable-libx264 --enable-debug=3 --disable-stripping --prefix=/usr
+
+
+# git describe --contains &quot;f95d951&quot;
+n4.5-dev~1874
+
+# git diff libavformat/rtmpproto.c
+diff --git a/libavformat/rtmpproto.c b/libavformat/rtmpproto.c
+index d9741bc..0da1398 100644
+--- a/libavformat/rtmpproto.c
++++ b/libavformat/rtmpproto.c
+@@ -123,6 +123,7 @@ typedef struct RTMPContext {
+     int           listen_timeout;             ///&lt; listen timeout to wait for new connections
+     int           nb_streamid;                ///&lt; The next stream id to return on createStream calls
+     double        duration;                   ///&lt; Duration of the stream in seconds as returned by the server (only valid if non-zer
++    int           timeout;                    ///&lt; timeout for tcp read/write operations
+     char          username[50];
+     char          password[50];
+     char          auth_params[500];
+@@ -2655,8 +2656,9 @@ static int rtmp_open(URLContext *s, const char *uri, int flags, AVDictionary **o
+             ff_url_join(buf, sizeof(buf), &quot;tcp&quot;, NULL, hostname, port,
+                         &quot;?listen&amp;listen_timeout=%d&quot;,
+                         rt-&gt;listen_timeout * 1000);
+-        else
+-            ff_url_join(buf, sizeof(buf), &quot;tcp&quot;, NULL, hostname, port, NULL);
++        else {
++            ff_url_join(buf, sizeof(buf), &quot;tcp&quot;, NULL, hostname, port, &quot;?timeout=%d&quot;, rt-&gt;timeout);
++        }
+     }
+
+ reconnect:
+@@ -3115,7 +3117,7 @@ static const AVOption rtmp_options[] = {
+     {&quot;rtmp_tcurl&quot;, &quot;URL of the target stream. Defaults to proto://host[:port]/app.&quot;, OFFSET(tcurl), AV_OPT_TYPE_STRING, {.str = NULL
+     {&quot;rtmp_listen&quot;, &quot;Listen for incoming rtmp connections&quot;, OFFSET(listen), AV_OPT_TYPE_INT, {.i64 = 0}, INT_MIN, INT_MAX, DEC, &quot;rtmp
+     {&quot;listen&quot;,      &quot;Listen for incoming rtmp connections&quot;, OFFSET(listen), AV_OPT_TYPE_INT, {.i64 = 0}, INT_MIN, INT_MAX, DEC, &quot;rtmp
+-    {&quot;timeout&quot;, &quot;Maximum timeout (in seconds) to wait for incoming connections. -1 is infinite. Implies -rtmp_listen 1&quot;,  OFFSET(list
++    {&quot;timeout&quot;, &quot;set timeout (in microseconds) of socket I/O operations&quot;,  OFFSET(timeout), AV_OPT_TYPE_INT, {.i64 = 0}, 0, INT_MAX,
+     { NULL },
+ };
+```
+
+
+
+</pre>
+</div>
+<div created="20210913072620011" modified="20211009030804477" tags="[[Sisyphus's Rock]] Journal" title="012 - 13th September 2021">
 <pre># 将取值范围为正整数的宏块转换为0为中心-128到的127的矩阵；
 # DCT变换，得到频域的系数矩阵，直流分量在左上交，高频交流分量位于右下角；
 # 量化，将高频分量置成0；右下角的高频分量大多被置了0；
 # zigzag编码，去掉多余的0。
 
 https://en.wikipedia.org/wiki/JPEG#Discrete_cosine_transform</pre>
+</div>
+<div created="20210914030137852" modified="20211009030850751" tags="[[Sisyphus's Rock]] Journal" title="013 - 14th September 2021">
+<pre>!ffmpeg configure fail when test whether if ~OpenSSL exist:
+
+```
+BEGIN /tmp/ffconf.mX92ejy0/test.c
+    1   #include &lt;openssl/ssl.h&gt;
+    2   #include &lt;stdint.h&gt;
+    3   long check_SSL_library_init(void) { return (long) SSL_library_init; }
+    4   int main(void) { int ret = 0;
+    5    ret |= ((intptr_t)check_SSL_library_init) &amp; 0xFFFF;
+    6   return ret; }
+END /tmp/ffconf.mX92ejy0/test.c
+gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_POSIX_C_SOURCE=200112 -D_XOPEN_SOURCE=600 -std=c11 -fomit-frame-pointer -pthread -c -o /tmp/ffconf.mX92ejy0/test.o /tmp/ffconf.mX92ejy0/test.c
+/tmp/ffconf.mX92ejy0/test.c: In function 'check_SSL_library_init':
+/tmp/ffconf.mX92ejy0/test.c:3:51: error: 'SSL_library_init' undeclared (first use in this function); did you mean 'check_SSL_library_init'?
+    3 | long check_SSL_library_init(void) { return (long) SSL_library_init; }
+      |                                                   ^~~~~~~~~~~~~~~~
+      |                                                   check_SSL_library_init
+/tmp/ffconf.mX92ejy0/test.c:3:51: note: each undeclared identifier is reported only once for each function it appears in
+ERROR: openssl not found
+```
+
+;Search with yum to find the development package, if not find a correct version then go to build from the official source code, git clone it and switch to the corresponding commint:
+```
+# yum search openssl
+......
+openssl-devel.i686 : Files for development of applications which will use OpenSSL
+openssl-devel.x86_64 : Files for development of applications which will use OpenSSL
+.....
+
+# repoquery -l openssl-devel | tee openssl.list | grep &quot;openssl/ssl.h&quot;
+.....
+/usr/include/openssl/ssl.h
+
+#  grep SSL_library_init /usr/include/openssl/ssl.h
+    # define OpenSSL_add_ssl_algorithms()    SSL_library_init()
+    # define SSLeay_add_ssl_algorithms()     SSL_library_init()
+    int SSL_library_init(void);
+
+```
+
+; Found many versions of openSSL in the host
+```
+#../configure --enable-gpl --enable-static --disable-shared --extra-ldflags=-ldl --enable-libx264 --enable-debug=3 --disable-stripping --prefix=/usr --enable-openssl --enable-nonfree
+
+# ./ffprobe -show_frames https://livepgc.chinamcache.com/pgc/4cc59971fd423ae81ba210b4b250b095.m3u8?auth_key=1631948282-0-0-cb4ee9b9328eb5009cf3a0e1274e1a7d
+```
+
+------------------------------------------------------------
+```
+# git diff
+diff --git a/TaskBroadcast.cpp b/TaskBroadcast.cpp
+index bd2acbb..ee3c323 100644
+--- a/TaskBroadcast.cpp
++++ b/TaskBroadcast.cpp
+@@ -6,6 +6,10 @@
+ #include &lt;pcrecpp.h&gt;
+ #include &lt;unordered_map&gt;
+
++extern &quot;C&quot; {
++#include &lt;libavutil/avstring.h&gt;
++};
++
+ #define gettid() syscall(__NR_gettid)
+ #define SAMPLE_RATE 44100
+ using namespace std;
+@@ -1533,12 +1537,19 @@ static int Interrupt_CB(void* p) {
+  */
+ bool TaskBroadcast::isNetStreamUrl(const std::string&amp; url)
+ {
+-       pcrecpp::RE oPattern1(&quot;^rtmp://&quot;),oPattern2(&quot;^rtsp://&quot;),oPattern3(&quot;^https*://.+m3u8$&quot;), oPattern5(&quot;^https*://&quot;),oPattern6(&quot;^ft
++    char proto[10] = &quot;&quot;, path[4096] = &quot;&quot;;
++    char *p = NULL;
++
++    av_url_split(proto, sizeof(proto), NULL, 0, NULL, 0, NULL, path, sizeof(path), url.c_str());
++    if (p = strchr(path, '?'))
++        *p = '\0';
++
+     DaoboLog(this, &quot;Check if %s is a live stream.\n&quot;, url.c_str());
+-       if (oPattern1.PartialMatch(url) || oPattern2.PartialMatch(url) || \
+-            oPattern3.PartialMatch(url) || oPattern8.PartialMatch(url)) {
++    DaoboLog(this, &quot;Check live stream: proto = %s, path = %s, av_match_ext(path, \'m3u8\') = %d, av_match_name(proto, \&quot;https,http,rt
++    if ( av_match_name(proto, &quot;rtmp,rtsp&quot;) ||
++        (av_match_name(proto, &quot;https,http&quot;) &amp;&amp; av_match_ext(path, &quot;m3u8&quot;))) {
+                return true;
+-       }
++    }
+
+        return false;
+ }
+diff --git a/makefile b/makefile
+index 54e412d..be1e36c 100644
+--- a/makefile
++++ b/makefile
+@@ -9,12 +9,7 @@ $(PROJECT): daobo.o\
+                        FilterMgr.o FFmpegEncoder.o NetStreamListen.o VMix.o AMix.o StreamMix.o\
+                        Broadcast.o JsonParse.o TaskBroadcast.o\
+                        ResourceCreater.o JsonConf.o Serial.o TaskApply.o socketlog.o DaoboLog.o FrameQueue.o PthreadTools.o
+-                       $(LINK) -o $(PROJECT) $(LIBS)  \
+-       daobo.o Decoder.o DecoderNet.o DecoderFile.o DecoderPicture.o PictureStream.o filter.o  AspectRatio.o \
+-       logoFilter.o DrawText.o split.o AudioResample.o Mosaic.o TimeMark.o TaskBroadcast.o FFmpegEncoder.o Broadcast.o \
+-       JsonParse.o ResourceCreater.o FilterMgr.o NetStreamListen.o JsonConf.o VMix.o AMix.o StreamMix.o Serial.o  \
+-       TaskApply.o socketlog.o DaoboLog.o FrameQueue.o PthreadTools.o \
+-       -lavformat -lavfilter -lpostproc -lavcodec -lavutil -lswscale -lswresample -luuid -lcurl -lpcrecpp -pthread -lm -lx264 -pthrea
++                       $(LINK) -o $(PROJECT) $(LIBS) daobo.o Decoder.o DecoderNet.o DecoderFile.o DecoderPicture.o PictureStream.o fi
+
+ daobo.o:daobo.cpp
+        $(CC) -c $(CFLAGS) $(INCLS) -o daobo.o daobo.cpp
+(END)
+```</pre>
+</div>
+<div created="20210915023305700" modified="20211009031010759" tags="[[Sisyphus's Rock]] Journal" title="014 - 15th September 2021">
+<pre>!Stream got stuck or freezing for a while when switch to/from Emergency Stream
+;Possible Reasons:
+#timestamps has gap between the two stream;
+#Live Streaming Server disconnect;
+#There were unexpected delay on av_interleaved_write_frame().
+
+;To determine whether or not those reason cause the problem
+```
+/* Add time string in the ffprobe's log. 
+ * [2021/09/15-10:38:14] xxx
+ */
+
+# ffprobe -show_entries frame=pkt_pts_time,media_type -of compact | tee stream.info
+
+#0  compact_print_str (wctx=0x25c6480, key=0x157bd94 &quot;pkt_pts_time&quot;, value=0x7fffffffd090 &quot;30810.990667&quot;)
+    at src/fftools/ffprobe.c:1165
+#1  0x00000000004975c8 in writer_print_string (flags=&lt;optimized out&gt;, val=&lt;optimized out&gt;, key=&lt;optimized out&gt;,
+    wctx=&lt;optimized out&gt;) at src/fftools/ffprobe.c:768
+#2  writer_print_time (wctx=wctx@entry=0x25c6480, key=key@entry=0x157bd94 &quot;pkt_pts_time&quot;, ts=&lt;optimized out&gt;,
+    time_base=time_base@entry=0x2644258, is_duration=0) at src/fftools/ffprobe.c:792
+#3  0x0000000000498e97 in show_frame (w=w@entry=0x25c6480, frame=frame@entry=0x279af40, stream=0x2644240,
+    fmt_ctx=fmt_ctx@entry=0x25c8ec0) at src/fftools/ffprobe.c:2146
+#4  0x000000000049aedb in process_frame (packet_new=&lt;synthetic pointer&gt;, pkt=0x7fffffffdab0, frame=0x279af40,
+    ifile=&lt;optimized out&gt;, w=0x25c6480) at src/fftools/ffprobe.c:2330
+#5  read_interval_packets (w=w@entry=0x25c6480, interval=interval@entry=0x7fffffffe050, cur_ts=cur_ts@entry=0x7fffffffe028,
+    ifile=&lt;optimized out&gt;, ifile=&lt;optimized out&gt;) at src/fftools/ffprobe.c:2443
+#6  0x000000000048cf2d in read_packets (ifile=0x7fffffffe030, w=0x25c6480) at src/fftools/ffprobe.c:2473
+#7  probe_file (print_filename=&lt;optimized out&gt;, filename=&lt;optimized out&gt;, wctx=0x25c6480) at src/fftools/ffprobe.c:3038
+#8  main (argc=&lt;optimized out&gt;, argv=&lt;optimized out&gt;) at src/fftools/ffprobe.c:3720
+
+```
+
+;The root cause was neither disconnection nor delay, it's update_req on a wrong frame.
+[img[mindmap-Daobo-LiveProductionSwitcher.drawio.svg]]</pre>
 </div>
 <div created="20210131171503618" modified="20210217114701440" tags="英语学习 Journal [[February 2021]]" title="01st February 2021">
 <pre>[[topcoder|https://www.topcoder.com/community/competitive-programming/tutorials/computational-complexity-section-1/]]
@@ -11299,117 +11599,6 @@ Five-and-a-half hours’ drive north-west from Solar Star, at a national laborat
 # specialize - 专门从事
 </pre>
 </div>
-<div created="20210914030137852" modified="20210915023120726" tags="[[Sisyphus's Rock]] Journal" title="14th September 2021">
-<pre>!ffmpeg configure fail when test whether if ~OpenSSL exist:
-
-```
-BEGIN /tmp/ffconf.mX92ejy0/test.c
-    1   #include &lt;openssl/ssl.h&gt;
-    2   #include &lt;stdint.h&gt;
-    3   long check_SSL_library_init(void) { return (long) SSL_library_init; }
-    4   int main(void) { int ret = 0;
-    5    ret |= ((intptr_t)check_SSL_library_init) &amp; 0xFFFF;
-    6   return ret; }
-END /tmp/ffconf.mX92ejy0/test.c
-gcc -D_ISOC99_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_POSIX_C_SOURCE=200112 -D_XOPEN_SOURCE=600 -std=c11 -fomit-frame-pointer -pthread -c -o /tmp/ffconf.mX92ejy0/test.o /tmp/ffconf.mX92ejy0/test.c
-/tmp/ffconf.mX92ejy0/test.c: In function 'check_SSL_library_init':
-/tmp/ffconf.mX92ejy0/test.c:3:51: error: 'SSL_library_init' undeclared (first use in this function); did you mean 'check_SSL_library_init'?
-    3 | long check_SSL_library_init(void) { return (long) SSL_library_init; }
-      |                                                   ^~~~~~~~~~~~~~~~
-      |                                                   check_SSL_library_init
-/tmp/ffconf.mX92ejy0/test.c:3:51: note: each undeclared identifier is reported only once for each function it appears in
-ERROR: openssl not found
-```
-
-;Search with yum to find the development package, if not find a correct version then go to build from the official source code, git clone it and switch to the corresponding commint:
-```
-# yum search openssl
-......
-openssl-devel.i686 : Files for development of applications which will use OpenSSL
-openssl-devel.x86_64 : Files for development of applications which will use OpenSSL
-.....
-
-# repoquery -l openssl-devel | tee openssl.list | grep &quot;openssl/ssl.h&quot;
-.....
-/usr/include/openssl/ssl.h
-
-#  grep SSL_library_init /usr/include/openssl/ssl.h
-    # define OpenSSL_add_ssl_algorithms()    SSL_library_init()
-    # define SSLeay_add_ssl_algorithms()     SSL_library_init()
-    int SSL_library_init(void);
-
-```
-
-; Found many versions of openSSL in the host
-```
-#../configure --enable-gpl --enable-static --disable-shared --extra-ldflags=-ldl --enable-libx264 --enable-debug=3 --disable-stripping --prefix=/usr --enable-openssl --enable-nonfree
-
-# ./ffprobe -show_frames https://livepgc.chinamcache.com/pgc/4cc59971fd423ae81ba210b4b250b095.m3u8?auth_key=1631948282-0-0-cb4ee9b9328eb5009cf3a0e1274e1a7d
-```
-
-------------------------------------------------------------
-```
-# git diff
-diff --git a/TaskBroadcast.cpp b/TaskBroadcast.cpp
-index bd2acbb..ee3c323 100644
---- a/TaskBroadcast.cpp
-+++ b/TaskBroadcast.cpp
-@@ -6,6 +6,10 @@
- #include &lt;pcrecpp.h&gt;
- #include &lt;unordered_map&gt;
-
-+extern &quot;C&quot; {
-+#include &lt;libavutil/avstring.h&gt;
-+};
-+
- #define gettid() syscall(__NR_gettid)
- #define SAMPLE_RATE 44100
- using namespace std;
-@@ -1533,12 +1537,19 @@ static int Interrupt_CB(void* p) {
-  */
- bool TaskBroadcast::isNetStreamUrl(const std::string&amp; url)
- {
--       pcrecpp::RE oPattern1(&quot;^rtmp://&quot;),oPattern2(&quot;^rtsp://&quot;),oPattern3(&quot;^https*://.+m3u8$&quot;), oPattern5(&quot;^https*://&quot;),oPattern6(&quot;^ft
-+    char proto[10] = &quot;&quot;, path[4096] = &quot;&quot;;
-+    char *p = NULL;
-+
-+    av_url_split(proto, sizeof(proto), NULL, 0, NULL, 0, NULL, path, sizeof(path), url.c_str());
-+    if (p = strchr(path, '?'))
-+        *p = '\0';
-+
-     DaoboLog(this, &quot;Check if %s is a live stream.\n&quot;, url.c_str());
--       if (oPattern1.PartialMatch(url) || oPattern2.PartialMatch(url) || \
--            oPattern3.PartialMatch(url) || oPattern8.PartialMatch(url)) {
-+    DaoboLog(this, &quot;Check live stream: proto = %s, path = %s, av_match_ext(path, \'m3u8\') = %d, av_match_name(proto, \&quot;https,http,rt
-+    if ( av_match_name(proto, &quot;rtmp,rtsp&quot;) ||
-+        (av_match_name(proto, &quot;https,http&quot;) &amp;&amp; av_match_ext(path, &quot;m3u8&quot;))) {
-                return true;
--       }
-+    }
-
-        return false;
- }
-diff --git a/makefile b/makefile
-index 54e412d..be1e36c 100644
---- a/makefile
-+++ b/makefile
-@@ -9,12 +9,7 @@ $(PROJECT): daobo.o\
-                        FilterMgr.o FFmpegEncoder.o NetStreamListen.o VMix.o AMix.o StreamMix.o\
-                        Broadcast.o JsonParse.o TaskBroadcast.o\
-                        ResourceCreater.o JsonConf.o Serial.o TaskApply.o socketlog.o DaoboLog.o FrameQueue.o PthreadTools.o
--                       $(LINK) -o $(PROJECT) $(LIBS)  \
--       daobo.o Decoder.o DecoderNet.o DecoderFile.o DecoderPicture.o PictureStream.o filter.o  AspectRatio.o \
--       logoFilter.o DrawText.o split.o AudioResample.o Mosaic.o TimeMark.o TaskBroadcast.o FFmpegEncoder.o Broadcast.o \
--       JsonParse.o ResourceCreater.o FilterMgr.o NetStreamListen.o JsonConf.o VMix.o AMix.o StreamMix.o Serial.o  \
--       TaskApply.o socketlog.o DaoboLog.o FrameQueue.o PthreadTools.o \
--       -lavformat -lavfilter -lpostproc -lavcodec -lavutil -lswscale -lswresample -luuid -lcurl -lpcrecpp -pthread -lm -lx264 -pthrea
-+                       $(LINK) -o $(PROJECT) $(LIBS) daobo.o Decoder.o DecoderNet.o DecoderFile.o DecoderPicture.o PictureStream.o fi
-
- daobo.o:daobo.cpp
-        $(CC) -c $(CFLAGS) $(INCLS) -o daobo.o daobo.cpp
-(END)
-```</pre>
-</div>
 <div created="20210215002553631" modified="20210218012808539" tags="英语学习 Journal [[February 2021]]" title="15th February 2021">
 <pre>Finally, formal definitions
 
@@ -11438,42 +11627,6 @@ Note that even the exact runtime function f doesn’t give an exact answer to th
 #* the agency failed to specify that the workers were not their employees. 这家代理没明确说明这些工人不是它的雇员。
 #* the recipe specify the size of eggs to be used. - 菜谱明确规定了所用鸡蛋的大小。
 </pre>
-</div>
-<div created="20210915023305700" modified="20210915212717874" tags="[[Sisyphus's Rock]] Journal" title="15th September 2021">
-<pre>!Stream got stuck or freezing for a while when switch to/from Emergency Stream
-;Possible Reasons:
-#timestamps has gap between the two stream;
-#Live Streaming Server disconnect;
-#There were unexpected delay on av_interleaved_write_frame().
-
-;To determine whether or not those reason cause the problem
-```
-/* Add time string in the ffprobe's log. 
- * [2021/09/15-10:38:14] xxx
- */
-
-# ffprobe -show_entries frame=pkt_pts_time,media_type -of compact | tee stream.info
-
-#0  compact_print_str (wctx=0x25c6480, key=0x157bd94 &quot;pkt_pts_time&quot;, value=0x7fffffffd090 &quot;30810.990667&quot;)
-    at src/fftools/ffprobe.c:1165
-#1  0x00000000004975c8 in writer_print_string (flags=&lt;optimized out&gt;, val=&lt;optimized out&gt;, key=&lt;optimized out&gt;,
-    wctx=&lt;optimized out&gt;) at src/fftools/ffprobe.c:768
-#2  writer_print_time (wctx=wctx@entry=0x25c6480, key=key@entry=0x157bd94 &quot;pkt_pts_time&quot;, ts=&lt;optimized out&gt;,
-    time_base=time_base@entry=0x2644258, is_duration=0) at src/fftools/ffprobe.c:792
-#3  0x0000000000498e97 in show_frame (w=w@entry=0x25c6480, frame=frame@entry=0x279af40, stream=0x2644240,
-    fmt_ctx=fmt_ctx@entry=0x25c8ec0) at src/fftools/ffprobe.c:2146
-#4  0x000000000049aedb in process_frame (packet_new=&lt;synthetic pointer&gt;, pkt=0x7fffffffdab0, frame=0x279af40,
-    ifile=&lt;optimized out&gt;, w=0x25c6480) at src/fftools/ffprobe.c:2330
-#5  read_interval_packets (w=w@entry=0x25c6480, interval=interval@entry=0x7fffffffe050, cur_ts=cur_ts@entry=0x7fffffffe028,
-    ifile=&lt;optimized out&gt;, ifile=&lt;optimized out&gt;) at src/fftools/ffprobe.c:2443
-#6  0x000000000048cf2d in read_packets (ifile=0x7fffffffe030, w=0x25c6480) at src/fftools/ffprobe.c:2473
-#7  probe_file (print_filename=&lt;optimized out&gt;, filename=&lt;optimized out&gt;, wctx=0x25c6480) at src/fftools/ffprobe.c:3038
-#8  main (argc=&lt;optimized out&gt;, argv=&lt;optimized out&gt;) at src/fftools/ffprobe.c:3720
-
-```
-
-;The root cause was neither disconnection nor delay, it's update_req on a wrong frame.
-[img[mindmap-Daobo-LiveProductionSwitcher.drawio.svg]]</pre>
 </div>
 <div created="20210215172044496" modified="20210217144118232" tags="英语学习 Journal [[February 2021]]" title="16th February 2021">
 <pre>[[''Vaccine Hesitancy'']]
@@ -12507,159 +12660,6 @@ What I got from this issue is Audio Frames with wrong parameter could be passed 
 -------------------------------------------------------------------------------
 
 Wrap the whole process, and isolate the related resources.</pre>
-</div>
-<div created="20210908090228428" modified="20210910101058240" tags="[[Sisyphus's Rock]] Journal" title="8th September 2021">
-<pre>!Symptom
-
-&lt;p&gt;flv muxer report error &quot;DTS Invalid&quot; and caused the program shutdown the connection 
- with the RTMP Live Streaming Server&lt;/p&gt;
-
-!Keys
-
-GDB, tcpdump, netstat, poll(), tcp half-closed.
-
-!Process
-
-;To find out ~AVFormateContext::max_interleve_delta and its side effects:
-av_interleave_write_frame() failed and it caused av_write_trailer() to be called to shut the connection between the server and the daobo down. Short before disconnecting, I observed the log &quot;forcing output&quot;, then flv muxer print invalid dts, it directly caused av_interleaved_write_frame() returned failure.
-
-There were two approaches I could take:
-
-# Read the code of ffmpeg and figure out what made the problem happen.
-# Compare with the official ffmpeg tool, find out the difference between daobo and ffmpeg tool.
-
-By reading the ffmpeg code, I didn't spend much time to get fully understand the related logic, just got some sense about that ~AVFormateContext::max_interleve_delta cause the problem, it made &quot;forcing output&quot; occured in mux.c, and that would cause flv_write_packet() return EINVAL. 
-
-I searched max_interleave_delta in the offical code, to look for the way to set this variable propurly;  but I saw that there is nowhere this variable be set, it may be better not to change this variable manually.
-
-When I removed max_interleave_delta setting codes, another issue emerged. the program would get stuck occasionally.
-
-;To locate the stuck point with gdb, here is the trick I use for that:
-
-:In the program code, print every threads' tid with the following code
-```
-ostringstream ss;
-ss &lt;&lt; this_thread::get_id();
-size_t tid = stoll(ss.str());
-snprintf(tag, sizeof(tag), &quot;[tid @ 0x%lx]&quot;, tid);
-```
-: To find out the suspicious thread: the stuck point probably is in the encode&amp;output thread. there's hundreds threads within the process, record the threads info in a file, and searching the file with vim will much easier to find the thread number for gdb-thread command use.
-
-```
-# gdb -p &lt;pid&gt;
-&gt; set log on
-&gt; info threads
-/* search gdb.txt file with the encode&amp;output thread's tid, get the thread number &lt;num&gt;. */
-&gt; thread &lt;num&gt;
-```
-:In the thread, I found out poll() the tcp socket always return 0, and no `revent` occurs, that cause ff_network_wait_fd_timeout() hang in an inifinity loop.
-
-;To find out what happened on the tcp connection:
-: by reading the Manual, poll() returned 0, means the tcp socket was not ready to write, and the `revent` field was zero, it indicated that no error occured. 
-
-:by using tcpdump and netstat to get some clue
-```
-$ netstat -antp
-   -a, --all
-       Show  both  listening  and  non-listening (for TCP this means established connections) sockets. 
-   --numeric , -n
-       Show numerical addresses instead of trying to determine symbolic host, port or user names.
-   -t
-       Show TCP sockets only.
-   -p, --program
-       Show the PID and name of the program to which each socket belongs.
-```
-: the command I used was `watch -n 0.5 &quot;netstat -antp | grep daobo&quot;`, 'watch' is better then 'netstat -c', which is easier to read.
-
-```
-# watch -n 0.5 &quot;netstat -anpt | grep daobo&quot;
-Every 0.5s: netstat -anpt | grep daobo                                                                        Fri Sep 10 14:36:32 2021
-
-tcp     6507      0 192.168.1.32:48974      182.138.102.134:1935    ESTABLISHED 19694/daobo
-tcp        0      0 192.168.1.32:46650      192.168.0.61:1936       ESTABLISHED 19694/daobo
-tcp        0      0 192.168.1.32:44454      120.52.72.9:1935        ESTABLISHED 19694/daobo
-tcp        1      0 192.168.1.32:54998      192.168.0.181:3306      CLOSE_WAIT  19694/daobo
-tcp        0    157 192.168.1.32:39180      221.196.251.229:1935    CLOSE_WAIT  19694/daobo
-tcp        0      0 192.168.1.32:53638      192.168.0.61:1936       ESTABLISHED 19694/daobo
-```
-: According to the netstat outputs, I saw the connection to the Live Streaming Server was CLOSE_WAIT, see the following explanation. That is the reason why poll() return 0 without any returned event (revent == 0).
-```
-        CLOSE_WAIT
-              The remote end has shut down, waiting for the socket to close.
-```
-
-:found out that about 3 seconds after connecting to the Live Streaming Server, the server send a FIN to the daobo. the server end has shut down the connection but the client end is still waiting the socket to be writable by calling poll().
-
-```
-# tcpdump -i eth0 -nn 'tcp[tcpflags] &amp; (tcp-syn|tcp-fin) != 0 and port 1935'
-15:59:51.594637 IP 192.168.1.32.40004 &gt; 192.168.0.61.1935: Flags [S], seq 1223734074, ...
-15:59:51.596332 IP 192.168.0.61.1935 &gt; 192.168.1.32.40004: Flags [S.], seq 1049677996, ...
-15:59:54.921741 IP 192.168.0.61.1935 &gt; 192.168.1.32.40004: Flags [F.], seq 3593, ack 3810...
-
-/*
- *     -n     Don't convert host addresses to names.  This can be used to avoid DNS lookups.
- *     -nn    Don't convert protocol and port numbers etc. to names either.
- */
-```
-
-;To figure out a solution:
-: The problem is the program hang in av_interleaved_write_frame(), so by reading the code of ffmpeg, I saw TCPContext::rw_timeout could break the loop. And AVOption &quot;timeout&quot; could set this field, URI parameters `tcp://0.0.0.0?timeout=555` also can make a change on it.
-
-[img[tcp_close_wait2.drawio.svg]]
-
-: But when I set the AVOption from the outside of the flv muxer with av_dict_set(), met an issue, see the following figure;
-
-[img[tcp_close_wait3.drawio.svg]]
-
-: Therefore I have to change the ffmpeg code, see below:
------------------------------
-
-!ffmpeg modification:
-```
-../configure --host-ldflags=-ldl --enable-gpl --enable-static --disable-shared --extra-ldflags=-ldl --enable-libx264 --enable-debug=3 --disable-stripping --prefix=/usr
-
-
-# git describe --contains &quot;f95d951&quot;
-n4.5-dev~1874
-
-# git diff libavformat/rtmpproto.c
-diff --git a/libavformat/rtmpproto.c b/libavformat/rtmpproto.c
-index d9741bc..0da1398 100644
---- a/libavformat/rtmpproto.c
-+++ b/libavformat/rtmpproto.c
-@@ -123,6 +123,7 @@ typedef struct RTMPContext {
-     int           listen_timeout;             ///&lt; listen timeout to wait for new connections
-     int           nb_streamid;                ///&lt; The next stream id to return on createStream calls
-     double        duration;                   ///&lt; Duration of the stream in seconds as returned by the server (only valid if non-zer
-+    int           timeout;                    ///&lt; timeout for tcp read/write operations
-     char          username[50];
-     char          password[50];
-     char          auth_params[500];
-@@ -2655,8 +2656,9 @@ static int rtmp_open(URLContext *s, const char *uri, int flags, AVDictionary **o
-             ff_url_join(buf, sizeof(buf), &quot;tcp&quot;, NULL, hostname, port,
-                         &quot;?listen&amp;listen_timeout=%d&quot;,
-                         rt-&gt;listen_timeout * 1000);
--        else
--            ff_url_join(buf, sizeof(buf), &quot;tcp&quot;, NULL, hostname, port, NULL);
-+        else {
-+            ff_url_join(buf, sizeof(buf), &quot;tcp&quot;, NULL, hostname, port, &quot;?timeout=%d&quot;, rt-&gt;timeout);
-+        }
-     }
-
- reconnect:
-@@ -3115,7 +3117,7 @@ static const AVOption rtmp_options[] = {
-     {&quot;rtmp_tcurl&quot;, &quot;URL of the target stream. Defaults to proto://host[:port]/app.&quot;, OFFSET(tcurl), AV_OPT_TYPE_STRING, {.str = NULL
-     {&quot;rtmp_listen&quot;, &quot;Listen for incoming rtmp connections&quot;, OFFSET(listen), AV_OPT_TYPE_INT, {.i64 = 0}, INT_MIN, INT_MAX, DEC, &quot;rtmp
-     {&quot;listen&quot;,      &quot;Listen for incoming rtmp connections&quot;, OFFSET(listen), AV_OPT_TYPE_INT, {.i64 = 0}, INT_MIN, INT_MAX, DEC, &quot;rtmp
--    {&quot;timeout&quot;, &quot;Maximum timeout (in seconds) to wait for incoming connections. -1 is infinite. Implies -rtmp_listen 1&quot;,  OFFSET(list
-+    {&quot;timeout&quot;, &quot;set timeout (in microseconds) of socket I/O operations&quot;,  OFFSET(timeout), AV_OPT_TYPE_INT, {.i64 = 0}, 0, INT_MAX,
-     { NULL },
- };
-```
-
-
-
-</pre>
 </div>
 <div created="20210409025901069" modified="20210409031210651" tags="英语学习 Journal April" title="9th April 2021">
 <pre>''Example 6. ''Let’s try to apply our new “recursion tree” method to solve the following recurrence equation:
