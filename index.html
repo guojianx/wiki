@@ -335,11 +335,11 @@ Error message and password prompt
 
 <li>28th September 2021</li>
 
-<li>29th July 2021</li>
-
 <li>29th September 2021</li>
 
 <li>2nd April 2021</li>
+
+<li>3 - 29th July 2021</li>
 
 <li>30th July 2021</li>
 
@@ -10592,7 +10592,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20211009022232466" list="[[2 - 26th July 2021 -- lvalue, rvalue, unique_ptr &amp; shared_ptr]] [[1 - 23rd July 2021 -- vector's capability and subscript operator]] [[Sisyphus's Rock]]" modified="20211009022408489" title="$:/StoryList">
+<div created="20211009022232466" list="[[3 - 29th July 2021]] [[2 - 26th July 2021 -- lvalue, rvalue, unique_ptr &amp; shared_ptr]] [[1 - 23rd July 2021 -- vector's capability and subscript operator]] [[Sisyphus's Rock]]" modified="20211009022423385" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -12127,54 +12127,6 @@ TaskBroadcast::~TaskBroadcast()
 # facilitate  - 促进(v.)
 # imperactive - 重要紧急的事 (accident, incident, emergency)</pre>
 </div>
-<div created="20210729031434558" modified="20210729033004660" tags="[[Sisyphus's Rock]] Journal" title="29th July 2021">
-<pre>! ''override'' specifier
-
-标记的函数要不是从父类继承的就编译错误。
-
-```
-class A {
-    virtual int dothings(int a) { ... }
-};
-
-class B : public A
-{
-    virtual int dothings(int a) const override    // A::dothing() is not const，compile error.
-    { ... }
-};
-
-```
-
-! ''final'' specifier
-
-标记的类或函数不允许继承和重载。
-
-```
-class A {
-   virtual int dothings(int a) {... }
-};
-
-class B : public A {
-   virtual int dothings(int a) override final
-   { ... }
-};
-
-class C : public B {
-   virtual int dothings(int a) overrride // B::dothings() is final, compile error.
-   { ... }
-}
-
-class A final
-{ ... };
-
-class B : public A      // class A is final, compile error.
-{ ... };
-
-```
-
-
-</pre>
-</div>
 <div created="20210929013947520" modified="20210929100219212" tags="[[Sisyphus's Rock]] Journal" title="29th September 2021">
 <pre>```
 #0  AMix::init_effectfilter (this=0x7fa412d7c330, task_=...) at AMix.cpp:70
@@ -12269,6 +12221,54 @@ Combining both observations we get the final result: The total amount of work do
 A side note. If the reader doesn’t trust the simplifications we made when using this method, he is invited to treat this method as a “way of making a good guess” and then to prove the result using the substitution method. However, with a little effort the application of this method could also be upgraded to a full formal proof.
 
 # arbitrary - 任意的</pre>
+</div>
+<div created="20210729031434558" modified="20211009022430867" tags="[[Sisyphus's Rock]] Journal" title="3 - 29th July 2021">
+<pre>! ''override'' specifier
+
+标记的函数要不是从父类继承的就编译错误。
+
+```
+class A {
+    virtual int dothings(int a) { ... }
+};
+
+class B : public A
+{
+    virtual int dothings(int a) const override    // A::dothing() is not const，compile error.
+    { ... }
+};
+
+```
+
+! ''final'' specifier
+
+标记的类或函数不允许继承和重载。
+
+```
+class A {
+   virtual int dothings(int a) {... }
+};
+
+class B : public A {
+   virtual int dothings(int a) override final
+   { ... }
+};
+
+class C : public B {
+   virtual int dothings(int a) overrride // B::dothings() is final, compile error.
+   { ... }
+}
+
+class A final
+{ ... };
+
+class B : public A      // class A is final, compile error.
+{ ... };
+
+```
+
+
+</pre>
 </div>
 <div created="20210730072330611" modified="20210730103436113" tags="[[Sisyphus's Rock]] Journal" title="30th July 2021">
 <pre>! ''Element Management in PVW base on the below command.''
