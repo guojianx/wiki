@@ -12072,7 +12072,7 @@ You're not being hired for knowledge, but how you apply the knowledge.
 !!SONY
 :None</pre>
 </div>
-<div created="20211019032150821" modified="20211020020625544" tags="[[Sisyphus's Rock]] Journal" title="032 - 19 - 20th October 2021">
+<div created="20211019032150821" modified="20211020020815992" tags="[[Sisyphus's Rock]] Journal" title="032 - 19 - 20th October 2021">
 <pre>!Debugging &quot;Segmentation fault&quot;
 :&lt;a href=&quot;https://ftp.gnu.org/old-gnu/Manuals/gdb/html_node/gdb_55.html&quot;&gt; GDB Examining Memory &lt;/a&gt;
 :How to watch a bunch of memory in gdb?
@@ -12103,6 +12103,35 @@ Derive::vfunc(0x24ed010) : x3 = 0x7ffc3e512eec
 Derive::vfunc(0x24ed010) : p1 = 0x24ed030
 Derive::vfunc(0x24ed010) : p2 = 0x24ed050
 Derive::vfunc(0x24ed010) : p3 = 0x24ed070
+```
+```
+(gdb) info registers
+rax            0x602100 6299904
+rbx            0x603010 6303760
+rcx            0xb40    2880
+rdx            0x0      0
+rsi            0x7ffff75b6a00   140737343351296
+rdi            0x7fffffffe540   140737488348480
+rbp            0x0      0x0
+rsp            0x7fffffffe538   0x7fffffffe538
+r8             0x7ffff7fed740   140737354061632
+r9             0x7ffff7fed740   140737354061632
+r10            0x7ffff7dc06b0   140737351780016
+r11            0x246    582
+r12            0x400ac0 4197056
+r13            0x7fffffffe640   140737488348736
+r14            0x0      0
+r15            0x0      0
+rip            0x400fc0 0x400fc0 &lt;Derive::vfunc()&gt;
+eflags         0x213    [ CF AF IF ]
+cs             0x33     51
+ss             0x2b     43
+ds             0x0      0
+es             0x0      0
+fs             0x0      0
+gs             0x0      0
+(gdb) p/ $pc
+$1 = (void (*)(void)) 0x400fc0 &lt;Derive::vfunc()&gt;
 ```</pre>
 </div>
 <div created="20210202175517701" modified="20210217115005143" tags="英语学习 Journal [[February 2021]]" title="03rd February 2021">
