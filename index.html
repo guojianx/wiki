@@ -12072,7 +12072,7 @@ You're not being hired for knowledge, but how you apply the knowledge.
 !!SONY
 :None</pre>
 </div>
-<div created="20211019032150821" modified="20211020040830042" tags="[[Sisyphus's Rock]] Journal" title="032 - 19 - 20th October 2021">
+<div created="20211019032150821" modified="20211020041422300" tags="[[Sisyphus's Rock]] Journal" title="032 - 19 - 20th October 2021">
 <pre>!Debugging &quot;Segmentation fault&quot;
 :&lt;a href=&quot;https://ftp.gnu.org/old-gnu/Manuals/gdb/html_node/gdb_55.html&quot;&gt; GDB Examining Memory &lt;/a&gt;
 :How to watch a bunch of memory in gdb?
@@ -12158,6 +12158,10 @@ No symbol &quot;h0x4017f0&quot; in current context.
 ```
 
 # Which Pin is in use
+#* Observe its vtable, (gdb)
+#** print *this     /* record the vtable address*/
+#** x/32xg  vtable     /* record the function addresses in the vtable */
+#** check if the vtable's contents changed
 # Whether if I cannot change the contents in .text segment which contains const data and functions?
 # How do I see the segments' addresss in gdb?</pre>
 </div>
