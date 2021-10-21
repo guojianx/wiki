@@ -12288,7 +12288,7 @@ Clearly this will occur always when one of the runtime functions grows asymptoti
 # neglect - 忽视
 # asymptotically - 逐渐地</pre>
 </div>
-<div created="20211021012958635" modified="20211021025100593" tags="[[Sisyphus's Rock]] Journal" title="1021 - 21st October 2021">
+<div created="20211021012958635" modified="20211021025248091" tags="[[Sisyphus's Rock]] Journal" title="1021 - 21st October 2021">
 <pre>!! Suspicious: Pin's vtable pointer has been altered unexpectedly.
 : Decoder and Pin instances' addresses are correct;
 : Therefore, Watch memory whether if changed after SetupFilters(), and in where they are modified?
@@ -12299,7 +12299,7 @@ Clearly this will occur always when one of the runtime functions grows asymptoti
 (gdb) watch -l tail-&gt;link
 (gdb) watch -l pins[src_index]
 ```
-It works! Find out that Pin instances is deleted but the mixer still alive and its pins[] array still keeping the deleted address.
+!!!It works! Find out that Pin instances is deleted but the mixer still alive and its pins[] array still keeping the deleted address.
 
 ```
 Hardware watchpoint 1: *(char*)0x7f3a8ce3fef0
@@ -12336,7 +12336,28 @@ New value = 48 '0'
 28              virtual ~Link() {}
 Delete all breakpoints? (y or n) Continuing.
 ```
-</pre>
+
+!!! Fixed it by the following code:
+
+```
+ int PvwPgm::CleanFilterChain(Link* begin)
+ {
+-    Link *end = mixer;
++    vector&lt;const Link*&gt; ends = mixer-&gt;GetPins();
+        Link* next = begin;
+
+        while (next) {
+                Link* tmp = next-&gt;getNext();
+-               if (next != end) delete next;
+-               else              break;
++        if (find(ends.begin(), ends.end(), next) != ends.end())
++            break;
++
++        delete next;
+                next = tmp;
+        }
+        return 0;
+```</pre>
 </div>
 <div created="20210110221624935" modified="20210217113120531" tags="英语学习 Journal [[January 2021]]" title="11th January 2021">
 <pre>THE MEGAPHONE has been taken away. On January 8th Twitter, a social network, announced that it was “permanently suspending” President Donald Trump's account. Viewed in isolation, the two tweets that led to the ban were, by Mr Trump’s standards, fairly innocuous. But Twitter said it had taken its decision in the wake of the riot at America's Congress on January 6th, in which five people died as legislators' offices were ransacked by a crowd of Mr Trump's supporters after Mr Trump had encouraged them to march on the Capitol. The social network said that continuing to give Mr Trump access risked allowing him to incite further violence.
