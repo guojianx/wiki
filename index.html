@@ -141,6 +141,8 @@ Error message and password prompt
 
 <p>This <a class="tc-tiddlylink-external" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">TiddlyWiki</a> contains the following tiddlers:</p><p><ul>
 
+<li>&lt;C++&gt; Move Semantics, rvlaue and lvalue</li>
+
 <li>&lt;C++&gt; Type Casting</li>
 
 <li>&lt;PROBLEM&gt; Changing audio properties on the fly is not supported.</li>
@@ -609,6 +611,31 @@ Error message and password prompt
 <!--~~ Ordinary tiddlers ~~-->
 
 <div id="storeArea" style="display:none;">
+<div created="20211021095812201" modified="20211021095853112" tags="[[Flash Cards]]" title="&lt;C++&gt; Move Semantics, rvlaue and lvalue">
+<pre>```
+void PrintName(string &amp;name)
+{
+    cout &lt;&lt; &quot;[lvale]&quot; &lt;&lt; name &lt;&lt; endl;
+    return;
+}
+
+void PrintName(string &amp;&amp;name)
+{
+    cout &lt;&lt; &quot;[rvale]&quot; &lt;&lt; name &lt;&lt; endl;
+    return;
+}
+
+int main(int argc, char **argv)
+{
+    string first_name = &quot;abc&quot;;
+    string last_name = &quot;def&quot;;
+    string fullname = first_name + last_name;
+    PrintName(fullname);                      // lvale
+    PrintName(first_name + last_name);        // rvale
+    return 0;
+}
+```</pre>
+</div>
 <div created="20211021093617026" modified="20211021093847334" tags="[[Flash Cards]]" title="&lt;C++&gt; Type Casting">
 <pre></pre>
 </div>
@@ -10680,7 +10707,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20211021094503710" list="[[Raw Material]]" modified="20211021095237923" title="$:/StoryList">
+<div created="20211021095759511" list="[[Flash Cards]] [[&lt;C++&gt; Move Semantics, rvlaue and lvalue]] [[&lt;C++&gt; Type Casting]]" modified="20211021095803359" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
