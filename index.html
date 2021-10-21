@@ -636,8 +636,44 @@ int main(int argc, char **argv)
 }
 ```</pre>
 </div>
-<div created="20211021093617026" modified="20211021093847334" tags="[[Flash Cards]]" title="&lt;C++&gt; Type Casting">
-<pre></pre>
+<div created="20211021093617026" modified="20211021101323898" tags="[[Flash Cards]]" title="&lt;C++&gt; Type Casting">
+<pre>```
+class Entity
+{
+    virtual void DoSomething() { }  // dynamic_cast&lt;&gt; can only apply to polymorphic object.
+};
+
+class Player : public Entity
+{
+};
+
+class Enemy : public Entity
+{
+};
+
+int main(int argc, char **argv)
+{
+    Player p;
+    Enemy  e;
+    Entity *actual_player = &amp;p;
+    Entity *actual_enemy  = &amp;e;
+    Player *ptr_p = dynamic_cast&lt;Player*&gt;(actual_enemy); // Wrong Type will get NULL here.
+
+    cout &lt;&lt; &quot;       Player:&quot; &lt;&lt; &amp;p &lt;&lt; endl;
+    cout &lt;&lt; &quot;       Enemy: &quot; &lt;&lt; &amp;e  &lt;&lt; endl;
+    cout &lt;&lt; &quot;Actual Player:&quot; &lt;&lt; actual_player &lt;&lt; endl;
+    cout &lt;&lt; &quot;Actual Enemy: &quot; &lt;&lt; actual_enemy  &lt;&lt; endl;
+    cout &lt;&lt; &quot;Castin Player:&quot; &lt;&lt; ptr_p  &lt;&lt; endl;
+
+    return 0;
+}
+[root@localhost 07]# ./a.out
+       Player:0x7ffef0bee598
+       Enemy: 0x7ffef0bee590
+Actual Player:0x7ffef0bee598
+Actual Enemy: 0x7ffef0bee590
+Castin Player:0
+```</pre>
 </div>
 <div created="20210929034749152" modified="20211021083917017" tags="MindMap" title="&lt;PROBLEM&gt; Changing audio properties on the fly is not supported.">
 <pre>```
