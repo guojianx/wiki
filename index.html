@@ -161,8 +161,6 @@ Error message and password prompt
 
 <li>$:/GitHub/Username</li>
 
-<li>$:/Import</li>
-
 <li>$:/isEncrypted</li>
 
 <li>$:/SiteSubtitle</li>
@@ -605,7 +603,7 @@ Error message and password prompt
 <!--~~ Ordinary tiddlers ~~-->
 
 <div id="storeArea" style="display:none;">
-<div created="20210929034749152" modified="20211021083321952" tags="MindMap" title="&lt;PROBLEM&gt; Changing audio properties on the fly is not supported.">
+<div created="20210929034749152" modified="20211021083917017" tags="MindMap" title="&lt;PROBLEM&gt; Changing audio properties on the fly is not supported.">
 <pre>```
 [2021/09/29-11:46:31][25241] [ain0 @ 0x7fc2a89fcb80] filter context - fmt: fltp r: 44100 layout: 3 ch: 2, incoming frame - fmt: fltp r: 48000 layout: 3 ch: 2 pts_time: 1746.46
 [2021/09/29-11:46:31][25241] [ain0 @ 0x7fc2a89fcb80] Changing audio frame properties on the fly is not supported.
@@ -632,7 +630,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 ```
 
 ;According to the above analysis, the filter's setup is correct, the problem may hide in the process timing.
-:I checked sample_rate of the frames putted in StreamMix. It's supposed to be 44100, but it still was the original value, 48000. That seems the 'aformat' filter doesn't work.
+:I checked sample_rate of the frames putted in ~StreamMix. It's supposed to be 44100, but it still was the original value, 48000. That seems the 'aformat' filter doesn't work.
 
 ;The root cause is the aformat filter not in the filter chain, fixed by the following patch:
 
@@ -10574,11 +10572,6 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div created="20201228153456878" modified="20201228153456878" title="$:/GitHub/Username">
 <pre>guojianx</pre>
 </div>
-<div status="complete" title="$:/Import">
-<pre>The following tiddlers were imported:
-
-# [[Socket_server.png]]</pre>
-</div>
 <div title="$:/isEncrypted">
 <pre>no</pre>
 </div>
@@ -10600,7 +10593,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div created="20201230023808396" modified="20211018013032488" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20201228150048917" modified="20211021082829306" title="$:/state/sidebar">
+<div created="20201228150048917" modified="20211021083341427" title="$:/state/sidebar">
 <pre>no</pre>
 </div>
 <div created="20210909023547312" modified="20210909023605584" title="$:/state/tab--1963855381">
