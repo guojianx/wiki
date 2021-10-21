@@ -12288,7 +12288,7 @@ Clearly this will occur always when one of the runtime functions grows asymptoti
 # neglect - 忽视
 # asymptotically - 逐渐地</pre>
 </div>
-<div created="20211021012958635" modified="20211021013939587" tags="[[Sisyphus's Rock]] Journal" title="1021 - 21st October 2021">
+<div created="20211021012958635" modified="20211021025100593" tags="[[Sisyphus's Rock]] Journal" title="1021 - 21st October 2021">
 <pre>!! Suspicious: Pin's vtable pointer has been altered unexpectedly.
 : Decoder and Pin instances' addresses are correct;
 : Therefore, Watch memory whether if changed after SetupFilters(), and in where they are modified?
@@ -12298,7 +12298,45 @@ Clearly this will occur always when one of the runtime functions grows asymptoti
 # After  tail-&gt;linkTo(Pin)
 (gdb) watch -l tail-&gt;link
 (gdb) watch -l pins[src_index]
-```</pre>
+```
+It works! Find out that Pin instances is deleted but the mixer still alive and its pins[] array still keeping the deleted address.
+
+```
+Hardware watchpoint 1: *(char*)0x7f3a8ce3fef0
+
+Old value = 80 'P'
+New value = -16 '\360'
+0x00000000004c8ab5 in Linker::~Linker (this=0x7f3a8ce3fef0, __in_chrg=&lt;optimized out&gt;) at MediaBase.h:42
+42              virtual ~Linker(){}
+#0  0x00000000004c8ab5 in Linker::~Linker (this=0x7f3a8ce3fef0, __in_chrg=&lt;optimized out&gt;) at MediaBase.h:42
+#1  0x000000000053f5d9 in Pin::~Pin (this=0x7f3a8ce3fef0, __in_chrg=&lt;optimized out&gt;) at MediaBase.h:62
+#2  0x000000000053f608 in Pin::~Pin (this=0x7f3a8ce3fef0, __in_chrg=&lt;optimized out&gt;) at MediaBase.h:62
+#3  0x000000000054860b in PvwPgm::CleanFilterChain (this=0x3dbcab8, begin=0x7f3a8d2d6a50) at PvwPgm.cpp:338
+#4  0x0000000000548569 in PvwPgm::CleanFilterChain (this=0x3dbcab8) at PvwPgm.cpp:325
+#5  0x00000000004e5c51 in TaskBroadcast::UpdateStream (this=0x3dbc3d0, task=..., response=...) at TaskBroadcast.cpp:1060
+#6  0x00000000004dfb8b in TaskBroadcast::TaskParse (this=0x3dbc3d0, task=std::vector of length 1, capacity 1 = {...}, response=...)
+    at TaskBroadcast.cpp:153
+#7  0x0000000000504174 in Broadcast::listenRequest (this=0x3dbc2f0, run=@0x1e77e84: true) at Broadcast.cpp:184
+#8  0x0000000000504b5a in Broadcast::__lambda4::operator() (__closure=0x3dbe3d0) at Broadcast.cpp:290
+#9  0x00000000005061ba in std::_Bind_simple&lt;Broadcast::listen(bool&amp;)::__lambda4()&gt;::_M_invoke&lt;&gt;(std::_Index_tuple&lt;&gt;) (this=0x3dbe3d0)
+    at /usr/include/c++/4.8.2/functional:1732
+#10 0x0000000000506111 in std::_Bind_simple&lt;Broadcast::listen(bool&amp;)::__lambda4()&gt;::operator()(void) (this=0x3dbe3d0)
+    at /usr/include/c++/4.8.2/functional:1720
+#11 0x00000000005060aa in std::thread::_Impl&lt;std::_Bind_simple&lt;Broadcast::listen(bool&amp;)::__lambda4()&gt; &gt;::_M_run(void) (
+    this=0x3dbe3b8) at /usr/include/c++/4.8.2/thread:115
+#12 0x00007f3a96eb1330 in ?? () from /lib64/libstdc++.so.6
+#13 0x00007f3a969d1e65 in start_thread () from /lib64/libpthread.so.0
+#14 0x00007f3a966fa88d in clone () from /lib64/libc.so.6
+Continuing.
+Hardware watchpoint 1: *(char*)0x7f3a8ce3fef0
+
+Old value = -16 '\360'
+New value = 48 '0'
+0x00000000004c89af in Link::~Link (this=0x7f3a8ce3fef0, __in_chrg=&lt;optimized out&gt;) at MediaBase.h:28
+28              virtual ~Link() {}
+Delete all breakpoints? (y or n) Continuing.
+```
+</pre>
 </div>
 <div created="20210110221624935" modified="20210217113120531" tags="英语学习 Journal [[January 2021]]" title="11th January 2021">
 <pre>THE MEGAPHONE has been taken away. On January 8th Twitter, a social network, announced that it was “permanently suspending” President Donald Trump's account. Viewed in isolation, the two tweets that led to the ban were, by Mr Trump’s standards, fairly innocuous. But Twitter said it had taken its decision in the wake of the riot at America's Congress on January 6th, in which five people died as legislators' offices were ransacked by a crowd of Mr Trump's supporters after Mr Trump had encouraged them to march on the Capitol. The social network said that continuing to give Mr Trump access risked allowing him to incite further violence.
