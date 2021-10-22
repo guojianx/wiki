@@ -145,6 +145,8 @@ Error message and password prompt
 
 <li>&lt;C++&gt; Type Casting</li>
 
+<li>&lt;Float-Point&gt; 1's complement and 2's</li>
+
 <li>&lt;PROBLEM&gt; Changing audio properties on the fly is not supported.</li>
 
 <li>$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/import</li>
@@ -676,6 +678,132 @@ Actual Player:0x7ffcf6247048
 Actual Enemy: 0x7ffcf6247040
 Castin Player:0
 ```</pre>
+</div>
+<div created="20211022030126080" modified="20211022030228443" tags="[[Flash Cards]]" title="&lt;Float-Point&gt; 1's complement and 2's">
+<pre>        &lt;table&gt;
+                &lt;thead&gt;
+                        &lt;tr&gt;
+                                &lt;th&gt;Decimal&lt;/th&gt;
+                                &lt;th&gt;Binary&lt;/th&gt;
+                                &lt;th&gt;1's Complement&lt;/th&gt;
+                                &lt;th&gt;2's Complement&lt;/th&gt;
+                        &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody&gt;
+                &lt;tr&gt;
+                        &lt;td&gt;-8&lt;/td&gt;
+                        &lt;td&gt; - &lt;/td&gt;
+                        &lt;td&gt;1111&lt;/td&gt;
+                        &lt;td&gt;-&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td&gt;-7&lt;/td&gt;
+                        &lt;td&gt;1111&lt;/td&gt;
+                        &lt;td&gt;1000&lt;/td&gt;
+                        &lt;td&gt;1001&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td&gt;-6&lt;/td&gt;
+                        &lt;td&gt;1110&lt;/td&gt;
+                        &lt;td&gt;1001&lt;/td&gt;
+                        &lt;td&gt;1010&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td&gt;-5&lt;/td&gt;
+                        &lt;td&gt;1101&lt;/td&gt;
+                        &lt;td&gt;1010&lt;/td&gt;
+                        &lt;td&gt;1011&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td&gt;-4&lt;/td&gt;
+                        &lt;td&gt;1100&lt;/td&gt;
+                        &lt;td&gt;1011&lt;/td&gt;
+                        &lt;td&gt;1100&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td&gt;-3&lt;/td&gt;
+                        &lt;td&gt;1011&lt;/td&gt;
+                        &lt;td&gt;1100&lt;/td&gt;
+                        &lt;td&gt;1101&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td&gt;-2&lt;/td&gt;
+                        &lt;td&gt;1010&lt;/td&gt;
+                        &lt;td&gt;1101&lt;/td&gt;
+                        &lt;td&gt;1110&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td&gt;-1&lt;/td&gt;
+                        &lt;td&gt;1001&lt;/td&gt;
+                        &lt;td&gt;1110&lt;/td&gt;
+                        &lt;td&gt;1111&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td&gt;-0&lt;/td&gt;
+                        &lt;td&gt;1000&lt;/td&gt;
+                        &lt;td&gt;-&lt;/td&gt;
+                        &lt;td&gt;-&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td&gt;0&lt;/td&gt;
+                        &lt;td&gt;0000&lt;/td&gt;
+                        &lt;td&gt;0000&lt;/td&gt;
+                        &lt;td&gt;0000&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td&gt;1&lt;/td&gt;
+                        &lt;td&gt;0001&lt;/td&gt;
+                        &lt;td&gt;0001&lt;/td&gt;
+                        &lt;td&gt;0001&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td&gt;2&lt;/td&gt;
+                        &lt;td&gt;0010&lt;/td&gt;
+                        &lt;td&gt;0010&lt;/td&gt;
+                        &lt;td&gt;0010&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td&gt;3&lt;/td&gt;
+                        &lt;td&gt;0011&lt;/td&gt;
+                        &lt;td&gt;0011&lt;/td&gt;
+                        &lt;td&gt;0011&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td&gt;4&lt;/td&gt;
+                        &lt;td&gt;0100&lt;/td&gt;
+                        &lt;td&gt;0100&lt;/td&gt;
+                        &lt;td&gt;0100&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td&gt;5&lt;/td&gt;
+                        &lt;td&gt;0101&lt;/td&gt;
+                        &lt;td&gt;0101&lt;/td&gt;
+                        &lt;td&gt;0101&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td&gt;6&lt;/td&gt;
+                        &lt;td&gt;0110&lt;/td&gt;
+                        &lt;td&gt;0110&lt;/td&gt;
+                        &lt;td&gt;0110&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                        &lt;td&gt;7&lt;/td&gt;
+                        &lt;td&gt;0111&lt;/td&gt;
+                        &lt;td&gt;0111&lt;/td&gt;
+                        &lt;td&gt;0111&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;/tbody&gt;
+                &lt;tfoot&gt;
+                        &lt;tr&gt;
+                                &lt;td colspan=&quot;4&quot;&gt;
+                                &lt;p&gt;
+                                        1's Complement: nagtive number flips all the bit of its positive number.&lt;br&gt;
+                                        2's Complement: equal to 1's Complement + 1
+                                &lt;/p&gt;
+                                &lt;/td&gt;
+                        &lt;/tr&gt;
+                &lt;/tfoot&gt;
+        &lt;/table&gt;</pre>
 </div>
 <div created="20210929034749152" modified="20211021083917017" tags="MindMap" title="&lt;PROBLEM&gt; Changing audio properties on the fly is not supported.">
 <pre>```
@@ -10667,8 +10795,8 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div created="20201230023808396" modified="20211018013032488" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20201228150048917" modified="20211022015150617" title="$:/state/sidebar">
-<pre>no</pre>
+<div created="20201228150048917" modified="20211022030112404" title="$:/state/sidebar">
+<pre>yes</pre>
 </div>
 <div created="20210909023547312" modified="20210909023605584" title="$:/state/tab--1963855381">
 <pre>$:/themes/tiddlywiki/vanilla/themetweaks</pre>
@@ -10745,7 +10873,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20211022012940216" list="[[034 - 22nd October 2021]]" modified="20211022015109522" title="$:/StoryList">
+<div created="20211022012940216" list="[[Flash Cards]] [[&lt;Float-Point&gt; 1's complement and 2's]] [[034 - 22nd October 2021]]" modified="20211022030116811" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
