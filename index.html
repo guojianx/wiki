@@ -10850,8 +10850,8 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div created="20201230023808396" modified="20211018013032488" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20201228150048917" modified="20211022031412756" title="$:/state/sidebar">
-<pre>yes</pre>
+<div created="20201228150048917" modified="20211022075830552" title="$:/state/sidebar">
+<pre>no</pre>
 </div>
 <div created="20210909023547312" modified="20210909023605584" title="$:/state/tab--1963855381">
 <pre>$:/themes/tiddlywiki/vanilla/themetweaks</pre>
@@ -10928,7 +10928,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20211022012940216" list="[[034 - 22nd October 2021]]" modified="20211022033328820" title="$:/StoryList">
+<div created="20211022065607070" list="[[034 - 22nd October 2021]]" modified="20211022065622406" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -12560,7 +12560,7 @@ Delete all breakpoints? (y or n) Continuing.
         return 0;
 ```</pre>
 </div>
-<div created="20211022013618451" modified="20211022033403447" tags="[[Sisyphus's Rock]] Journal" title="034 - 22nd October 2021">
+<div created="20211022013618451" modified="20211022080016848" tags="[[Sisyphus's Rock]] Journal" title="034 - 22nd October 2021">
 <pre>Found a gorgeous new channel &lt;a href=&quot;https://www.youtube.com/nesoacademy&quot;&gt;Neso Acdemy&lt;/a&gt; about Computer Science today. It contains a massive amount of computer science videos. But there are hundreds of videos for a single topic of C language, including entry level lessons to the advanced ones, many of them are not suit to me, and I have to spend long time to judge whether if this video suit me. Time is very thing, that gives me an insight that I should flow one serial which is &lt;a href=&quot;https://github.com/jwasham/coding-interview-university&quot;&gt;John Washam's repository&lt;/a&gt;, so I can easily find those videos I really need.
 
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -12573,7 +12573,38 @@ Delete all breakpoints? (y or n) Continuing.
 ---------------------------------------------------------------------------------------------------------------------------------------
 ;For Work:
 * Implement two outputs for PVW and PGM
-**Wrap the objects only, don't touch the process.</pre>
+**Wrap the objects only, don't touch the process.
+
+----------------------------------------------------------------------------------------------------------------------------------------
+&lt;Problem&gt; 
+
+```
+Program received signal SIGSEGV, Segmentation fault.
+[Switching to Thread 0x7f86acdfa700 (LWP 12974)]
+0x00007f86a873e660 in ?? ()
+(gdb) where
+#0  0x00007f86a873e660 in ?? ()
+#1  0x000000000054715c in PvwPgm::CleanFilterChain (this=0x4399ab8, begin=0x7f86a8b399f0) at PvwPgm.cpp:328
+#2  0x00000000005470f3 in PvwPgm::CleanFilterChain (this=0x4399ab8) at PvwPgm.cpp:316
+#3  0x00000000004e5bd5 in TaskBroadcast::UpdateStream (this=0x43993d0, task=..., response=...)
+    at TaskBroadcast.cpp:1058
+#4  0x00000000004dfb0b in TaskBroadcast::TaskParse (this=0x43993d0,
+    task=std::vector of length 1, capacity 1 = {...}, response=...) at TaskBroadcast.cpp:151
+#5  0x0000000000502d0a in Broadcast::listenRequest (this=0x43992f0, run=@0x1e77e84: true) at Broadcast.cpp:184
+#6  0x00000000005036f0 in Broadcast::__lambda4::operator() (__closure=0x439b3e0) at Broadcast.cpp:290
+#7  0x0000000000504d6c in std::_Bind_simple&lt;Broadcast::listen(bool&amp;)::__lambda4()&gt;::_M_invoke&lt;&gt;(std::_Index_tuple&lt;&gt;) (this=0x439b3e0) at /usr/include/c++/4.8.2/functional:1732
+#8  0x0000000000504cc3 in std::_Bind_simple&lt;Broadcast::listen(bool&amp;)::__lambda4()&gt;::operator()(void) (
+    this=0x439b3e0) at /usr/include/c++/4.8.2/functional:1720
+#9  0x0000000000504c5c in std::thread::_Impl&lt;std::_Bind_simple&lt;Broadcast::listen(bool&amp;)::__lambda4()&gt; &gt;::_M_run(void) (this=0x439b3c8) at /usr/include/c++/4.8.2/thread:115
+#10 0x00007f86b22f4330 in ?? () from /lib64/libstdc++.so.6
+#11 0x00007f86b1e14e65 in start_thread () from /lib64/libpthread.so.0
+#12 0x00007f86b1b3d88d in clone () from /lib64/libc.so.6
+(gdb) frame 1
+#1  0x000000000054715c in PvwPgm::CleanFilterChain (this=0x4399ab8, begin=0x7f86a8b399f0) at PvwPgm.cpp:328
+328             Link* tmp = next-&gt;getNext();
+(gdb) print next
+$1 = (Link *) 0x7f86a873e67
+```</pre>
 </div>
 <div created="20210202175517701" modified="20210217115005143" tags="英语学习 Journal [[February 2021]]" title="03rd February 2021">
 <pre>A neat trick
