@@ -636,8 +636,44 @@ int main(int argc, char **argv)
 }
 ```</pre>
 </div>
-<div created="20211021093617026" modified="20211021093847334" tags="[[Flash Cards]]" title="&lt;C++&gt; Type Casting">
-<pre></pre>
+<div created="20211021093617026" modified="20211022013417465" tags="[[Flash Cards]]" title="&lt;C++&gt; Type Casting">
+<pre>```
+class Entity
+{
+    virtual void DoSomething() { }  // dynamic_cast&lt;&gt; can only apply to polymorphic object.
+};
+
+class Player : public Entity
+{
+};
+
+class Enemy : public Entity
+{
+};
+
+int main(int argc, char **argv)
+{
+    Player p;
+    Enemy  e;
+    Entity *actual_player = &amp;p;
+    Entity *actual_enemy  = &amp;e;
+    Player *ptr_p = dynamic_cast&lt;Player*&gt;(actual_enemy); // Wrong Type will get NULL here.
+
+    cout &lt;&lt; &quot;       Player:&quot; &lt;&lt; &amp;p &lt;&lt; endl;
+    cout &lt;&lt; &quot;       Enemy: &quot; &lt;&lt; &amp;e  &lt;&lt; endl;
+    cout &lt;&lt; &quot;Actual Player:&quot; &lt;&lt; actual_player &lt;&lt; endl;
+    cout &lt;&lt; &quot;Actual Enemy: &quot; &lt;&lt; actual_enemy  &lt;&lt; endl;
+    cout &lt;&lt; &quot;Castin Player:&quot; &lt;&lt; ptr_p  &lt;&lt; endl;
+
+    return 0;
+}
+[root@localhost 07]# ./a.out
+       Player:0x7ffcf6247048
+       Enemy: 0x7ffcf6247040
+Actual Player:0x7ffcf6247048
+Actual Enemy: 0x7ffcf6247040
+Castin Player:0
+```</pre>
 </div>
 <div created="20210929034749152" modified="20211021083917017" tags="MindMap" title="&lt;PROBLEM&gt; Changing audio properties on the fly is not supported.">
 <pre>```
@@ -10629,7 +10665,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div created="20201230023808396" modified="20211018013032488" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20201228150048917" modified="20211021095235355" title="$:/state/sidebar">
+<div created="20201228150048917" modified="20211022012935224" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20210909023547312" modified="20210909023605584" title="$:/state/tab--1963855381">
@@ -10707,7 +10743,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20211021101509566" list="MindMap" modified="20211021101509566" title="$:/StoryList">
+<div created="20211022012940216" list="[[&lt;C++&gt; Type Casting]]" modified="20211022013024776" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
