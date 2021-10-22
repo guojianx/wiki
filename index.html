@@ -10850,8 +10850,8 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div created="20201230023808396" modified="20211018013032488" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20201228150048917" modified="20211022084619695" title="$:/state/sidebar">
-<pre>yes</pre>
+<div created="20201228150048917" modified="20211022084622391" title="$:/state/sidebar">
+<pre>no</pre>
 </div>
 <div created="20210909023547312" modified="20210909023605584" title="$:/state/tab--1963855381">
 <pre>$:/themes/tiddlywiki/vanilla/themetweaks</pre>
@@ -12560,7 +12560,7 @@ Delete all breakpoints? (y or n) Continuing.
         return 0;
 ```</pre>
 </div>
-<div created="20211022013618451" modified="20211022080536215" tags="[[Sisyphus's Rock]] Journal" title="034 - 22nd October 2021">
+<div created="20211022013618451" modified="20211022093514738" tags="[[Sisyphus's Rock]] Journal" title="034 - 22nd October 2021">
 <pre>Found a gorgeous new channel &lt;a href=&quot;https://www.youtube.com/nesoacademy&quot;&gt;Neso Acdemy&lt;/a&gt; about Computer Science today. It contains a massive amount of computer science videos. But there are hundreds of videos for a single topic of C language, including entry level lessons to the advanced ones, many of them are not suit to me, and I have to spend long time to judge whether if this video suit me. Time is very thing, that gives me an insight that I should flow one serial which is &lt;a href=&quot;https://github.com/jwasham/coding-interview-university&quot;&gt;John Washam's repository&lt;/a&gt;, so I can easily find those videos I really need.
 
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -12608,7 +12608,9 @@ Program received signal SIGSEGV, Segmentation fault.
 328             Link* tmp = next-&gt;getNext();
 (gdb) print next
 $1 = (Link *) 0x7f86a873e67
-```</pre>
+```
+; The root cause is, Stop Command does not call ~CleanFilterChain() to set Pads' destination pointers clear.
+: When STOP happen, the objects connecting to the pad were not be freed, but ~StreamMix and its pins were destroyed. Therefore when next UPDATE comes up, ends list won't contain the previous pins which were destroyed when STOP happened, the ~CleanFilterChain() won't stop because of that, so previous pins will be double freed, Segfault happen.</pre>
 </div>
 <div created="20210202175517701" modified="20210217115005143" tags="英语学习 Journal [[February 2021]]" title="03rd February 2021">
 <pre>A neat trick
