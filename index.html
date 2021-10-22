@@ -10850,7 +10850,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div created="20201230023808396" modified="20211018013032488" title="$:/state/showeditpreview">
 <pre>yes</pre>
 </div>
-<div created="20201228150048917" modified="20211022084622391" title="$:/state/sidebar">
+<div created="20201228150048917" modified="20211022093534427" title="$:/state/sidebar">
 <pre>no</pre>
 </div>
 <div created="20210909023547312" modified="20210909023605584" title="$:/state/tab--1963855381">
@@ -12560,7 +12560,7 @@ Delete all breakpoints? (y or n) Continuing.
         return 0;
 ```</pre>
 </div>
-<div created="20211022013618451" modified="20211022093514738" tags="[[Sisyphus's Rock]] Journal" title="034 - 22nd October 2021">
+<div created="20211022013618451" modified="20211022093849063" tags="[[Sisyphus's Rock]] Journal" title="034 - 22nd October 2021">
 <pre>Found a gorgeous new channel &lt;a href=&quot;https://www.youtube.com/nesoacademy&quot;&gt;Neso Acdemy&lt;/a&gt; about Computer Science today. It contains a massive amount of computer science videos. But there are hundreds of videos for a single topic of C language, including entry level lessons to the advanced ones, many of them are not suit to me, and I have to spend long time to judge whether if this video suit me. Time is very thing, that gives me an insight that I should flow one serial which is &lt;a href=&quot;https://github.com/jwasham/coding-interview-university&quot;&gt;John Washam's repository&lt;/a&gt;, so I can easily find those videos I really need.
 
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -12610,7 +12610,23 @@ Program received signal SIGSEGV, Segmentation fault.
 $1 = (Link *) 0x7f86a873e67
 ```
 ; The root cause is, Stop Command does not call ~CleanFilterChain() to set Pads' destination pointers clear.
-: When STOP happen, the objects connecting to the pad were not be freed, but ~StreamMix and its pins were destroyed. Therefore when next UPDATE comes up, ends list won't contain the previous pins which were destroyed when STOP happened, the ~CleanFilterChain() won't stop because of that, so previous pins will be double freed, Segfault happen.</pre>
+: When STOP happen, the objects connecting to the pad were not be freed, but ~StreamMix and its pins were destroyed. Therefore when next UPDATE comes up, ends list won't contain the previous pins which were destroyed when STOP happened, the ~CleanFilterChain() won't stop because of that, so previous pins will be double freed, Segfault happen.
+
+```
+[2021/10/22-17:21:19][24621][0x43d42f0] ##CMD## {&quot;pipeResponse&quot;: &quot;/opt/NetMsgListener/pipe_response_1&quot;, &quot;instanceID&quot;: &quot;602dcce1fa27750006a0dc1f&quot;, &quot;userID&quot;: &quot;5b481cce7e8c1a000fbd503e&quot;, &quot;messageType&quot;: &quot;stop&quot;, &quot;requestID&quot;: &quot;687DB2140DCC4476A0821F360343EDE7&quot;, &quot;taskType&quot;:&quot;update&quot;, &quot;pipeRequest&quot;: &quot;/opt/NetMsgListener/pipe_request_1&quot;} ##
+......
+[2021/10/22-17:21:19][24621][0x7f37946ff820] Destructor: ~eightPinLink(): delete pins[5] : 0x7f37947116f0
+[2021/10/22-17:21:19][24621][0x7f37947116f0] Destructor: ~Pin()
+
+Program received signal SIGSEGV, Segmentation fault.
+[Switching to Thread 0x7f3822ebd700 (LWP 24629)]
+0x00007f37947116e0 in ?? ()
+(gdb) frame 1
+#1  0x0000000000547418 in PvwPgm::CleanFilterChain (this=0x43d4ab8, begin=0x7f381ff3a2d0) at PvwPgm.cpp:343
+343             Link* tmp = next-&gt;getNext();
+(gdb) print next
+$1 = (Link *) 0x7f37947116f0
+```</pre>
 </div>
 <div created="20210202175517701" modified="20210217115005143" tags="英语学习 Journal [[February 2021]]" title="03rd February 2021">
 <pre>A neat trick
