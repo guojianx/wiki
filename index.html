@@ -147,6 +147,8 @@ Error message and password prompt
 
 <li>&lt;Float-Point&gt; 1's complement and 2's</li>
 
+<li>&lt;Float-Point&gt; Excess-127 and 1's Complement</li>
+
 <li>&lt;PROBLEM&gt; Changing audio properties on the fly is not supported.</li>
 
 <li>$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/import</li>
@@ -863,6 +865,44 @@ Castin Player:0
                         &lt;/tr&gt;
                 &lt;/tbody&gt;
         &lt;/table&gt;</pre>
+</div>
+<div created="20211025094700201" modified="20211025094745057" tags="[[Flash Cards]]" title="&lt;Float-Point&gt; Excess-127 and 1's Complement">
+<pre>```
+uint32_t exponent(float f)
+{
+    uint32_t i = *(uint32_t*)&amp;f;
+    return (i &gt;&gt; 23) &amp; 0xff;
+}
+
+uint32_t mantissa(float f)
+{
+    uint32_t i = *(uint32_t*)&amp;f;
+    return i &amp; 0x7fffff;
+}
+
+int main(int argc, char **argv)
+{
+    float f = 1.0;
+
+    do {
+        printf(&quot;f = %f: exp(0x%02x | dec: %d) mantissa(0x%06x)\n&quot;, f, exponent(f), exponent(f), mantissa(f));
+        std::cin &gt;&gt; f;
+    } while (1);
+
+    return 0;
+}
+[root@localhost 07]# ./a.out
+f = 1.000000: exp(0x7f | dec: 127) mantissa(0x000000)
+f = 1.500000: exp(0x7f | dec: 127) mantissa(0x400000)
+f = 1.250000: exp(0x7f | dec: 127) mantissa(0x200000)
+f = 1.125000: exp(0x7f | dec: 127) mantissa(0x100000)
+f = 1.875000: exp(0x7f | dec: 127) mantissa(0x700000)
+f = 0.500000: exp(0x7e | dec: 126) mantissa(0x000000)
+f = 2.000000: exp(0x80 | dec: 128) mantissa(0x000000)
+f = 4.000000: exp(0x81 | dec: 129) mantissa(0x000000)
+f = -1.875000: exp(0x7f | dec: 127) mantissa(0x700000)
+```
+</pre>
 </div>
 <div created="20210929034749152" modified="20211021083917017" tags="MindMap" title="&lt;PROBLEM&gt; Changing audio properties on the fly is not supported.">
 <pre>```
@@ -10932,7 +10972,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20211025012007200" list="[[035 - 25th October 2021]] [[034 - 22nd October 2021]]" modified="20211025091809124" title="$:/StoryList">
+<div created="20211025094418784" list="[[Flash Cards]] [[&lt;Float-Point&gt; Excess-127 and 1's Complement]] [[035 - 25th October 2021]] [[&lt;Float-Point&gt; 1's complement and 2's]] [[&lt;C++&gt; Typecasting]] [[&lt;C++&gt; Move Semantics, rvlaue and lvalue]]" modified="20211025094655439" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
