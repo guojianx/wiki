@@ -10921,7 +10921,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div created="20210909023053209" modified="20210909023053209" title="$:/state/importpreviewtype">
 <pre>$:/core/ui/ImportPreviews/Fields</pre>
 </div>
-<div created="20201230023808396" modified="20211025194430658" title="$:/state/showeditpreview">
+<div created="20201230023808396" modified="20211026071158384" title="$:/state/showeditpreview">
 <pre>no</pre>
 </div>
 <div created="20201228150048917" modified="20211023014421129" title="$:/state/sidebar">
@@ -11002,7 +11002,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20211026013304920" list="[[&lt;Float-Point&gt; 1's complement and 2's]] MindMap" modified="20211026013317471" title="$:/StoryList">
+<div created="20211026071131472" list="[[036 - 26th October 2021]]" modified="20211026071131472" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
@@ -12756,10 +12756,40 @@ f = -1.875000: exp(0x7f | dec: 127) mantissa(0x700000)
 ;Work
 :493 lines are changed in the diff file to make outer module could choose manipulating pvw or pgm of ~PvwPgm module.</pre>
 </div>
-<div created="20211025194416181" modified="20211025194548183" tags="[[Sisyphus's Rock]] Journal" title="036 - 26th October 2021">
+<div created="20211025194416181" modified="20211026071230424" tags="[[Sisyphus's Rock]] Journal" title="036 - 26th October 2021">
 <pre>; -fPIC -lW,rpath 
 : https://stevens.netmeister.org/631/elf.html
-; To Retain Polymorphic Definition on Wiki</pre>
+; To Retain Polymorphic Definition on Wiki
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+; Dead lock
+
+```
+#4  0x0000000000547ed2 in std::timed_mutex::lock (this=0x3eb75f0) at /usr/include/c++/4.8.2/mutex:223
+#5  0x0000000000548be3 in std::unique_lock&lt;std::timed_mutex&gt;::lock (this=0x7fdf55480c80) at /usr/include/c++/4.8.2/mutex:511
+#6  0x0000000000548165 in std::unique_lock&lt;std::timed_mutex&gt;::unique_lock (this=0x7fdf55480c80, __m=...)
+    at /usr/include/c++/4.8.2/mutex:443
+#7  0x0000000000545f1c in Pad::DelDestination (this=0x3eb75d0, p=0x0) at PvwPgm.cpp:38
+#8  0x00000000005476f7 in PvwPgm::CleanFilterChain (this=0x3eb6ab8, pvw_pgm_idx=0) at PvwPgm.cpp:323
+#9  0x00000000004e5e86 in TaskBroadcast::UpdateStream (this=0x3eb63d0, task=..., response=...) at TaskBroadcast.cpp:1073
+```
+
+```
+#0  0x00007fdf5a4a2da2 in pthread_cond_timedwait@@GLIBC_2.3.2 () from /lib64/libpthread.so.0
+#1  0x0000000000545a7b in DaoboCondWaitTimeout (cond=0x7fdebf7cd480, mutex=0x7fdebc616550, ms=20) at PthreadTools.cpp:135
+#2  0x0000000000545330 in frame_queue_peek_writable (f=0x7fdebfbfb1f8) at FrameQueue.cpp:77
+#3  0x000000000053caac in StreamMix::PutFrame (this=0x7fdebc4a6580, type=1, frame=0x7fdf49f30d40, pin=1) at StreamMix.cpp:270
+#4  0x000000000053cfc1 in StreamMix::BroadData (this=0x7fdebc4a6580, p=..., pin=1) at StreamMix.cpp:348
+#5  0x000000000053e487 in Pin::fillBuffer (this=0x7fdf50e94690, p=...) at MediaBase.h:62
+#6  0x00000000004d80c8 in AspectRatio::fillBuffer (this=0x7fdebf7facf0, p=...) at AspectRatio.cpp:26
+#7  0x0000000000545db6 in Pad::fillBuffer (this=0x3eb75d0, frame=...) at PvwPgm.cpp:21
+#8  0x00000000004dd3fd in split::pushStream (this=0x7fdf500e5b10, p=..., in=0x7fdf500ec580, out_pre=0x7fdf500ecb80,
+    out_from=0x7fdf500ee340, type=AUDIO, push=true) at split.cpp:209
+#9  0x00000000004dcbd2 in split::fillBuffer (this=0x7fdf500e5b10, p=...) at split.cpp:28
+#10 0x00000000004c72f2 in Decoder::sendFrame (this=0x7fdf50000e00, frame=0x7fdf49ad9f40, type=AUDIO, force_keyframe=false)
+    at Decoder.cpp:81
+#11 0x00000000004ca5bf in DecoderNet::exec (this=0x7fdf50000e00) at DecoderNet.cpp:244
+```</pre>
 </div>
 <div created="20210202175517701" modified="20210217115005143" tags="英语学习 Journal [[February 2021]]" title="03rd February 2021">
 <pre>A neat trick
