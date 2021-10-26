@@ -12756,7 +12756,7 @@ f = -1.875000: exp(0x7f | dec: 127) mantissa(0x700000)
 ;Work
 :493 lines are changed in the diff file to make outer module could choose manipulating pvw or pgm of ~PvwPgm module.</pre>
 </div>
-<div created="20211025194416181" modified="20211026081456643" tags="[[Sisyphus's Rock]] Journal" title="036 - 26th October 2021">
+<div created="20211025194416181" modified="20211026082454179" tags="[[Sisyphus's Rock]] Journal" title="036 - 26th October 2021">
 <pre>; -fPIC -lW,rpath 
 : https://stevens.netmeister.org/631/elf.html
 ; To Retain Polymorphic Definition on Wiki
@@ -12792,7 +12792,8 @@ f = -1.875000: exp(0x7f | dec: 127) mantissa(0x700000)
 ```
 
 # Add timeout with frame_queue_peek_writable()
-# Why does the queue be fed to full?</pre>
+# Why does the queue be fed to full?
+#* The full frameq from audio stream, and there's no AMix thread to consume the data, therefore the ~PutFrame() method is blocked.</pre>
 </div>
 <div created="20210202175517701" modified="20210217115005143" tags="英语学习 Journal [[February 2021]]" title="03rd February 2021">
 <pre>A neat trick
