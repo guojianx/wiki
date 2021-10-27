@@ -684,7 +684,7 @@ object_base = MakeBase(55);
 ```
 </pre>
 </div>
-<div created="20211027055139136" modified="20211027072138510" tags="[[Flash Cards]]" title="&lt;C++&gt; Polymorphism - virtual function">
+<div created="20211027055139136" modified="20211027073653378" tags="[[Flash Cards]]" title="&lt;C++&gt; Polymorphism - virtual function">
 <pre>https://www.tutorialspoint.com/cplusplus/cpp_polymorphism.htm
 
 C++ Polymorphism means that a call to a member function could cause a different function to be executed depending on the type of the object that invokes the function.
@@ -693,8 +693,10 @@ C++ Polymorphism means that a call to a member function could cause a different 
 # Static Resolution, Static Linkage, or early binding
 #* the function call is fixed before the program is executed, it's set during the compilation of the program.
 # Dynamic Linkage, Late Binding
-#* 
-</pre>
+#* virtual function
+
+同一个成员函数的调用可能有不同的函数被执行，取决于调用该函数的对象。&lt;br&gt;
+如：基类有一个虚函数，该基类派生出了不同的子类，不同的子类对该虚函数有不同的实现。用基类指针调用该虚函数时，实际调用的函数取决于它所指向的对象的类型。&lt;br&gt;</pre>
 </div>
 <div created="20211021093617026" modified="20211022032417610" tags="[[Flash Cards]]" title="&lt;C++&gt; Typecasting">
 <pre>static_cast is a compile time cast
