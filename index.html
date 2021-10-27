@@ -141,6 +141,8 @@ Error message and password prompt
 
 <p>This <a class="tc-tiddlylink-external" href="https://tiddlywiki.com" rel="noopener noreferrer" target="_blank">TiddlyWiki</a> contains the following tiddlers:</p><p><ul>
 
+<li>&lt;C++&gt; dynamic_cast</li>
+
 <li>&lt;C++&gt; Move Semantics: rvlaue and lvalue</li>
 
 <li>&lt;C++&gt; Move Semantics: unique_ptr</li>
@@ -148,8 +150,6 @@ Error message and password prompt
 <li>&lt;C++&gt; Overload -- another branch of polymorphism</li>
 
 <li>&lt;C++&gt; Polymorphism - virtual function</li>
-
-<li>&lt;C++&gt; Typecasting</li>
 
 <li>&lt;Float-Point&gt; 1's complement and 2's</li>
 
@@ -635,6 +635,48 @@ Error message and password prompt
 <!--~~ Ordinary tiddlers ~~-->
 
 <div id="storeArea" style="display:none;">
+<div created="20211021093617026" modified="20211027081508115" tags="[[Flash Cards]]" title="&lt;C++&gt; dynamic_cast">
+<pre>static_cast is a compile time cast
+https://www.geeksforgeeks.org/static_cast-in-c-type-casting-operators/
+
+```
+class Entity
+{
+    virtual void DoSomething() { }  // dynamic_cast&lt;&gt; can only apply to polymorphic object.
+};
+
+class Player : public Entity
+{
+};
+
+class Enemy : public Entity
+{
+};
+
+int main(int argc, char **argv)
+{
+    Player p;
+    Enemy  e;
+    Entity *actual_player = &amp;p;
+    Entity *actual_enemy  = &amp;e;
+    Player *ptr_p = dynamic_cast&lt;Player*&gt;(actual_enemy); // Wrong Type will get NULL here.
+
+    cout &lt;&lt; &quot;       Player:&quot; &lt;&lt; &amp;p &lt;&lt; endl;
+    cout &lt;&lt; &quot;       Enemy: &quot; &lt;&lt; &amp;e  &lt;&lt; endl;
+    cout &lt;&lt; &quot;Actual Player:&quot; &lt;&lt; actual_player &lt;&lt; endl;
+    cout &lt;&lt; &quot;Actual Enemy: &quot; &lt;&lt; actual_enemy  &lt;&lt; endl;
+    cout &lt;&lt; &quot;Castin Player:&quot; &lt;&lt; ptr_p  &lt;&lt; endl;
+
+    return 0;
+}
+[root@localhost 07]# ./a.out
+       Player:0x7ffcf6247048
+       Enemy: 0x7ffcf6247040
+Actual Player:0x7ffcf6247048
+Actual Enemy: 0x7ffcf6247040
+Castin Player:0
+```</pre>
+</div>
 <div created="20211021095812201" modified="20211025095054316" tags="[[Flash Cards]]" title="&lt;C++&gt; Move Semantics: rvlaue and lvalue">
 <pre>```
 void PrintName(string &amp;name)
@@ -702,48 +744,6 @@ C++ Polymorphism means that a call to a member function could cause a different 
 
 同一个成员函数的调用可能有不同的函数被执行，取决于调用该函数的对象。&lt;br&gt;
 如：基类有一个虚函数，该基类派生出了不同的子类，不同的子类对该虚函数有不同的实现。用基类指针调用该虚函数时，实际调用的函数取决于它所指向的对象的类型。&lt;br&gt;</pre>
-</div>
-<div created="20211021093617026" modified="20211022032417610" tags="[[Flash Cards]]" title="&lt;C++&gt; Typecasting">
-<pre>static_cast is a compile time cast
-https://www.geeksforgeeks.org/static_cast-in-c-type-casting-operators/
-
-```
-class Entity
-{
-    virtual void DoSomething() { }  // dynamic_cast&lt;&gt; can only apply to polymorphic object.
-};
-
-class Player : public Entity
-{
-};
-
-class Enemy : public Entity
-{
-};
-
-int main(int argc, char **argv)
-{
-    Player p;
-    Enemy  e;
-    Entity *actual_player = &amp;p;
-    Entity *actual_enemy  = &amp;e;
-    Player *ptr_p = dynamic_cast&lt;Player*&gt;(actual_enemy); // Wrong Type will get NULL here.
-
-    cout &lt;&lt; &quot;       Player:&quot; &lt;&lt; &amp;p &lt;&lt; endl;
-    cout &lt;&lt; &quot;       Enemy: &quot; &lt;&lt; &amp;e  &lt;&lt; endl;
-    cout &lt;&lt; &quot;Actual Player:&quot; &lt;&lt; actual_player &lt;&lt; endl;
-    cout &lt;&lt; &quot;Actual Enemy: &quot; &lt;&lt; actual_enemy  &lt;&lt; endl;
-    cout &lt;&lt; &quot;Castin Player:&quot; &lt;&lt; ptr_p  &lt;&lt; endl;
-
-    return 0;
-}
-[root@localhost 07]# ./a.out
-       Player:0x7ffcf6247048
-       Enemy: 0x7ffcf6247040
-Actual Player:0x7ffcf6247048
-Actual Enemy: 0x7ffcf6247040
-Castin Player:0
-```</pre>
 </div>
 <div created="20211022030126080" modified="20211026013459953" tags="[[Flash Cards]]" title="&lt;Float-Point&gt; 1's complement and 2's">
 <pre>video: https://youtu.be/4qH4unVtJkE
@@ -11034,7 +11034,7 @@ avfilter_graph_parse_ptr([ain0]aformat=sample_fmts=fltp:channel_layouts=stereo:s
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20211027072106006" list="[[Flash Cards]] [[&lt;C++&gt; Overload -- another branch of polymorphism]] [[036 - 26th October 2021]] [[&lt;C++&gt; Polymorphism - virtual function]]" modified="20211027074223862" title="$:/StoryList">
+<div created="20211027072106006" list="[[&lt;C++&gt; dynamic_cast]] [[Flash Cards]] [[&lt;C++&gt; Overload -- another branch of polymorphism]] [[036 - 26th October 2021]] [[&lt;C++&gt; Polymorphism - virtual function]]" modified="20211027081357583" title="$:/StoryList">
 <pre></pre>
 </div>
 <div author="JeremyRuston" core-version="&gt;=5.0.0" dependents="$:/themes/tiddlywiki/vanilla" description="Emphasises individual tiddlers" name="Snow White" plugin-priority="0" plugin-type="theme" title="$:/themes/tiddlywiki/snowwhite" type="application/json" version="5.1.23">
